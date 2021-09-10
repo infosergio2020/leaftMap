@@ -1,0 +1,453 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.202825,
+          -34.857614
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.197173,
+              -34.858342
+            ],
+            [
+              -56.197216,
+              -34.858342
+            ],
+            [
+              -56.197173,
+              -34.858342
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "color": "Red",
+          "weight": "14",
+          "fillOpacity": "0.7",
+          "dashArray": "5,10,15",
+          "outlink": "https://www.youtube.com/watch?v=b0lqXo4sets&list=PLXxWLsUmxWI7XxY04SLWQ_D_EReHE-zt3&index=5"
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.205658,
+              -34.858905
+            ],
+            [
+              -56.206313,
+              -34.85909
+            ],
+            [
+              -56.206592,
+              -34.85938
+            ],
+            [
+              -56.206538,
+              -34.859706
+            ],
+            [
+              -56.206345,
+              -34.859838
+            ],
+            [
+              -56.20598,
+              -34.860014
+            ],
+            [
+              -56.205744,
+              -34.86019
+            ],
+            [
+              -56.205326,
+              -34.860102
+            ],
+            [
+              -56.20524,
+              -34.859178
+            ],
+            [
+              -56.205379,
+              -34.85909
+            ],
+            [
+              -56.205261,
+              -34.859592
+            ],
+            [
+              -56.205444,
+              -34.858993
+            ],
+            [
+              -56.205658,
+              -34.858905
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -56.207525,
+            -34.859453
+          ],
+          [
+            -56.209059,
+            -34.859734
+          ],
+          [
+            -56.208855,
+            -34.859928
+          ],
+          [
+            -56.208619,
+            -34.860244
+          ],
+          [
+            -56.208212,
+            -34.860825
+          ],
+          [
+            -56.20818,
+            -34.861282
+          ],
+          [
+            -56.207697,
+            -34.861265
+          ],
+          [
+            -56.207386,
+            -34.861115
+          ],
+          [
+            -56.206903,
+            -34.860939
+          ],
+          [
+            -56.206839,
+            -34.860781
+          ],
+          [
+            -56.207032,
+            -34.860332
+          ],
+          [
+            -56.207193,
+            -34.859981
+          ],
+          [
+            -56.207439,
+            -34.859567
+          ],
+          [
+            -56.207493,
+            -34.859479
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {},
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.211537,
+              -34.862007
+            ],
+            [
+              -56.210153,
+              -34.860431
+            ],
+            [
+              -56.209209,
+              -34.860748
+            ],
+            [
+              -56.209874,
+              -34.862341
+            ],
+            [
+              -56.211537,
+              -34.862007
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "iconClass": "Circle",
+          "color": "Yellow"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.203668,
+          -34.859276
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "outlink": "https://www.youtube.com/watch?v=b0lqXo4sets&list=PLXxWLsUmxWI7XxY04SLWQ_D_EReHE-zt3&index=5",
+          "outlinkTarget": "parent"
+        }
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.205615,
+              -34.858683
+            ],
+            [
+              -56.205315,
+              -34.858499
+            ],
+            [
+              -56.204877,
+              -34.85865
+            ],
+            [
+              -56.205207,
+              -34.858921
+            ],
+            [
+              -56.205615,
+              -34.858683
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "showLabel": null,
+          "labelDirection": "top"
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.204099,
+          -34.859002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "showLabel": false
+        },
+        "calles": "zona 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.205859,
+          -34.859205
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "iconUrl": "/uploads/pictogram/park2-24_1.png",
+          "showLabel": null,
+          "popupTemplate": "Table",
+          "labelDirection": "right"
+        },
+        "name": "zona 1"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.203394,
+          -34.859824
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "iconUrl": "https://img1.freepng.es/20171220/kcq/smile-mouth-png-5a3a7392284c66.86010673151378011416518611.jpg",
+          "popupShape": "Large"
+        },
+        "description": "{{{https://www.youtube.com/embed/b0lqXo4sets|480*720}}}",
+        "name": "zona 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.20407,
+          -34.859872
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "color": "Magenta",
+          "iconClass": "Drop",
+          "iconUrl": "/uploads/pictogram/school-24.png",
+          "zoomTo": 13,
+          "popupShape": "Large"
+        },
+        "description": "Ödsligt torp intill Dalälven.\nGamla ekar och älvängar, men ont om stigar.\nUgglor, hackspettar och lodjur.\n\nTillgänglig för övernattning via upplandsstiftelsen. Nyckel krävs, vägen bommad vid Hyttön.\n\n5 bäddar. \nKallvatten, men ingen el, köksutrustning, solcellsdrivet kylskåp och vedeldad spis/kamin.\nEldstad vid stranden.\n100 kr/person och dygn.\n\n{{https://cdn.naturkartan.se/image/upload/c_fill,g_center,h_480,w_750/e_auto_contrast/e_vibrance:50/e_sharpen:50/f_jpg,q_auto/bw9f24jkfztr8npjg1er.jpg}}\n\n\n{{{https://www.youtube.com/embed/b0lqXo4sets|480*720}}}",
+        "name": "zona 3"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.202905,
+          -34.859656
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "iconClass": "Drop",
+          "iconUrl": "/uploads/pictogram/pitch-24_1.png",
+          "zoomTo": 53,
+          "showLabel": true,
+          "labelDirection": "left",
+          "labelInteractive": true
+        },
+        "description": "haga click en mi",
+        "name": "zona 4",
+        "calles": "zona 2"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.204085,
+          -34.859459
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "description": "**nivel de inundación**\n\n[[https://cdn1.eldia.com/052018/1526113158767.jpg?&cw=630|mas informacion]]\n\nDesde la municipalidad de Berisso informaron que son cien las personas evacuadas. Por la gravedad de lo sucedido en ese distrito se declaró la “emergencia climática”, con lo que se establece que las dependencias municipales quedan al servicio de la Intendencia y sus respectivas secretarias, quienes coordinaran las áreas de emergencia, vehículos, personal e infraestructura necesaria.\n\n\n# encabezado principal\n{{https://cdn1.eldia.com/052018/1526113158767.jpg}}\n---\n## encabezado secundario\n### encabezado ternario (para ver mas visita el siguiente enlace)\n [[https://sigdeletras.com/2019/consumiendo-informacion-geografica-de-servicios-apirest-lealfet/|cuidemosnos de la inundacion]]\n\n---\n\n{{{https://www.youtube.com/embed/b0lqXo4sets}}}\n\n\n\n\n ",
+        "_umap_options": {
+          "weight": "8",
+          "opacity": "1",
+          "fillOpacity": "0.5",
+          "showLabel": null,
+          "labelInteractive": true,
+          "popupTemplate": "Default"
+        },
+        "name": "zona 4"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -56.204585,
+              -34.858486
+            ],
+            [
+              -56.20437,
+              -34.858433
+            ],
+            [
+              -56.20349,
+              -34.858626
+            ],
+            [
+              -56.201903,
+              -34.860343
+            ],
+            [
+              -56.201098,
+              -34.861259
+            ],
+            [
+              -56.199596,
+              -34.861584
+            ],
+            [
+              -56.20275,
+              -34.86375
+            ],
+            [
+              -56.204703,
+              -34.863107
+            ],
+            [
+              -56.20466,
+              -34.859225
+            ],
+            [
+              -56.204585,
+              -34.858486
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "_umap_options": {
+          "color": "DarkRed",
+          "iconClass": "Ball",
+          "showLabel": null,
+          "labelDirection": "bottom"
+        },
+        "description": "Esta es la coordenada donde hay mas probabilidad de que se inunda mucho.\n\n**nivel de inundación**\n\n[[https://cdn1.eldia.com/052018/1526113158767.jpg?&cw=630|mas informacion]]\n\nDesde la municipalidad de Berisso informaron que son cien las personas evacuadas. Por la gravedad de lo sucedido en ese distrito se declaró la “emergencia climática”, con lo que se establece que las dependencias municipales quedan al servicio de la Intendencia y sus respectivas secretarias, quienes coordinaran las áreas de emergencia, vehículos, personal e infraestructura necesaria.\n\n\n# encabezado principal\n{{https://cdn1.eldia.com/052018/1526113158767.jpg}}\n---\n## encabezado secundario\n### encabezado ternario (para ver mas visita el siguiente enlace)\n [[https://sigdeletras.com/2019/consumiendo-informacion-geografica-de-servicios-apirest-lealfet/|cuidemosnos de la inundacion]]\n\n---\n\n{{{https://www.youtube.com/embed/b0lqXo4sets}}}\n\n\n\n\n ",
+        "name": "zona 5"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -56.203461,
+          -34.859044
+        ]
+      }
+    }
+  ]
+}
