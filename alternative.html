@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+
+
+    <link rel="stylesheet" href="style.css"/>
+	
+</head>
+<body>
+
+<div id="mapid" style="width: 800px; height: 500px;"></div>
+<script src="index.js"></script>
+
+<script>
+//Create my map 
+var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    maxZoom: 18,
+    id: 'mapbox/streets-v10',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
+}).addTo(mymap);
+
+//Add geojson 
+L.geoJSON(inundaciones).addTo(mymap)
+
+//Create an icon 
+var LeafletIcon = L.Icon.extend({
+    options: {
+        iconSize: [38.95],
+        iconAnchor: [22,94],
+        popupAnchor: [3,76]
+    }
+})
+var personIcon = new LeafletIcon ({
+    iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png'
+})
+
+/*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
+    .bindPopup(`
+    <h1 tabindex=0 >Juan. Barrio: La Plata.</h1>
+    <iframe tabindex=0 width="260" height="315" src="https://www.youtube.com/embed/cCJEH0NCbBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    `);
+*/
+
+// remove the shadow pane (otherwise each shadow image is read out)
+//$('.leaflet-shadow-pane').remove();
+    
+// prevent screen readers from reading out each map tile
+//$('.leaflet-tile-container img, .leaflet-shadow-pane img').attr('role','presentation').attr('alt','');
+
+//Functions
+var selectedM = false;
+var createMarker = function (latlng,texto){
+    console.log('Latlng: ',latlng);
+    console.log('texto: ',texto);
+    var marker = L.marker(latlng).addTo(mymap).bindPopup(texto);
+    marker.on('click',function(e){
+        if (selectedM){ //marker selected
+            selectedM = e.target;
+            // colocar el foco a la ventana seleccionada cuando se abre   
+            selectedM.popup._container.attr('tabindex','-1').focus();
+            // move the close button to the end of the popup content so screen readers reach it
+            // after the main popup content, not before
+            var close = selectedM.popup._container.find('.leaflet-popup-close-button');
+            selectedM.popup._container.find('.leaflet-popup-close-button').remove();
+            close.attr('title','Item cerrado');
+            selectedM.popup._container.append(close); //??
+
+            selectedM = false; //Cambia cuando ingresa al if 
+        }
+    })
+    marker.on('popupclose', function(e){
+        var selectedM = e.popup._source._icon;
+        selectedM.focus();
+    })
+} 
+
+//Create 2 markers
+createMarker([-34.933861,-57.9787715], `<div class="my-popup-content"><h1 tabindex=0 >Maria. Barrio: La Plata.</h1>`);
+createMarker([-34.91018, -57.94452],`<div class="my-popup-content"><h1 tabindex=0 >Jose. Barrio: La Plata.</h1>`);
+
+
+</script>
+
+</body>
+</html>
