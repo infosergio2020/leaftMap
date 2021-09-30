@@ -71,28 +71,21 @@ var selectedM = false;
 function mostrarVideo(){
     alert ("Funcion de mostrar video!!");   
 }
+/*****
+ * link: contiene url de youtube
+ ****/
 var createMarker = function (latlng,texto,link){
     console.log('Latlng: ',latlng);
     console.log('texto: ',texto);
     var marker = L.marker(latlng).addTo(mymap).bindPopup(texto);
-    marker.on('click',function(e){ //Aca entra solo si es click de mouse
-        //Al hacer click muestro en un div a la derecha el video de yb
-       // alert ("Funcion de mostrar video!!");   
-        //marker selected
-       //selectedM = e.target;
+    marker.on('keypress',function(e){ //Aca entra solo si es click de mouse o con un enter
         console.log('Entre!!');
-        //marker.attr('aria-label','Holaaa').focus(); 
-        // colocar el foco a la ventana seleccionada cuando se abre   
-       /* selectedM.popup._container.attr('tabindex','0').focus();
-        // move the close button to the end of the popup content so screen readers reach it
-        // after the main popup content, not before
-        var close = selectedM.popup._container.find('.leaflet-popup-close-button');
-        selectedM.popup._container.find('.leaflet-popup-close-button').remove();
-        close.attr('title','Item cerrado');
-        selectedM.popup._container.append(close); //??
-
-        selectedM = false; //Cambia cuando ingresa al if 
-    */
+        
+        if(event.keyCode==13) {
+            mostrarVideo()
+            //cuando valida que sea enter, debo enviar el link a un div para que cargue el video
+            $('#videoid')
+        }
     })
     marker.on('popupclose', function(e){
         var selectedM = e.popup._source._icon;
@@ -104,6 +97,8 @@ var createMarker = function (latlng,texto,link){
 createMarker([-34.933861,-57.9787715], `<h1 tabindex=0 aria-label="Holaa1" aria-hidden="true">Maria. Barrio: La Plata.</h1>`);
 createMarker([-34.91018, -57.94452],`<h1 tabindex=0 aria-label="Holaa2">Jose. Barrio: La Plata.</h1>`,'<div id="prueba">https://youtu.be/9Q3_fB1LqV0?t=4282</div>');
 </script>
-<input type="button" onkeyup="if(event.keyCode==13)mostrarVideo()">Tocar</input>
+<!--<input type="button" onkeyup="if(event.keyCode==13)mostrarVideo()">Tocar</input>-->
+<div>Video cargado</div>
+<iframe id="videoid" tabindex=0 width="260" height="315" src="https://www.youtube.com/embed/cCJEH0NCbBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </body>
 </html>
