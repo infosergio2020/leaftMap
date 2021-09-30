@@ -66,39 +66,35 @@ var personIcon = new LeafletIcon ({
 //$('.leaflet-tile-container img, .leaflet-shadow-pane img').attr('role','presentation').attr('alt','');
 
 //Functions
-var selectedM = false;
 
-function mostrarVideo(){
-    alert ("Funcion de mostrar video!!");   
-}
 /*****
  * link: contiene url de youtube
  ****/
 var createMarker = function (latlng,texto,link){
-    console.log('Latlng: ',latlng);
-    console.log('texto: ',texto);
-    var marker = L.marker(latlng).addTo(mymap).bindPopup(texto);
-    marker.on('keypress',function(e){ //Aca entra solo si es click de mouse o con un enter
+    var marker = L.marker(latlng).addTo(mymap);
+    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
         console.log('Entre!!');
-        
         if(event.keyCode==13) {
-            mostrarVideo()
-            //cuando valida que sea enter, debo enviar el link a un div para que cargue el video
-            $('#videoid')
+            var d = document.getElementById('video');
+            d.src = link;
         }
     })
-    marker.on('popupclose', function(e){
-        var selectedM = e.popup._source._icon;
-        selectedM.focus();
+    marker.on('click',function(e){ //Aca entra solo si es click de mouse
+        console.log('Entre!!');
+        var d = document.getElementById('video');
+        d.src = link;
     })
 } 
 
+
 //Create 2 markers
-createMarker([-34.933861,-57.9787715], `<h1 tabindex=0 aria-label="Holaa1" aria-hidden="true">Maria. Barrio: La Plata.</h1>`);
-createMarker([-34.91018, -57.94452],`<h1 tabindex=0 aria-label="Holaa2">Jose. Barrio: La Plata.</h1>`,'<div id="prueba">https://youtu.be/9Q3_fB1LqV0?t=4282</div>');
+createMarker([-34.933861,-57.9787715], `<h1 tabindex=0 aria-label="Holaa1" aria-hidden="true">Maria. Barrio: La Plata.</h1>`,"https://www.youtube.com/embed/cCJEH0NCbBY");
+createMarker([-34.91018, -57.94452],`<h1 tabindex=0 aria-label="Holaa2">Jose. Barrio: La Plata.</h1>`,"https://www.youtube.com/embed/cCJEH0NCbBY");
+
+//
+
+
 </script>
-<!--<input type="button" onkeyup="if(event.keyCode==13)mostrarVideo()">Tocar</input>-->
-<div>Video cargado</div>
-<iframe id="videoid" tabindex=0 width="260" height="315" src="https://www.youtube.com/embed/cCJEH0NCbBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<iframe id="video" tabindex=0 width="260" height="315" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </body>
 </html>
