@@ -1,6 +1,42 @@
-body {
-    padding: 0;
-    margin: 0;
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
-#mapid { height: 180px; }
+header {
+    background-color: rebeccapurple;
+    height: 100px;
+}
+header h1{
+    font-size: 40px;
+    line-height: 100px;
+    text-align: center;
+}
+body {
+    background-color: gray;
+}
+.home {
+    display: flex;
+    flex-wrap: wrap;
+}
+#mapid { 
+    background-color: seagreen;
+    flex: 2;
+    height: 500px;
+    min-width: 250px;
+    outline: none;
+    padding: 20px;
+    position: relative;
+ }
+ #desc {
+     text-align: center;
+     background-color: #004D40;
+     flex: 1;
+     margin:0 auto;
+     min-width: 250px;
+     padding: 20px;
+ }
+ #video {
+    width: 80%; 
+    height: 50%;   
+ }
