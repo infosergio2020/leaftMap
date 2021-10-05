@@ -4,3 +4,12 @@ body {
 }
 
 #mapid { height: 180px; }
+
+
+.header{
+    font-size: 1.8rem;
+    color: #ffffff;
+    padding: 1rem;
+    background-color: #00472a;
+    text-align: center;
+}

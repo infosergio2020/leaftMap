@@ -17,11 +17,11 @@
  crossorigin=""></script>
 
 
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="./style.css"/>
 	
 </head>
 <body>
-
+<header class="header">Mapa de entrevistados</header>
 <div id="mapid" style="width: 800px; height: 500px;"></div>
 <script src="index.js"></script>
 
@@ -75,7 +75,7 @@ var createMarker = function (latlng,texto){
         if (selectedM){ //marker selected
             selectedM = e.target;
             // colocar el foco a la ventana seleccionada cuando se abre   
-            selectedM.popup._container.attr('tabindex','-1').focus();
+            selectedM.popup._container.attr('tabindex','0').focus();
             // move the close button to the end of the popup content so screen readers reach it
             // after the main popup content, not before
             var close = selectedM.popup._container.find('.leaflet-popup-close-button');
