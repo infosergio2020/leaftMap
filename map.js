@@ -58,7 +58,16 @@ function assignedText(cadena){
                 t.textContent=cadena[i];                
             }
         }
+        t=searchID('texto'+0);
+        t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
     }
+}
+/**
+ * Se posiciona en el ultimo marcador en el que se hizo click
+ * Parametros: ? Necesitaria guardarme el marcador en si para realizar marker.focus()
+ */
+function positionMap(){
+    alert('Volver al mapa!!');
 }
 /***
  * Crea un marcador con sus respectivas funciones
@@ -72,6 +81,13 @@ var createMarker = function (latlng,texto,link){
             d.src = link;
             var cadena = decompose(texto);
             assignedText(cadena);
+            //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
+            //Este ultimo tengo que crearlo!!!
+            const button = document.createElement('button'); 
+            button.type = 'button'; 
+            button.innerText = 'Haz Click';
+            //document.getElementById('desc')[0].appendChild(button);
+            //document.body.appendChild(button); 
         }
     })
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
@@ -85,9 +101,11 @@ var createMarker = function (latlng,texto,link){
 
 
 //Create 6 markers
+//Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
+//es decir Maria
 createMarker([-34.933861,-57.9787715], `Maria. Barrio: La Plata`,"https://www.youtube-nocookie.com/embed/cCJEH0NCbBY");
 createMarker([-34.91018, -57.94452],`Jose. Barrio: La Plata.`,"https://www.youtube-nocookie.com/embed/2J52CfXvGaQ");
-createMarker([-34.9138982,-57.9758826],'holaa',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
-createMarker([-34.9528344,-57.96863],'jhhhjg. Barrio: Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
-createMarker([-34.9361601,-57.9825345],'kjkjh. Barrio: San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
-createMarker([-34.8868379,-57.983098],'uwu',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+createMarker([-34.9138982,-57.9758826],'Julieta. Barrio: La Plata',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
+createMarker([-34.9528344,-57.96863],'Paula. Barrio: Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
+createMarker([-34.9361601,-57.9825345],'Pedro. Barrio: San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
+createMarker([-34.8868379,-57.983098],'Juan. Barrio: Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
