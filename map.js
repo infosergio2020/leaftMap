@@ -67,7 +67,7 @@ function assignedText(cadena){
  * Parametros: ? Necesitaria guardarme el marcador en si para realizar marker.focus()
  */
 function positionMap(){
-    alert('Volver al mapa!!');
+    alert('Volver al mapa');
 }
 /***
  * Crea un marcador con sus respectivas funciones
@@ -82,12 +82,12 @@ var createMarker = function (latlng,texto,link){
             var cadena = decompose(texto);
             assignedText(cadena);
             //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
-            //Este ultimo tengo que crearlo!!!
-            const button = document.createElement('button'); 
+            //Creación del botón
+            var button = document.createElement('button'); 
             button.type = 'button'; 
+            button.onclick=positionMap ;
             button.innerText = 'Haz Click';
-            //document.getElementById('desc')[0].appendChild(button);
-            //document.body.appendChild(button); 
+            document.getElementById('desc').appendChild(button);
         }
     })
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
