@@ -83,10 +83,13 @@ var createMarker = function (latlng,texto,link){
             assignedText(cadena);
             //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
             //Creación del botón
-            var button = document.createElement('button'); 
+            var button = document.getElementById('button');
+            if (button != null) boton.remove();    
+            button = document.createElement('button'); 
+            button.id='button';
             button.type = 'button'; 
             button.onclick=positionMap ;
-            button.innerText = 'Haz Click';
+            button.innerText = 'Haz Click'; 
             document.getElementById('desc').appendChild(button);
         }
     })
