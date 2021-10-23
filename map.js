@@ -15,13 +15,13 @@ L.geoJSON(inundaciones).addTo(mymap)
 //Create an icon 
 var LeafletIcon = L.Icon.extend({
     options: {
-        iconSize: [38.95],
+        iconSize: [38,95],
         iconAnchor: [22,94],
         popupAnchor: [3,76]
     }
 })
 var personIcon = new LeafletIcon ({
-    iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png'
+    iconUrl: 'marcador_ori.png'
 })
 
 /*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
@@ -58,23 +58,16 @@ function assignedText(cadena){
                 t.textContent=cadena[i];                
             }
         }
-        t=searchID('texto'+0);
-        t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
+        //t=searchID('texto'+0);
+        //t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
     }
-}
-/**
- * Se posiciona en el ultimo marcador en el que se hizo click
- * Parametros: ? Necesitaria guardarme el marcador en si para realizar marker.focus()
- */
-function positionMap(){
-    alert('Volver al mapa');
 }
 /***
  * Crea un marcador con sus respectivas funciones
  */
 var createMarker = function (latlng,texto,link){
-    var marker = L.marker(latlng).addTo(mymap);
-    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
+    var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
+    /*marker.on('keypress',function(e){ //Aca entra solo si es con un enter
         //console.log('Entre!!');
         if(event.keyCode==13) {
             var d = searchID('video');
@@ -91,12 +84,17 @@ var createMarker = function (latlng,texto,link){
             button.onclick=positionMap ;
             button.innerText = 'Haz Click'; 
             document.getElementById('desc').appendChild(button);
+            
         }
-    })
+    })*/
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         //console.log('Entre!!');
         var d = searchID('video');
         d.src = link;
+        var textoinicio = document.getElementById('tituloinicial');
+        if (textoinicio != null) textoinicio.remove();    
+        searchID('label1').style.visibility='visible';
+        searchID('label2').style.visibility='visible';
         var cadena = decompose(texto);
         assignedText(cadena);
     })
@@ -106,9 +104,9 @@ var createMarker = function (latlng,texto,link){
 //Create 6 markers
 //Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
 //es decir Maria
-createMarker([-34.933861,-57.9787715], `Maria. Barrio: La Plata`,"https://www.youtube-nocookie.com/embed/cCJEH0NCbBY");
-createMarker([-34.91018, -57.94452],`Jose. Barrio: La Plata.`,"https://www.youtube-nocookie.com/embed/2J52CfXvGaQ");
-createMarker([-34.9138982,-57.9758826],'Julieta. Barrio: La Plata',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
-createMarker([-34.9528344,-57.96863],'Paula. Barrio: Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
-createMarker([-34.9361601,-57.9825345],'Pedro. Barrio: San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
-createMarker([-34.8868379,-57.983098],'Juan. Barrio: Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+createMarker([-34.933861,-57.9787715], `Maria. La Plata`,"https://www.youtube-nocookie.com/embed/cCJEH0NCbBY");
+createMarker([-34.91018, -57.94452],`Jose. La Plata.`,"https://www.youtube-nocookie.com/embed/2J52CfXvGaQ");
+createMarker([-34.9138982,-57.9758826],'Julieta.  La Plata',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
+createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
+createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
+createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
