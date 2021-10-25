@@ -28,8 +28,8 @@ const hideMaker = function(){
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
         elements[i].setAttribute("aria-hidden", "true");
-        elements[i].setAttribute("alt", "holass");
-        elements[i].setAttribute("tabindex", "-1");
+        elements[i].setAttribute("alt", "soy una persona");
+        elements[i].setAttribute("tabindex", "0");
         } 
 }
 // ori termina de ver esconder los controles de zoom
@@ -65,8 +65,6 @@ var LeafletIcon = L.Icon.extend({
 })
 var personIcon = new LeafletIcon ({
     iconUrl: 'marcador_ori.png',
-    title:"hola soy una persona"
-    
 })
 
 /*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
