@@ -21,28 +21,40 @@
 	
 </head>
 <header>
+    <!-- comienzo de la accesibilidad -->
+
     <h1>Mapa de entrevistados</h1>
 </header>
 <body>
     <section class="home">
         <div id="mapid"></div>
         <div id="desc">
-            <h1 >Información del entrevistado</h1>
-            <br>
-            <div id="info" >
+            <!-- <div tabindex="0" style="height: 4rem;"> -->
+                <h1>Información del entrevistado</h1>
+                <!-- <h1  tabindex=0 aria-label="A continuación se listan 2 entrevistas" ></h1> -->
+                <br>
+                <!-- <ul role="list" style="visibility:hidden; position: relative; bottom:0; ">
+                    <li role="listitem" data-message="Rodrigo" >Para escuchar la entrevista de Rodrigo presione enter.</li>
+                    <li role="listitem" data-message="Lore" >Para escuchar la entrevista de Lore presione enter.</li>
+        
+                </ul> -->
+            <!-- </div> -->
+            
+            <!-- fin de la accesibilidad -->
+            <div id="info">
                 <div class="centrar">
-                    <h1 class="text" id="tituloinicial" tabindex=0 aria-label="Holaa1" aria-hidden="true">Haga click en alguna persona dentro del mapa para obtener mas información de la misma.</h1>
+                    <h1 class="text" id="tituloinicial" aria-hidden="true">Haga click en alguna persona dentro del mapa para obtener mas información de la misma.</h1>
                 </div>
                 <div class="centrar">
                     <label for="name" id="label1" class="text" style="visibility:hidden"><h1>Nombre: </h1> </label>
-                    <h1 id="texto0" class="text" tabindex=0 aria-label="Holaa1" aria-hidden="true"></h1>
+                    <h1 id="texto0" class="text"  aria-label="Holaa1" aria-hidden="true"></h1>
                 </div>
                 <div class="centrar">
                     <label for="name" id="label2" class="text" style="visibility:hidden"><h1>Barrio: </h1> </label>
-                    <h2 id="texto1" class="text" tabindex=0 aria-hidden="true"></h2>
+                    <h2 id="texto1" class="text" aria-hidden="true"></h2>
                     <br><br>
                 </div>
-                <iframe id="video" tabindex=0 src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <iframe id="video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>    
     </section>

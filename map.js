@@ -4,10 +4,45 @@ var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox/streets-v10',
+   
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
 }).addTo(mymap);
+
+
+// ori prueba esconder los controles de zoom
+var elements = document.querySelectorAll(".leaflet-control a");
+for (var i = 0; i < elements.length; ++i) {
+    elements[i].setAttribute("aria-hidden", "true");
+  }
+  
+
+  var elements = document.querySelectorAll(".leaflet-tile-pane img");
+  for (var i = 0; i < elements.length; ++i) {
+      elements[i].setAttribute("aria-hidden", "true");
+      elements[i].setAttribute("alt", "holass");
+      elements[i].setAttribute("tabindex", "-1");
+
+    } 
+    
+// ori termina de ver esconder los controles de zoom
+
+
+// ori prueba colocar titulo a la imagen
+// $(document).on('ready', function(){
+//     addMapTileAttr('.leaflet-tile-pane img')
+// });
+
+// function addMapTileAttr(styleClass) {
+//     var selector = $(styleClass);
+//     selector.each(
+//     function(index) {
+//         $(this).attr('alt',"Map tile image " + index);
+//     });
+// }
+// ori termina de ver colocar titulo a la imagen
+
 
 //Add geojson 
 L.geoJSON(inundaciones).addTo(mymap)
@@ -17,11 +52,15 @@ var LeafletIcon = L.Icon.extend({
     options: {
         iconSize: [38,95],
         iconAnchor: [22,94],
-        popupAnchor: [3,76]
+        popupAnchor: [3,76],
+        
     }
+    
 })
 var personIcon = new LeafletIcon ({
-    iconUrl: 'marcador_ori.png'
+    iconUrl: 'marcador_ori.png',
+    title:"hola soy una persona"
+    
 })
 
 /*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
@@ -99,6 +138,36 @@ var createMarker = function (latlng,texto,link){
         assignedText(cadena);
     })
 } 
+// abrir un alert personalizado cuando se presiona una opcion del listado.
+const buttons = document.querySelectorAll('li');
+
+      for(let i = 0; i < buttons.length; i++) {
+        addHandler(buttons[i]);
+      }
+
+      function addHandler(li) {
+        li.addEventListener('click', function(e) {
+          let message = e.target.getAttribute('data-message');
+        //   alert(message);
+        Swal.fire({
+          
+    
+            html:
+              '<iframe width="400" height="315" src="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Salir',
+            confirmButtonAriaLabel: 'Salir',
+           
+          })
+          var d = searchID('video');
+            d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
+            // var cadena = decompose(texto);
+            // assignedText(cadena);
+        })
+      }
+
 
 
 //Create 6 markers
