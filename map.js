@@ -1,4 +1,5 @@
 //Create my map 
+var titulos=["titulo1","titulo2","titulo3","titulo4","titulo5","titulo6"];
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -23,12 +24,11 @@ const hideZoomControl = function(){
   
 
 //   var elements = document.querySelectorAll(".leaflet-tile-pane img");
-const hideMaker = function(){
+const hideMaker = function(titulos){
     console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("aria-hidden", "true");
-        elements[i].setAttribute("alt", "soy una persona");
+        elements[i].setAttribute("alt", titulos[i]);
         elements[i].setAttribute("tabindex", "0");
         } 
 }
@@ -109,6 +109,7 @@ function assignedText(cadena){
  * Crea un marcador con sus respectivas funciones
  */
 var createMarker = function (latlng,texto,link){
+    
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
     marker.on('keypress',function(e){ //Aca entra solo si es con un enter
         let aux = e.target._icon;
@@ -135,8 +136,23 @@ var createMarker = function (latlng,texto,link){
     
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         //console.log('Entre!!');
-        var d = searchID('video');
-        d.src = link;
+        // var d = searchID('video');
+        // d.src = link;
+
+        Swal.fire({
+          
+    
+            html:
+              '<iframe width="400" height="315" src="+ link +" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Salir',
+            confirmButtonAriaLabel: 'Salir',
+           
+          })
+        
+
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
         searchID('label1').style.visibility='visible';
@@ -146,34 +162,34 @@ var createMarker = function (latlng,texto,link){
     })
 } 
 // abrir un alert personalizado cuando se presiona una opcion del listado.
-const buttons = document.querySelectorAll('li');
+// const buttons = document.querySelectorAll('li');
 
-      for(let i = 0; i < buttons.length; i++) {
-        addHandler(buttons[i]);
-      }
+//       for(let i = 0; i < buttons.length; i++) {
+//         addHandler(buttons[i]);
+//       }
 
-      function addHandler(li) {
-        li.addEventListener('click', function(e) {
-          let message = e.target.getAttribute('data-message');
-        //   alert(message);
-        Swal.fire({
+//       function addHandler(li) {
+//         li.addEventListener('click', function(e) {
+//           let message = e.target.getAttribute('data-message');
+//         //   alert(message);
+//         Swal.fire({
           
     
-            html:
-              '<iframe width="400" height="315" src="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Salir',
-            confirmButtonAriaLabel: 'Salir',
+//             html:
+//               '<iframe width="400" height="315" src="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+//             showCloseButton: true,
+//             focusConfirm: false,
+//             confirmButtonText:
+//               '<i class="fa fa-thumbs-up"></i> Salir',
+//             confirmButtonAriaLabel: 'Salir',
            
-          })
-          var d = searchID('video');
-            d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
-            // var cadena = decompose(texto);
-            // assignedText(cadena);
-        })
-      }
+//           })
+//           var d = searchID('video');
+//             d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
+//             // var cadena = decompose(texto);
+//             // assignedText(cadena);
+//         })
+//       }
 
 
 
@@ -187,4 +203,4 @@ createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-n
 createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
 createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
 hideZoomControl();
-hideMaker();
+hideMaker(titulos);
