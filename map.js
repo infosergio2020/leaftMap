@@ -138,12 +138,12 @@ var createMarker = function (latlng,texto,link){
         //console.log('Entre!!');
         // var d = searchID('video');
         // d.src = link;
+        console.log(link)
 
         Swal.fire({
-          
-    
             html:
-              '<iframe width="400" height="315" src="+ link +" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+            // <iframe id="video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              '<iframe width="400" height="315" src='+link+' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
             showCloseButton: true,
             focusConfirm: false,
             confirmButtonText:
