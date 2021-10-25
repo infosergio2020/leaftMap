@@ -4,7 +4,6 @@ var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox/streets-v10',
-   
     tileSize: 512,
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
@@ -12,20 +11,27 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 
 
 // ori prueba esconder los controles de zoom
-var elements = document.querySelectorAll(".leaflet-control a");
-for (var i = 0; i < elements.length; ++i) {
-    elements[i].setAttribute("aria-hidden", "true");
-  }
+const hideZoomControl = function(){
+    console.log('hideZoomControl its running!!!');
+    let elementos = document.querySelectorAll(".leaflet-control a");
+    elementos.forEach(item => {
+        item.setAttribute("aria-hidden", "true")
+        item.setAttribute("tabindex", "-1");//no lo enfoques
+    })
+}
+
   
 
-  var elements = document.querySelectorAll(".leaflet-tile-pane img");
-  for (var i = 0; i < elements.length; ++i) {
-      elements[i].setAttribute("aria-hidden", "true");
-      elements[i].setAttribute("alt", "holass");
-      elements[i].setAttribute("tabindex", "-1");
-
-    } 
-    
+//   var elements = document.querySelectorAll(".leaflet-tile-pane img");
+const hideMaker = function(){
+    console.log('hideMaker its running!!!');
+    let elements = document.querySelectorAll(".leaflet-marker-icon");
+    for (var i = 0; i < elements.length; ++i) {
+        elements[i].setAttribute("aria-hidden", "true");
+        elements[i].setAttribute("alt", "holass");
+        elements[i].setAttribute("tabindex", "-1");
+        } 
+}
 // ori termina de ver esconder los controles de zoom
 
 
@@ -106,26 +112,29 @@ function assignedText(cadena){
  */
 var createMarker = function (latlng,texto,link){
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
-    /*marker.on('keypress',function(e){ //Aca entra solo si es con un enter
+    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
+        let aux = e.target._icon;
+        console.log(e.target._icon);
         //console.log('Entre!!');
-        if(event.keyCode==13) {
-            var d = searchID('video');
-            d.src = link;
-            var cadena = decompose(texto);
-            assignedText(cadena);
-            //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
-            //Creación del botón
-            var button = document.getElementById('button');
-            if (button != null) boton.remove();    
-            button = document.createElement('button'); 
-            button.id='button';
-            button.type = 'button'; 
-            button.onclick=positionMap ;
-            button.innerText = 'Haz Click'; 
-            document.getElementById('desc').appendChild(button);
+        // if(event.keyCode==13) {
+        //     var d = searchID('video');
+        //     d.src = link;
+        //     var cadena = decompose(texto);
+        //     assignedText(cadena);
+        //     //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
+        //     //Creación del botón
+        //     var button = document.getElementById('button');
+        //     if (button != null) boton.remove();    
+        //     button = document.createElement('button'); 
+        //     button.id='button';
+        //     button.type = 'button'; 
+        //     button.onclick=positionMap ;
+        //     button.innerText = 'Haz Click'; 
+        //     document.getElementById('desc').appendChild(button);
             
-        }
-    })*/
+        // }
+    })
+    
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         //console.log('Entre!!');
         var d = searchID('video');
@@ -179,3 +188,5 @@ createMarker([-34.9138982,-57.9758826],'Julieta.  La Plata',"https://www.youtube
 createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
 createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
 createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+hideZoomControl();
+hideMaker();
