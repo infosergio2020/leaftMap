@@ -1,3 +1,5 @@
+import { datos } from "./data.js";
+
 var titulos=["titulo1.","titulo2.","titulo3.","titulo4.","titulo5.","titulo6."];
 for (var i = 0; i < titulos.length; ++i) {
     titulos[i]="Presiona enter para ver la entrevista de "+titulos[i];
@@ -218,11 +220,7 @@ var createMarker = function (latlng,texto,link){
 //Create 6 markers
 //Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
 //es decir Maria
-createMarker([-34.933861,-57.9787715], `Maria. La Plata`,"https://www.youtube-nocookie.com/embed/cCJEH0NCbBY");
-createMarker([-34.91018, -57.94452],`Jose. La Plata.`,"https://www.youtube-nocookie.com/embed/2J52CfXvGaQ");
-createMarker([-34.9138982,-57.9758826],'Julieta.  La Plata',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
-createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
-createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
-createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+
+datos.forEach(dato => createMarker(dato.coord,dato.title,dato.link));
 hideZoomControl();
 hideMaker(titulos);
