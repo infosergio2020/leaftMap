@@ -3,16 +3,21 @@
     margin: 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
-header,footer{
+header,footer, a{
     background-color:#00695C;
     height: 100px;
     font-family: sans-serif;
     color: #ffff;
+    text-align: center;
 }
 header h1{
     font-size: 40px;
     line-height: 100px;
     text-align: center;
+}
+a{
+    text-decoration: none;
+    cursor:default;
 }
 
 .accesible{
