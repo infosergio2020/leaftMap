@@ -91,7 +91,7 @@ function assignedText(cadena){
  */
 var createMarker = function (latlng,texto,link){
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
-    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
+/*     marker.on('keypress',function(e){ //Aca entra solo si es con un enter - No funciona! Siempre va por onClick
         if(e.keyCode === 13) {
             var d = searchID('video');
             d.src = link;
@@ -109,7 +109,7 @@ var createMarker = function (latlng,texto,link){
             //boton.onclick=markerFocus(e);
             //console.log(e.target._icon);  
         }
-    })
+    }) */
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         var d = searchID('video');
         d.src = link;
@@ -121,14 +121,13 @@ var createMarker = function (latlng,texto,link){
         assignedText(cadena);
         console.log("Estoy en función click!!");
         //Creación del botón
-        var boton = document.getElementById('boton');
-        console.log(boton);  
-        boton.style.visibility='visible'; 
-        var datos = function (){
+        var markerFocus = function (){
             e.target._icon.focus();
-            console.log(event,param1);
+            console.log("markerFocus");
         };
-        boton.onclick = datos.bind(e,'e');
+        let boton = document.getElementById('boton');
+        boton.addEventListener('click',markerFocus.bind(e));
+        boton.style.visibility='visible';
     })
 } 
 
