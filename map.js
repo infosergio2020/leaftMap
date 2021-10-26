@@ -1,5 +1,9 @@
+var titulos=["titulo1.","titulo2.","titulo3.","titulo4.","titulo5.","titulo6."];
+for (var i = 0; i < titulos.length; ++i) {
+    titulos[i]="Presiona enter para ver la entrevista de "+titulos[i];
+}
+
 //Create my map 
-var titulos=["titulo1","titulo2","titulo3","titulo4","titulo5","titulo6"];
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -138,12 +142,35 @@ var createMarker = function (latlng,texto,link){
         //console.log('Entre!!');
         // var d = searchID('video');
         // d.src = link;
-        console.log(link)
+        let aux = e.target._icon;
+        // console.log(e.target._icon);
+        let elements = document.querySelectorAll(".leaflet-marker-icon");
+    for (var i = 0; i < elements.length; ++i) {
+        elements[i].setAttribute("tabindex", "-1");
+        elements[i].setAttribute("aria-hidden", "true");
+        if(elements[i]==aux){
+            console.log("verdad")
+            elements[i].setAttribute("tabindex", "0");
+            elements[i].setAttribute("aria-hidden", "false");
+        }
+        console.log(elements[i])
+        // elements[i].setAttribute("alt", titulos[i]);
+        // elements[i].setAttribute("tabindex", "0");
+    }
+
+
+
+        var textoinicio = document.getElementById('tituloinicial');
+        if (textoinicio != null) textoinicio.remove();    
+        searchID('label1').style.visibility='visible';
+        searchID('label2').style.visibility='visible';
+        var cadena = decompose(texto);
+        assignedText(cadena);
 
         Swal.fire({
+        
             html:
-            // <iframe id="video" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              '<iframe width="400" height="315" src='+link+' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
+              '<h1 class="text">Nombre: '+cadena[0]+'. </h1> <h1>Barrio: '+cadena[1]+'. </h1> <iframe width="400" height="315" src='+link+' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
             showCloseButton: true,
             focusConfirm: false,
             confirmButtonText:
@@ -153,12 +180,7 @@ var createMarker = function (latlng,texto,link){
           })
         
 
-        var textoinicio = document.getElementById('tituloinicial');
-        if (textoinicio != null) textoinicio.remove();    
-        searchID('label1').style.visibility='visible';
-        searchID('label2').style.visibility='visible';
-        var cadena = decompose(texto);
-        assignedText(cadena);
+        
     })
 } 
 // abrir un alert personalizado cuando se presiona una opcion del listado.
