@@ -65,3 +65,12 @@ body {
     display: flex;
     justify-content: center;
 }
+.ocultar-visualmente {
+
+    position:absolute;
+    
+    overflow:hidden;
+    
+    top:-9999px; /* o left:-9999px; o text-indent:-9999px; */
+    
+}

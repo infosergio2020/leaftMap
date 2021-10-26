@@ -1,3 +1,8 @@
+var titulos=["titulo1.","titulo2.","titulo3.","titulo4.","titulo5.","titulo6."];
+for (var i = 0; i < titulos.length; ++i) {
+    titulos[i]="Presiona enter para ver la entrevista de "+titulos[i];
+}
+
 //Create my map 
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
 
@@ -32,6 +37,23 @@ var personIcon = new LeafletIcon ({
 */
 
 //Functions
+const hideMaker = function(titulos){
+    console.log('hideMaker its running!!!');
+    let elements = document.querySelectorAll(".leaflet-marker-icon");
+    for (var i = 0; i < elements.length; ++i) {
+        elements[i].setAttribute("alt", titulos[i]);
+        elements[i].setAttribute("tabindex", "0");
+        } 
+}
+// ori prueba esconder los controles de zoom
+const hideZoomControl = function(){
+    console.log('hideZoomControl its running!!!');
+    let elementos = document.querySelectorAll(".leaflet-control a");
+    elementos.forEach(item => {
+        item.setAttribute("aria-hidden", "true")
+        item.setAttribute("tabindex", "-1");//no lo enfoques
+    })
+}
 
 /*****
  * link: contiene url de youtube
@@ -58,45 +80,55 @@ function assignedText(cadena){
                 t.textContent=cadena[i];                
             }
         }
-        //t=searchID('texto'+0);
-        //t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
+        t=searchID('texto'+0);
+        t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
     }
+    return;
 }
+
 /***
  * Crea un marcador con sus respectivas funciones
  */
 var createMarker = function (latlng,texto,link){
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
-    /*marker.on('keypress',function(e){ //Aca entra solo si es con un enter
-        //console.log('Entre!!');
-        if(event.keyCode==13) {
+    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
+        if(e.keyCode === 13) {
             var d = searchID('video');
             d.src = link;
+            var textoinicio = document.getElementById('tituloinicial');
+            if (textoinicio != null) textoinicio.remove();    
+            searchID('label1').style.visibility='visible';
+            searchID('label2').style.visibility='visible';
             var cadena = decompose(texto);
             assignedText(cadena);
-            //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
+            console.log("Voy por acá!!");
             //Creación del botón
-            var button = document.getElementById('button');
-            if (button != null) boton.remove();    
-            button = document.createElement('button'); 
-            button.id='button';
-            button.type = 'button'; 
-            button.onclick=positionMap ;
-            button.innerText = 'Haz Click'; 
-            document.getElementById('desc').appendChild(button);
-            
+            var boton = document.getElementById('boton');
+            console.log(boton);
+            //boton.style.visibility='visible'; NO FUNCIONA!!
+            //boton.onclick=markerFocus(e);
+            //console.log(e.target._icon);  
         }
-    })*/
+    })
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
-        //console.log('Entre!!');
         var d = searchID('video');
         d.src = link;
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
         searchID('label1').style.visibility='visible';
         searchID('label2').style.visibility='visible';
-        var cadena = decompose(texto);
+        var cadena = decompose(texto);  
         assignedText(cadena);
+        console.log("Estoy en función click!!");
+        //Creación del botón
+        var boton = document.getElementById('boton');
+        console.log(boton);  
+        boton.style.visibility='visible'; 
+        var datos = function (){
+            e.target._icon.focus();
+            console.log(event,param1);
+        };
+        boton.onclick = datos.bind(e,'e');
     })
 } 
 
@@ -110,3 +142,5 @@ createMarker([-34.9138982,-57.9758826],'Julieta.  La Plata',"https://www.youtube
 createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
 createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
 createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+hideZoomControl();
+hideMaker(titulos);
