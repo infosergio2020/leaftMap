@@ -1,36 +1,33 @@
+function clickHandler(e) {
+    let message = e.target.getAttribute('data-message');
+    if(message==="Rodrigo"){
+        var fun="https://www.youtube.com/embed/Yn94t4r7y1c";
+    }
+    if(message==="Lore"){
+        var fun="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
+    } 
+        Swal.fire({   
+            html:`<iframe width="400" height="315" src='${fun}' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; " allowfullscreen></iframe>`,
+            showCloseButton: true,
+            focusConfirm: false,
+            confirmButtonText:
+            '<i class="fa fa-thumbs-up aria-label="Holaa1"">Salir</i>',
+            confirmButtonAriaLabel: 'Salir',
+    })
+    
+    var d = searchID('video');
+    let vi=e.target.getAttribute('video');
+    vi.src= "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
+    d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
+    // var cadena = decompose(texto);
+    // assignedText(cadena);
+}
+
+
 const buttons = document.querySelectorAll('li');
-
-      for(let i = 0; i < buttons.length; i++) {
-        addHandler(buttons[i]);
-      }
-
+      buttons.forEach(btn => addHandler(btn));
       function addHandler(li) {
-                li.addEventListener('click', function(e) {
-                    let message = e.target.getAttribute('data-message');
-                    if(message==="Rodrigo"){
-                        var fun="https://www.youtube.com/embed/Yn94t4r7y1c";
-                    }
-                    if(message==="Lore"){
-                        var fun="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
-                    } 
-                        Swal.fire({   
-                            html:'<iframe width="400" height="315" src='+fun+' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; " allowfullscreen></iframe>',
-                            showCloseButton: true,
-                            focusConfirm: false,
-                            confirmButtonText:
-                            '<i class="fa fa-thumbs-up aria-label="Holaa1"">Salir</i>',
-                            confirmButtonAriaLabel: 'Salir',
-                    })
-                    
-                    
-                    var d = searchID('video');
-                    let vi=e.target.getAttribute('video');
-                    vi.src= "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
-                    
-                    d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
-                    // var cadena = decompose(texto);
-                    // assignedText(cadena);
-                })
+                li.addEventListener('click',clickHandler)
       }
 
 

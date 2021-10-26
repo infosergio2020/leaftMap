@@ -1,13 +1,11 @@
-import { datos } from "./data.js";
-
-var titulos=["titulo1.","titulo2.","titulo3.","titulo4.","titulo5.","titulo6."];
-for (var i = 0; i < titulos.length; ++i) {
-    titulos[i]="Presiona enter para ver la entrevista de "+titulos[i];
-}
-
+// IMPORTS
+import { datos,titulos,opciones } from "./data.js";
+import { hideMaker,hideZoomControl } from "./functionOri.js";
+import { createMarker } from "./functionYani.js";
+/*----------------------------------------------------------------------------------------------*/
+titulos.map((titulo)=>{ titulo = `Presiona enter para ver la entrevista de ${titulo}`; })
 //Create my map 
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
-
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox/streets-v10',
@@ -15,212 +13,13 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
 }).addTo(mymap);
-
-
-// ori prueba esconder los controles de zoom
-const hideZoomControl = function(){
-    console.log('hideZoomControl its running!!!');
-    let elementos = document.querySelectorAll(".leaflet-control a");
-    elementos.forEach(item => {
-        item.setAttribute("aria-hidden", "true")
-        item.setAttribute("tabindex", "-1");//no lo enfoques
-    })
-}
-
-  
-
-//   var elements = document.querySelectorAll(".leaflet-tile-pane img");
-const hideMaker = function(titulos){
-    console.log('hideMaker its running!!!');
-    let elements = document.querySelectorAll(".leaflet-marker-icon");
-    for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("alt", titulos[i]);
-        elements[i].setAttribute("tabindex", "0");
-        } 
-}
-// ori termina de ver esconder los controles de zoom
-
-
-// ori prueba colocar titulo a la imagen
-// $(document).on('ready', function(){
-//     addMapTileAttr('.leaflet-tile-pane img')
-// });
-
-// function addMapTileAttr(styleClass) {
-//     var selector = $(styleClass);
-//     selector.each(
-//     function(index) {
-//         $(this).attr('alt',"Map tile image " + index);
-//     });
-// }
-// ori termina de ver colocar titulo a la imagen
-
-
 //Add geojson 
 L.geoJSON(inundaciones).addTo(mymap)
-
 //Create an icon 
-var LeafletIcon = L.Icon.extend({
-    options: {
-        iconSize: [38,95],
-        iconAnchor: [22,94],
-        popupAnchor: [3,76],
-        
-    }
-    
-})
-var personIcon = new LeafletIcon ({
-    iconUrl: 'marcador_ori.png',
-})
-
-/*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
-    .bindPopup(`
-    <h1 tabindex=0 >Juan. Barrio: La Plata.</h1>
-    <iframe tabindex=0 width="260" height="315" src="https://www.youtube.com/embed/cCJEH0NCbBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `);
-*/
-
-//Functions
-
-/*****
- * link: contiene url de youtube
- ****/
-function searchID(id){
-    return document.getElementById(id);
-}
-/***
- * Divide el texto pasado por parametro en un arreglo de cadenas
- */
-function decompose(text){
-    var separador = ".";
-    return text.split(separador);
-}
-function assignedText(cadena){
-    if (cadena !== null){
-        //console.log(cadena.length);
-        var t;
-        for (var i=0; i < cadena.length; i++) {
-            //console.log('texto'+i);
-            t=searchID('texto'+i);
-            //console.log(cadena[i]);
-            if (cadena[i]!==''){
-                t.textContent=cadena[i];                
-            }
-        }
-        //t=searchID('texto'+0);
-        //t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
-    }
-}
-/***
- * Crea un marcador con sus respectivas funciones
- */
-var createMarker = function (latlng,texto,link){
-    
-    var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
-    marker.on('keypress',function(e){ //Aca entra solo si es con un enter
-        let aux = e.target._icon;
-        console.log(e.target._icon);
-        //console.log('Entre!!');
-        // if(event.keyCode==13) {
-        //     var d = searchID('video');
-        //     d.src = link;
-        //     var cadena = decompose(texto);
-        //     assignedText(cadena);
-        //     //Ver si se puede realizar un marker.focus() como evento cuando se hace click en boton "volver al mapa".
-        //     //Creación del botón
-        //     var button = document.getElementById('button');
-        //     if (button != null) boton.remove();    
-        //     button = document.createElement('button'); 
-        //     button.id='button';
-        //     button.type = 'button'; 
-        //     button.onclick=positionMap ;
-        //     button.innerText = 'Haz Click'; 
-        //     document.getElementById('desc').appendChild(button);
-            
-        // }
-    })
-    
-    marker.on('click',function(e){ //Aca entra solo si es click de mouse
-        //console.log('Entre!!');
-        // var d = searchID('video');
-        // d.src = link;
-        let aux = e.target._icon;
-        // console.log(e.target._icon);
-        let elements = document.querySelectorAll(".leaflet-marker-icon");
-    for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("tabindex", "-1");
-        elements[i].setAttribute("aria-hidden", "true");
-        if(elements[i]==aux){
-            console.log("verdad")
-            elements[i].setAttribute("tabindex", "0");
-            elements[i].setAttribute("aria-hidden", "false");
-        }
-        console.log(elements[i])
-        // elements[i].setAttribute("alt", titulos[i]);
-        // elements[i].setAttribute("tabindex", "0");
-    }
-
-
-
-        var textoinicio = document.getElementById('tituloinicial');
-        if (textoinicio != null) textoinicio.remove();    
-        searchID('label1').style.visibility='visible';
-        searchID('label2').style.visibility='visible';
-        var cadena = decompose(texto);
-        assignedText(cadena);
-
-        Swal.fire({
-        
-            html:
-              '<h1 class="text">Nombre: '+cadena[0]+'. </h1> <h1>Barrio: '+cadena[1]+'. </h1> <iframe width="400" height="315" src='+link+' title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-            showCloseButton: true,
-            focusConfirm: false,
-            confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Salir',
-            confirmButtonAriaLabel: 'Salir',
-           
-          })
-        
-
-        
-    })
-} 
-// abrir un alert personalizado cuando se presiona una opcion del listado.
-// const buttons = document.querySelectorAll('li');
-
-//       for(let i = 0; i < buttons.length; i++) {
-//         addHandler(buttons[i]);
-//       }
-
-//       function addHandler(li) {
-//         li.addEventListener('click', function(e) {
-//           let message = e.target.getAttribute('data-message');
-//         //   alert(message);
-//         Swal.fire({
-          
-    
-//             html:
-//               '<iframe width="400" height="315" src="https://www.youtube-nocookie.com/embed/2J52CfXvGaQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>',
-//             showCloseButton: true,
-//             focusConfirm: false,
-//             confirmButtonText:
-//               '<i class="fa fa-thumbs-up"></i> Salir',
-//             confirmButtonAriaLabel: 'Salir',
-           
-//           })
-//           var d = searchID('video');
-//             d.src = "https://www.youtube-nocookie.com/embed/2J52CfXvGaQ";
-//             // var cadena = decompose(texto);
-//             // assignedText(cadena);
-//         })
-//       }
-
-
-
+var LeafletIcon = L.Icon.extend({ options: opciones })
+var personIcon = new LeafletIcon ({ iconUrl: 'marcador_ori.png' })
 //Create 6 markers
 //Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
-//es decir Maria
-
-datos.forEach(dato => createMarker(dato.coord,dato.title,dato.link));
+datos.forEach(dato => createMarker(L,mymap,personIcon,dato.coord,dato.title,dato.link));
 hideZoomControl();
 hideMaker(titulos);
