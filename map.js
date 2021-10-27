@@ -81,8 +81,8 @@ function assignedText(cadena){
                 t.textContent=cadena[i];                
             }
         }
-        t=searchID('texto'+0);
-        t.focus(); //Al finalizar, realizo el focus al nombre del entrevistado.
+        t=searchID('label1');
+        t.focus(); //Al finalizar, realizo el focus al titulo nombre!
     }
     return;
 }
@@ -112,6 +112,9 @@ var createMarker = function (latlng,texto,link){
         }
     }) */
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
+        searchID('info').setAttribute('aria-hidden','false');
+        searchID('video').setAttribute('tabindex','0');
+        searchID('video').setAttribute('aria-hidden','false');
         var d = searchID('video');
         d.src = link;
         var textoinicio = document.getElementById('tituloinicial');
@@ -121,9 +124,11 @@ var createMarker = function (latlng,texto,link){
         var cadena = decompose(texto);  
         assignedText(cadena);
         console.log("Estoy en función click!!");
-        //Creación del botón
+        //Add button "volver al mapa"
         var markerFocus = function (){
             e.target._icon.focus();
+            searchID('info').setAttribute('aria-hidden','true');
+            //searchID('label1').blur(); //le saco el focus al texto Nombre!
             console.log("markerFocus");
         };
         let boton = document.getElementById('boton');
