@@ -1,7 +1,8 @@
 
 var titulos=["Maria.","Jose.","Julieta.","Paula.","Pedro.","Juan."];
 for (var i = 0; i < titulos.length; ++i) {
-    titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
+    //titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
+    titulos[i]="Press enter to listen to the interview from "+titulos[i];
 }
 
 //Create my map 
