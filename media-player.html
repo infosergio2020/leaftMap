@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/px-video.css" />
+</head>
+
+<body>
+    <div class="px-video-container" id="video">
+        <div class="px-video-img-captions-container">
+            <div class="px-video-captions hide" aria-hidden="true"></div>
+            <video width="640" height="360" poster="media/Silvia-RIVAS.jpg" controls>
+                <source src="video/Entrevista-Silvia.mp4" type="video/mp4" />
+                <source src="foo.webm" type="video/webm" />
+                <track kind="captions" label="English captions" src="media/Silvia-sub.vtt" srclang="en" default />
+                <div>
+                    <a href="foo.mp4">
+                        <img src="media/foo.jpg" width="640" height="360" alt="download video" />
+                    </a>
+                </div>
+            </video>
+        </div>
+        <div class="px-video-controls"></div>
+    </div>
+
+<script src="js/strings.js"></script>
+<script src="js/px-video.js"></script>
+<script>
+// Initialize
+new InitPxVideo({
+    "videoId": "video",
+    "captionsOnDefault": true,
+    "seekInterval": 20,
+    "videoTitle": "clips of stand-up comedy",
+    "debug": true
+});
+</script>
+</body>
+</html>
