@@ -150,3 +150,5 @@ createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-
 createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
 hideZoomControl();
 hideMaker(titulos);
+
+console.log(localStorage.getItem("IDIOMA"));

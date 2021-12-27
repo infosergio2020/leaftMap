@@ -42,11 +42,19 @@ Swal.fire({
   confirmButtonAriaLabel: 'El mapa será cargado en español',
   denyButtonAriaLabel: 'The map will be to charge in English'
 }).then((result) => {
+    /**
+     * De acuerdo a lo que seleccione le paso el parametro que necesito mediante localStorage - (clave,valor)
+     * **/
+    var idioma
     if (result.isConfirmed) {
-    Swal.fire('Mapa en español')
+        idioma = 'ES',
+        Swal.fire('Mapa en español') //Esto es de prueba
   } else if (result.isDenied) {
-    Swal.fire('English Map')
+    idioma = 'EN',
+    Swal.fire('English Map') //esto es de prueba
   }
+  localStorage.setItem("IDIOMA",idioma);
+  window.location = "alternative.html"
 })
 </script>
 
