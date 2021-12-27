@@ -1,8 +1,22 @@
+//Me fijo que idioma fue selecciono mediante localStorage
+var idioma = localStorage.getItem("IDIOMA");
+var titulos=["Maria.","Jose.","Julieta.","Paula.","Pedro.","Juan."]; //CAMBIAR! ESTO se toma de los videos!
 
-var titulos=["Maria.","Jose.","Julieta.","Paula.","Pedro.","Juan."];
-for (var i = 0; i < titulos.length; ++i) {
-    //titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
-    titulos[i]="Press enter to listen to the interview from "+titulos[i];
+if (idioma == "EN"){
+    for (var i = 0; i < titulos.length; ++i) {
+        titulos[i]="Press enter to listen to the interview from "+titulos[i];
+    }
+    console.log('estoy en ingles');
+    //Por defecto esta en ingles
+}
+else if (idioma == "ES"){
+    for (var i = 0; i < titulos.length; ++i) {
+        titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
+    }
+    console.log('estoy en español');
+    //Cambio de info a español
+    searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
+    searchID('boton')
 }
 
 //Create my map 
@@ -31,14 +45,19 @@ var personIcon = new LeafletIcon ({
     iconUrl: 'marcador_ori.png'
 })
 
-/*L.marker([-34.91018, -57.94452],{icon:personIcon}).bindTooltip("Entrevista 1.").addTo(mymap)
-    .bindPopup(`
-    <h1 tabindex=0 >Juan. Barrio: La Plata.</h1>
-    <iframe tabindex=0 width="260" height="315" src="https://www.youtube.com/embed/cCJEH0NCbBY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    `);
-*/
-
 //Functions
+function toggleText(id) {
+   var el = searchID(id);
+   if (idioma == "ES") 
+   {
+       el.firstChild.data = "Volver al mapa";
+   }
+   else 
+   {
+     el.firstChild.data = "Go back to map";
+   }
+}
+
 const hideMaker = function(titulos){
     console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
@@ -150,5 +169,3 @@ createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-
 createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
 hideZoomControl();
 hideMaker(titulos);
-
-console.log(localStorage.getItem("IDIOMA"));
