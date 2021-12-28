@@ -121,33 +121,10 @@ function assignedText(cadena){
 /***
  * Crea un marcador con sus respectivas funciones
  */
-var createMarker = function (latlng,texto,link){
+var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
-/*     marker.on('keypress',function(e){ //Aca entra solo si es con un enter - No funciona! Siempre va por onClick
-        if(e.keyCode === 13) {
-            var d = searchID('video');
-            d.src = link;
-            var textoinicio = document.getElementById('tituloinicial');
-            if (textoinicio != null) textoinicio.remove();    
-            searchID('label1').style.visibility='visible';
-            searchID('label2').style.visibility='visible';
-            var cadena = decompose(texto);
-            assignedText(cadena);
-            console.log("Voy por acá!!");
-            //Creación del botón
-            var boton = document.getElementById('boton');
-            console.log(boton);
-            //boton.style.visibility='visible'; NO FUNCIONA!!
-            //boton.onclick=markerFocus(e);
-            //console.log(e.target._icon);  
-        }
-    }) */
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
-        searchID('video').setAttribute('tabindex','0');
-        searchID('video').setAttribute('aria-hidden','false');
-        var d = searchID('video');
-        d.src = link;
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
         searchID('label1').style.visibility='visible';
@@ -155,6 +132,11 @@ var createMarker = function (latlng,texto,link){
         var cadena = decompose(texto);  
         assignedText(cadena);
         console.log("Estoy en función click!!");
+        //Insertar aqui los cambios a media-player
+        var link='media/'+cadena[0]+'.mp4';
+        console.log(link);
+        searchID('videoactual').setAttribute('src',link);
+        //
         //Add button "volver al mapa"
         var markerFocus = function (){
             e.target._icon.focus();
@@ -172,11 +154,19 @@ var createMarker = function (latlng,texto,link){
 //Create 6 markers
 //Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
 //es decir Maria
-createMarker([-34.933861,-57.9787715], `Maria. La Plata`,"https://www.youtube-nocookie.com/embed/cCJEH0NCbBY");
-createMarker([-34.91018, -57.94452],`Jose. La Plata.`,"https://www.youtube-nocookie.com/embed/2J52CfXvGaQ");
-createMarker([-34.9138982,-57.9758826],'Julieta.  La Plata',"https://www.youtube-nocookie.com/embed/amKEijrl_3M");
-createMarker([-34.9528344,-57.96863],'Paula.  Los Hornos',"https://www.youtube-nocookie.com/embed/pTyjIWZRpzs");
-createMarker([-34.9361601,-57.9825345],'Pedro. San Carlos',"https://www.youtube-nocookie.com/embed/AkPDuj0_XBQ");
-createMarker([-34.8868379,-57.983098],'Juan. Ringuelet',"https://www.youtube-nocookie.com/embed/onb5PeKrmwQ");
+createMarker([-34.933861,-57.9787715], `Benitez-Gabriela. Plaza Castelli`);
+createMarker([-34.9138982,-57.9758826],'Carzolio-Clara. Estadio Maradona');
+createMarker([-34.9528344,-57.96863],'Dominguez-Lujan. Los Hornos');
+createMarker([-34.9361601,-57.9825345],'Fernandez-Alejandro. Tolosa');
+createMarker([-34.8868379,-57.983098],'Galicchio-Maria. Plaza Castelli');
+createMarker([-34.8868379,-57.983098],'Gomez-Carlos. Tolosa'); //-dfas
+createMarker([-34.8868379,-57.983098],'Gutierrez-Lucas. Ringuelet');
+createMarker([-34.8868379,-57.983098],'Maria-Paola. Barrio Jardin');
+createMarker([-34.8868379,-57.983098],'McAdden-Betina. Barrio Norte');
+createMarker([-34.8868379,-57.983098],'Mendoza-Azucena. Los Hornos');
+createMarker([-34.8868379,-57.983098],'Purdier-Victor. Villa Elvira');
+createMarker([-34.8868379,-57.983098],'Rivas-Silvia. Estadio Maradona');
+createMarker([-34.8868379,-57.983098],'Suarez-Amina. Tolosa');
+
 hideZoomControl();
 hideMaker(titulos);
