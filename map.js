@@ -2,6 +2,7 @@
 var idioma = localStorage.getItem("IDIOMA");
 var titulos=["Maria.","Jose.","Julieta.","Paula.","Pedro.","Juan."]; //CAMBIAR! ESTO se toma de los videos!
 
+//Cambio de idioma
 if (idioma == "EN"){
     for (var i = 0; i < titulos.length; ++i) {
         titulos[i]="Press enter to listen to the interview from "+titulos[i];
@@ -15,8 +16,18 @@ else if (idioma == "ES"){
     }
     console.log('estoy en español');
     //Cambio de info a español
+    //Titulo del mapa
+    document.getElementsByClassName('accesible')[0].innerHTML='Mapa de entrevistados';
+    document.getElementsByClassName('accesible')[0].setAttribute('aria-label','A continuación se listas las 6 entrevistas en el mapa de entrevistados.');
+    //Cambio de idioma
+    document.getElementsByClassName('button')[0].innerHTML='Idioma';
+    //Informacion de 1 entretvistado
+    searchID('title-info').innerHTML='Información del entrevistado';
+    searchID('tituloinicial').innerHTML='Haga click en alguna persona dentro del mapa para obtener mas información de la misma.';
+    searchID('label1').innerHTML='<h1>Nombre: </h1>';
+    searchID('label2').innerHTML='<h1>Zona: </h1>';
     searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
-    searchID('boton')
+    searchID('boton').innerHTML='Volver al mapa';
 }
 
 //Create my map 
