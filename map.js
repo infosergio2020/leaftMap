@@ -135,11 +135,15 @@ var createMarker = function (latlng,texto){
         //Insertar aqui los cambios a media-player
         var link= cadena[0];
         console.log(link);
-        searchID('videoactual').setAttribute('src',link);
-
         var mediaplayer = searchID('myvid');
         mediaplayer.remove();
         mediaplayer = searchID('mediaplayer');
+        //me fijo el idioma en el que tengo que cargar cc o sub. Si es ingles el archivo se encontrara con nombre2.vtt
+        let changevtt;
+        if (idioma=="ES") changevtt = 
+        '<track kind="captions" label="Subtitulos en Español" src="media/'+link+'.vtt" srclang="es" default />'
+        else 
+            '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
         var mynewplayer = 
         '<div class="px-video-container" id="myvid">'+
         '<div class="px-video-img-captions-container">'+
@@ -147,7 +151,7 @@ var createMarker = function (latlng,texto){
             '<video width="380" height="195" poster="media/foo.jpg" controls>'+
                 '<source id="videoactual" src="video/'+link+'.mp4" type="video/mp4" />'+
                 '<source src="foo.webm" type="video/webm" />'+
-                '<track kind="captions" label="English captions" src="media/'+link+'.vtt" srclang="en" default />'+
+                changevtt+
             '</video>'+
         '</div>'+
         '<div class="px-video-controls"></div>'+
@@ -170,19 +174,19 @@ var createMarker = function (latlng,texto){
 //Create 6 markers
 //Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
 //es decir Maria
-createMarker([-34.933861,-57.9787715], `Benitez-Gabriela. Plaza Castelli`);
-createMarker([-34.9138982,-57.9758826],'Carzolio-Clara. Estadio Maradona');
-createMarker([-34.9528344,-57.96863],'Dominguez-Lujan. Los Hornos');
-createMarker([-34.9361601,-57.9825345],'Fernandez-Alejandro. Tolosa');
-createMarker([-34.8868379,-57.983098],'Galicchio-Maria. Plaza Castelli');
-createMarker([-34.8868379,-57.983098],'Gomez-Carlos. Tolosa'); //-dfas
-createMarker([-34.8868379,-57.983098],'Gutierrez-Lucas. Ringuelet');
-createMarker([-34.8868379,-57.983098],'Maria-Paola. Barrio Jardin');
-createMarker([-34.8868379,-57.983098],'McAdden-Betina. Barrio Norte');
-createMarker([-34.8868379,-57.983098],'Mendoza-Azucena. Los Hornos');
-createMarker([-34.8868379,-57.983098],'Purdier-Victor. Villa Elvira');
-createMarker([-34.8868379,-57.983098],'Rivas-Silvia. Estadio Maradona');
-createMarker([-34.8868379,-57.983098],'Suarez-Amina. Tolosa');
+createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
+createMarker([-34.917228, -57.985247],'Carzolio-Clara. Estadio Maradona');
+createMarker([-34.957986, -57.977000],'Dominguez-Lujan. Los Hornos');
+createMarker([-34.900719, -57.980701],'Fernandez-Alejandro. Tolosa');
+createMarker([-34.942394, -57.948540],'Galicchio-Maria. Parque Castelli');
+createMarker([-34.902690, -57.977697],'Gomez-Carlos. Tolosa'); //-dfas
+createMarker([-34.886737, -57.984030],'Gutierrez-Lucas. Ringuelet');
+createMarker([-34.926702, -57.911197],'Maria-Paola. Barrio Jardin');
+createMarker([-34.907296, -57.963152],'McAdden-Betina. Barrio Norte');
+createMarker([-34.955009, -57.991031],'Mendoza-Azucena. Los Hornos');
+createMarker([-34.960042, -57.875716],'Purdier-Victor. Villa Elvira');
+createMarker([-34.917343, -57.989806],'Rivas-Silvia. Estadio Maradona');
+createMarker([-34.896274, -57.981307],'Suarez-Amina. Tolosa');
 
 hideZoomControl();
 hideMaker(titulos);
