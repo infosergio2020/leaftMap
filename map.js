@@ -133,10 +133,26 @@ var createMarker = function (latlng,texto){
         assignedText(cadena);
         console.log("Estoy en función click!!");
         //Insertar aqui los cambios a media-player
-        var link='media/'+cadena[0]+'.mp4';
+        var link= cadena[0];
         console.log(link);
         searchID('videoactual').setAttribute('src',link);
-        //
+
+        var mediaplayer = searchID('myvid');
+        mediaplayer.remove();
+        mediaplayer = searchID('mediaplayer');
+        var mynewplayer = 
+        '<div class="px-video-container" id="myvid">'+
+        '<div class="px-video-img-captions-container">'+
+            '<div class="px-video-captions hide" aria-hidden="true"></div>'+
+            '<video width="380" height="195" poster="media/foo.jpg" controls>'+
+                '<source id="videoactual" src="video/'+link+'.mp4" type="video/mp4" />'+
+                '<source src="foo.webm" type="video/webm" />'+
+                '<track kind="captions" label="English captions" src="media/'+link+'.vtt" srclang="en" default />'+
+            '</video>'+
+        '</div>'+
+        '<div class="px-video-controls"></div>'+
+        '</div>';
+        mediaplayer.innerHTML= mynewplayer;
         //Add button "volver al mapa"
         var markerFocus = function (){
             e.target._icon.focus();

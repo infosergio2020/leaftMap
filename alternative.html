@@ -47,16 +47,18 @@
                         <br><br>
                     </div>
                     <!--Accesible Media Player: por defecto no tiene nada y esta en ingles-->
-                    <div class="px-video-container" id="entrevista-id">
+                    <div id="mediaplayer">
+                    <div class="px-video-container" id="myvid">
                         <div class="px-video-img-captions-container">
                             <div class="px-video-captions hide" aria-hidden="true"></div>
                             <video width="380" height="195" poster="media/foo.jpg" controls>
                                 <source id="videoactual" src="video/Suarez-Amina.mp4" type="video/mp4" />
                                 <source src="foo.webm" type="video/webm" />
-                                <track kind="captions" label="English captions" src="media/foo.vtt" srclang="en" default />
+                                <track kind="captions" label="English captions" src="media/Suarez-Amina.vtt" srclang="en" default />
                             </video>
                         </div>
                         <div class="px-video-controls"></div>
+                    </div>
                     </div>
                     <button aria-label="Press enter to return to the map." tabindex="0" type="button" id="boton" class='ocultar-visualmente2' style="visibility:hidden" >Go back to map</button> <!-- volver al mapa - presione enter para volver al mapa-->
                 </div>
