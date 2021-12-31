@@ -1,12 +1,13 @@
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
-var titulos=["Maria.","Jose.","Julieta.","Paula.","Pedro.","Juan."]; //CAMBIAR! ESTO se toma de los videos!
-
+var titulos=[]; //Nombre de los entrevistados
+let introtext;
 //Cambio de idioma
 if (idioma == "EN"){
     for (var i = 0; i < titulos.length; ++i) {
         titulos[i]="Press enter to listen to the interview from "+titulos[i];
     }
+    introtext= titulos+' interviews are listed below on the testimonial map';
     console.log('estoy en ingles');
     //Por defecto esta en ingles
 }
@@ -15,6 +16,7 @@ else if (idioma == "ES"){
         titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
     }
     console.log('estoy en español');
+    introtext='A continuación se listan'+titulos+'entrevistas en el mapa de entrevistados';
     //Cambio de info a español
     //Titulo del mapa
     document.getElementsByClassName('accesible')[0].innerHTML='Mapa de entrevistados';
@@ -29,6 +31,7 @@ else if (idioma == "ES"){
     searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
     searchID('boton').innerHTML='Volver al mapa';
 }
+document.getElementsByClassName('accesible')[0].setAttribute('aria-label',introtext);
 
 //Create my map 
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
@@ -100,8 +103,11 @@ function decompose(text){
     var separador = ".";
     return text.split(separador);
 }
+function noNull (item){
+    return (item != null)
+}
 function assignedText(cadena){
-    if (cadena !== null){
+    if (noNull(cadena)){
         //console.log(cadena.length);
         var t;
         for (var i=0; i < cadena.length; i++) {
@@ -117,12 +123,17 @@ function assignedText(cadena){
     }
     return;
 }
-
+var agregoNombre = function(texto){
+    var cadena = decompose(texto);
+    if (noNull(cadena))
+        titulos.push(cadena[0])
+}
 /***
  * Crea un marcador con sus respectivas funciones
  */
 var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
+    agregoNombre(texto);
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
         var textoinicio = document.getElementById('tituloinicial');
@@ -171,9 +182,7 @@ var createMarker = function (latlng,texto){
 } 
 
 
-//Create 6 markers
-//Nota: siempre cuando me manejo por tab, y despues de moverme por el mapa con el tabulador comienzo en el primer marcador creado
-//es decir Maria
+//Createm markers
 createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
 createMarker([-34.917228, -57.985247],'Carzolio-Clara. Estadio Maradona');
 createMarker([-34.957986, -57.977000],'Dominguez-Lujan. Los Hornos');
