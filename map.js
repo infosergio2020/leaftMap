@@ -1,6 +1,7 @@
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
 var titulos=[]; //Nombre de los entrevistados
+var usados=[]; //para el nro aleatorio
 let introtext;
 //Cambio de idioma
 if (idioma == "EN"){
@@ -55,10 +56,10 @@ var LeafletIcon = L.Icon.extend({
         popupAnchor: [3,76]
     }
 })
-var personIcon = new LeafletIcon ({
-  //  var v = Math.floor(Math.random() * 10) + 1, Aca esta trabajando yani (:
-    iconUrl: 'media/makers/avatar1.png'
-})
+
+/*var personIcon= new LeafletIcon (nro) ({
+    iconUrl: 'media/makers/avatar'+nro+'.png'
+})*/
 
 //Functions
 function toggleText(id) {
@@ -128,12 +129,15 @@ var agregoNombre = function(texto){
     var cadena = decompose(texto);
     if (noNull(cadena))
         titulos.push(cadena[0])
-}
+} 
+
 /***
- * Crea un marcador con sus respectivas funciones
+ * Crea un marcador con sus respectivas funciones - 
  */
+var nro=1;
 var createMarker = function (latlng,texto){
-    var marker = L.marker(latlng,{icon:personIcon}).addTo(mymap);
+    var marker = L.marker(latlng,{icon:new LeafletIcon({iconUrl: 'media/makers/avatar'+(nro++)+'.png'})
+        }).addTo(mymap);
     agregoNombre(texto);
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
@@ -183,13 +187,14 @@ var createMarker = function (latlng,texto){
 } 
 
 
-//Createm markers
+//Createm markers 13 
+//Nota: los avatars estan ordenados
 createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
 createMarker([-34.917228, -57.985247],'Carzolio-Clara. Estadio Maradona');
 createMarker([-34.957986, -57.977000],'Dominguez-Lujan. Los Hornos');
 createMarker([-34.900719, -57.980701],'Fernandez-Alejandro. Tolosa');
 createMarker([-34.942394, -57.948540],'Galicchio-Maria. Parque Castelli');
-createMarker([-34.902690, -57.977697],'Gomez-Carlos. Tolosa'); //-dfas
+createMarker([-34.902690, -57.977697],'Gomez-Carlos. Tolosa'); 
 createMarker([-34.886737, -57.984030],'Gutierrez-Lucas. Ringuelet');
 createMarker([-34.926702, -57.911197],'Maria-Paola. Barrio Jardin');
 createMarker([-34.907296, -57.963152],'McAdden-Betina. Barrio Norte');
