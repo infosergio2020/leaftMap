@@ -127,8 +127,10 @@ function assignedText(cadena){
 }
 var agregoNombre = function(texto){
     var cadena = decompose(texto);
-    if (noNull(cadena))
-        titulos.push(cadena[0])
+    if (noNull(cadena)){
+        titulos.push(cadena[0]);
+        return cadena[0]
+    }
 } 
 
 /***
@@ -137,8 +139,8 @@ var agregoNombre = function(texto){
 var nro=1;
 var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:new LeafletIcon({iconUrl: 'media/makers/avatar'+(nro++)+'.png'})
-        }).addTo(mymap);
-    agregoNombre(texto);
+        }).bindTooltip(agregoNombre(texto)).openTooltip().addTo(mymap);
+
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
         var textoinicio = document.getElementById('tituloinicial');
