@@ -56,7 +56,8 @@ var LeafletIcon = L.Icon.extend({
     }
 })
 var personIcon = new LeafletIcon ({
-    iconUrl: 'marcador_ori.png'
+  //  var v = Math.floor(Math.random() * 10) + 1, Aca esta trabajando yani (:
+    iconUrl: 'media/makers/avatar1.png'
 })
 
 //Functions
