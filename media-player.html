@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="px-video.css" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+    <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -18,8 +20,9 @@
           <h2>Mapaa</h2>  
           <p>Aca estaria el mapa</p>
         </div>
-        <div class="w3-container w3-half">
-          <div class="px-video-container" id="video">
+        <div class="w3-container w3-half w3-blue">
+          <h2>Infoo</h2>  
+          <div class="px-video-container" id="mivideo">
             <div class="px-video-img-captions-container">
                 <div class="px-video-captions hide" aria-hidden="true"></div>
                 <video width="640" height="360" poster="media/Silvia-RIVAS.jpg" controls>
@@ -38,7 +41,7 @@
 <script>
 // Initialize
 new InitPxVideo({
-    "videoId": "video",
+    "videoId": "mivideo",
     "captionsOnDefault": true,
     "seekInterval": 20,
     "videoTitle": "Entrevista",
