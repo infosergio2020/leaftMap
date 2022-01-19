@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>Leaflet</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+     <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="css/style.css"/>
+	
+</head>
+<body>
+
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+
+<script defer src="inundacion_test1.geojson"></script>
+<script defer src="./js/index.js"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.all.min.js"></script>
+
+<script>
+Swal.fire({
+  title: '<strong>Idioma - Language</strong>',
+  icon: 'info',
+  html:
+    'A continuación seleccione un idioma'+ ' - ' +
+    'Selected a language',
+  showCloseButton: true,
+  showDenyButton: true,
+  focusConfirm: false,
+  confirmButtonText: 'Español',
+  denyButtonText: 'English',
+  confirmButtonAriaLabel: 'El mapa será cargado en español',
+  denyButtonAriaLabel: 'The map will be to charge in English'
+}).then((result) => {
+    /**
+     * De acuerdo a lo que seleccione le paso el parametro que necesito mediante localStorage - (clave,valor)
+     * **/
+    var idioma
+    if (result.isConfirmed) {
+        idioma = 'ES',
+        Swal.fire('Mapa en español') //Esto es de prueba
+  } else if (result.isDenied) {
+    idioma = 'EN',
+    Swal.fire('English Map') //esto es de prueba
+  }
+  localStorage.setItem("IDIOMA",idioma);
+  window.location = "index.html"
+})
+</script>
+
+</body>
+</html>

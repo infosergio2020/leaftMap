@@ -12,52 +12,79 @@
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
      <!-- Make sure you put this AFTER Leaflet's CSS -->
-     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
-    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
-    crossorigin=""></script>
+ <script defer src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+
+
     <link rel="stylesheet" href="css/style.css"/>
-	
+	<link rel="stylesheet" href="css/px-video.css" />
+
 </head>
 <body>
-
-<div id="mapid" style="width: 600px; height: 400px;"></div>
-
-<script src="inundacion_test1.geojson"></script>
-<script src="index.js"></script>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.all.min.js"></script>
-
-<script>
-Swal.fire({
-  title: '<strong>Idioma - Language</strong>',
-  icon: 'info',
-  html:
-    'A continuación seleccione un idioma'+ ' - ' +
-    'Selected a language',
-  showCloseButton: true,
-  showDenyButton: true,
-  focusConfirm: false,
-  confirmButtonText: 'Español',
-  denyButtonText: 'English',
-  confirmButtonAriaLabel: 'El mapa será cargado en español',
-  denyButtonAriaLabel: 'The map will be to charge in English'
-}).then((result) => {
-    /**
-     * De acuerdo a lo que seleccione le paso el parametro que necesito mediante localStorage - (clave,valor)
-     * **/
-    var idioma
-    if (result.isConfirmed) {
-        idioma = 'ES',
-        Swal.fire('Mapa en español') //Esto es de prueba
-  } else if (result.isDenied) {
-    idioma = 'EN',
-    Swal.fire('English Map') //esto es de prueba
-  }
-  localStorage.setItem("IDIOMA",idioma);
-  window.location = "alternative.html"
-})
-</script>
+    <header>
+        <a tabindex="0" class="accesible" aria-label="">Testimonials map</a> <!--Mapa de entrevistados   - A continuación se listas las 6 entrevistas en el mapa de entrevistados-->
+        <a tabindex="0" href="language.html" class="button">Language</a>
+    </header>
+    <main>
+        <section class="home">
+            <div id="mapid"></div>
+            <div id="desc">
+                <h1 id="title-info">Interviewee information</h1> <!-- Información del entrevistado-->
+                
+                <br>
+                <div id="info" aria-hidden="true">
+                    <div class="centrar">
+                        <h1 class="text" id="tituloinicial" aria-hidden="true">Click on an avatar on the map to get more information about it.</h1>   <!-- Haga click en alguna persona dentro del mapa para obtener mas información de la misma.-->
+                    </div>
+                    <div class="centrar">
+                        <label tabindex="0" for="name" id="label1" class="text" style="visibility:hidden"><h1>Name: </h1> </label>
+                        <h1 id="texto0" tabindex="0" class="text"></h1>
+                    </div>
+                    <div class="centrar">
+                        <label for="name" id="label2" tabindex="0" class="text" style="visibility:hidden"><h1>Zone: </h1> </label>
+                        <h1 id="texto1" class="text" tabindex="0"></h1>
+                        <br><br>
+                    </div>
+                    <!--Accesible Media Player: por defecto no tiene nada y esta en ingles-->
+                    <div id="mediaplayer">
+                    <div class="px-video-container" id="myvid" style="display:none">
+                        <div class="px-video-img-captions-container">  
+                            <div class="px-video-captions hide" aria-hidden="true"></div>
+                            <video width="380" height="195" poster="media/foo.jpg" controls preload="none">
+                                <source id="videoactual" src="video/Suarez-Amina.mp4" type="video/mp4" />
+                                <source src="foo.webm" type="video/webm" />
+                                <track kind="captions" label="English captions" src="media/Suarez-Amina.vtt" srclang="en" default />
+                            </video>
+                        </div>
+                        <div class="px-video-controls"></div>
+                    </div>
+                    </div>
+                    <button aria-label="Press enter to return to the map." tabindex="0" type="button" id="boton" class='ocultar-visualmente2' style="visibility:hidden" >Go back to map</button> <!-- volver al mapa - presione enter para volver al mapa-->
+                </div>
+            </div>    
+        </section>
+    
+    </main>
+    <footer aria-hidden="true">
+        <div class="footer__texto">&copy; 2021 | All rights reserved</div>
+    </footer>
+    <!-- comienzo de los script -->
+    <script defer src="./js/index.js"></script>
+    <script defer src="./js/map.js"></script>
+    <!-- scripts media player-->
+    <script defer src="./js/strings.js"></script>
+    <script defer src="./js/px-video.js"></script>
+    <script defer>
+    // Initialize
+    new InitPxVideo({
+        "entrevista-id": "myvid",
+        "captionsOnDefault": true,
+        "seekInterval": 20,
+        "videoTitle": "Entrevista de...", //Esto tiene que ir cambiando constantemente
+        "debug": true
+    });
+    </script>
 
 </body>
 </html>
