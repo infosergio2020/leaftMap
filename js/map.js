@@ -163,7 +163,7 @@ var createMarker = function (latlng,texto){
         else 
             '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
         var mynewplayer = 
-        '<div class="px-video-container" id="myvid">'+
+        '<div class="px-video-container" id="video">'+
         '<div class="px-video-img-captions-container">'+
             '<div class="px-video-captions hide" aria-hidden="true"></div>'+
             '<video width="380" height="195" poster="media/foo.jpg" controls>'+
