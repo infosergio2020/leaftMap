@@ -25,11 +25,11 @@
 <body>
 
     <div class="w3-row w3-border">
-        <div class="w3-container w3-half w3-red">
+        <div class="w3-container w3-twothird w3-red">
           <h2>Mapaa</h2>  
           <div id="mapid"></div>
         </div>
-        <div class="w3-container w3-half w3-blue">
+        <div class="w3-container w3-third w3-blue">
           <h2>Infoo</h2>  
           <div class="px-video-container" id="mivideo">
             <div class="px-video-img-captions-container">
@@ -58,15 +58,16 @@ new InitPxVideo({
 });
 </script>
 <script>
-    var map = L.map('mapid').setView([51.505, -0.09], 13);
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//Create my map 
+var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
-    id: 'mapbox/streets-v11',
+    id: 'mapbox/streets-v10',
     tileSize: 512,
     zoomOffset: -1,
-    accessToken: 'your.mapbox.access.token'
-}).addTo(map);
+    accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
+}).addTo(mymap);
 </script>
 </body>
 </html>
