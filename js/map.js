@@ -153,7 +153,7 @@ var createMarker = function (latlng,texto){
         //Insertar aqui los cambios a media-player
         var link= cadena[0];
         console.log(link);
-        var mediaplayer = searchID('myvid');
+        var mediaplayer = searchID('video');
         mediaplayer.remove();
         mediaplayer = searchID('mediaplayer');
         //me fijo el idioma en el que tengo que cargar cc o sub. Si es ingles el archivo se encontrara con nombre2.vtt
@@ -175,6 +175,14 @@ var createMarker = function (latlng,texto){
         '<div class="px-video-controls"></div>'+
         '</div>';
         mediaplayer.innerHTML= mynewplayer;
+            // Initialize
+        new InitPxVideo({
+            "videoId": "video",
+            "captionsOnDefault": true,
+            "seekInterval": 20,
+            "videoTitle": "Entrevista", //Esto tiene que ir cambiando constantemente
+            "debug": true
+        });
         //Add button "volver al mapa"
         var markerFocus = function (){
             e.target._icon.focus();
