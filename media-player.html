@@ -11,6 +11,15 @@
 
     <link rel="stylesheet" href="style.css">
 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+ integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+ crossorigin=""></script>
+
 </head>
 
 <body>
@@ -18,7 +27,7 @@
     <div class="w3-row w3-border">
         <div class="w3-container w3-half w3-red">
           <h2>Mapaa</h2>  
-          <p>Aca estaria el mapa</p>
+          <div id="mapid"></div>
         </div>
         <div class="w3-container w3-half w3-blue">
           <h2>Infoo</h2>  
@@ -47,6 +56,17 @@ new InitPxVideo({
     "videoTitle": "Entrevista",
     "debug": true
 });
+</script>
+<script>
+    var map = L.map('mapid').setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox/streets-v11',
+    tileSize: 512,
+    zoomOffset: -1,
+    accessToken: 'your.mapbox.access.token'
+}).addTo(map);
 </script>
 </body>
 </html>
