@@ -166,7 +166,7 @@ var createMarker = function (latlng,texto){
         '<div class="px-video-container" id="video">'+
         '<div class="px-video-img-captions-container">'+
             '<div class="px-video-captions hide" aria-hidden="true"></div>'+
-            '<video width="380" height="195" poster="media/foo.jpg" controls>'+
+            '<video class="px-video" poster="media/foo.jpg" controls>'+
                 '<source id="videoactual" src="video/'+link+'.mp4" type="video/mp4" />'+
                 '<source src="foo.webm" type="video/webm" />'+
                 changevtt+
