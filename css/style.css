@@ -42,20 +42,21 @@ body {
     height: 500px;
     min-width: 250px;
     outline: none;
-    padding: 20px;
+    padding: 30px;
     position: relative;
  }
  #desc {
      background-color:#A8C0C1;
      text-align: center;
-     flex: 1;
+     flex-grow: 1;
+     flex-basis: 90px;
      margin:0 auto;
      min-width: 250px;
      padding: 20px;
  }
  #info {
     height:80%;
-    width: 80%;
+    width: 90%;
     border-style: groove;
     border-color: #55F3A3;
     background-color: #ffff;
@@ -83,8 +84,9 @@ body {
 }
 
 footer{
-    margin-top: 2rem;
+    margin-top: 0rem;
     padding: 1rem 0;
+    height:100px;
 }
 .footer__texto{
     text-align: center;
@@ -157,4 +159,4 @@ footer{
       }
 }
 
-*{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}footer{background-color:#00695C;height:100px;font-family:sans-serif;color:#fff;text-align:center}body{background-color:#A8C0C1}.home{display:flex;flex-wrap:wrap}.text{font-family:sans-serif;color:#353a3bfb}#mapid{background-color:#A8C0C1;flex:2;height:500px;min-width:250px;outline:none;padding:20px;position:relative}#desc{background-color:#A8C0C1;text-align:center;flex:1;margin:0 auto;min-width:250px;padding:20px}#info{height:80%;width:80%;border-style:groove;border-color:#55F3A3;background-color:#fff;flex:1;margin:0 auto;min-width:250px;padding:20px}#video{width:80%;height:50%}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}footer{margin-top:2rem;padding:1rem 0}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border-radius:12px;position:relative;left:30%;color:#fff;padding:15px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;cursor:pointer}
+*{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}body{background-color:#A8C0C1}.home{display:flex;flex-wrap:wrap}.text{font-family:sans-serif;color:#353a3bfb}#video{width:80%;height:50%}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border-radius:12px;position:relative;left:30%;color:#fff;padding:15px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;cursor:pointer}
