@@ -19,6 +19,7 @@
 
     <link rel="stylesheet" href="css/style.css"/>
 	<link rel="stylesheet" href="css/px-video.css" />
+	<link rel="stylesheet" href="css/style-accordion.css" />
 
 
 </head>
@@ -48,6 +49,19 @@
                         <label for="name" id="label2" tabindex="0" class="text" style="visibility:hidden"><h1>Zone: </h1> </label>
                         <h1 id="texto1" class="text" tabindex="0"></h1>
                         <br><br>
+                        <div id="accordionGroup" class="accordion" style="visibility: hidden;">
+                        <button id="accordion-open-1" class="accordion__button" aria-expanded="false">
+                        Mas información de la zona
+                        </button>
+                        <div id="accordion-section-1" class="accordion__section" aria-hidden="true">
+                        <p>
+                            Zona de severidad: Leve
+                        </p>  
+                        <p>
+                            Dificultad para caminar. El agua subió entre 0.61 a 1.05 metros. 
+                        </p>
+                        </div>
+                    </div>
                     </div>
                     <!--Accesible Media Player: por defecto no tiene nada y esta en ingles-->
                     <div id="mediaplayer">
@@ -75,6 +89,7 @@
     <!-- comienzo de los script -->
     <script defer src="./js/index.js"></script>
     <script defer src="./js/map.js"></script>
+    <script defer src="./js/accordion.js"></script>
     <!-- scripts media player-->
     <script defer src="./js/strings.js"></script>
     <script src="./js/px-video.js"></script>

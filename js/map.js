@@ -147,6 +147,7 @@ var createMarker = function (latlng,texto){
         if (textoinicio != null) textoinicio.remove();    
         searchID('label1').style.visibility='visible';
         searchID('label2').style.visibility='visible';
+        searchID('accordionGroup').style.visibility='visible';
         var cadena = decompose(texto);  
         assignedText(cadena);
         console.log("Estoy en función click!!");
