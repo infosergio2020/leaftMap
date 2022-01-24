@@ -9,19 +9,14 @@
     color: #ffff;
     text-align: center;
 }
-/*header h1{
-    font-size: 40px;
-    line-height: 100px;
-    text-align: center;
-}*/
 a{
     text-decoration: none;
     cursor:default;
 }
 
 .accesible{ /*Logo-accesible*/
-    font-size: 40px;
-    line-height: 100px;
+    font-size: 2.5rem;
+    line-height: 6.25rem;
     text-align: center;
 }
 
@@ -42,19 +37,19 @@ body {
     background-color: #A8C0C1;
     flex: 2;
     height: 31.25rem;
-    min-width: 250px;
+    min-width: 15.625rem;
     outline: none;
-    padding: 30px;
+    padding: 1.875rem;
     position: relative;
  }
  #desc {
      background-color:#A8C0C1;
      text-align: center;
      flex-grow: 1;
-     flex-basis: 90px;
+     flex-basis: 5.625rem;
      margin:0 auto;
-     min-width: 250px;
-     padding: 20px;
+     min-width: 15.625rem;
+     padding: 1.25rem;
      height: 31.25rem;
  }
  #info {
@@ -65,13 +60,13 @@ body {
     background-color: #ffff;
     flex: 1;
     margin:0 auto;
-    min-width: 250px;
-    padding: 20px;
+    min-width: 15.625rem;
+    padding: 1.25rem;
     overflow-y: auto;
 }
 #separator{
-    border-top: 8px solid #fff;
-    border-radius: 5px;
+    border-top: 0.5rem solid #fff;
+    border-radius: 0.313rem;
 }
  #boton_acc{
      text-align: center;
@@ -81,16 +76,16 @@ body {
     display: flex;
     justify-content: center;
 }
-.ocultar-visualmente {
+.ocultar-visualmente { /*Hiding text*/
     position:absolute;
     overflow:hidden;
-    top:-9999px; /* o left:-9999px; o text-indent:-9999px; */   
+    text-indent:-9999px;
 }
 
 footer{
     margin-top: 0rem;
     padding: 1rem 0;
-    height:100px;
+    height:6.25rem;
 }
 .footer__texto{
     text-align: center;
@@ -101,22 +96,22 @@ footer{
 .miheader {
     overflow: hidden;
     background-color: #00695C;
-    padding: 20px 10px;
+    padding: 1.25rem 0.625rem;
   }
   
   .miheader a {
     float: left;
     color: black;
     text-align: center;
-    padding: 12px;
+    padding: 0.75rem;
     text-decoration: none;
-    font-size: 18px; 
-    line-height: 25px;
-    border-radius: 4px;
+    font-size: 1.125rem; 
+    line-height: 1.563rem;
+    border-radius: 0.25rem;
   }
   
   .miheader a.accesible {
-    font-size: 40px;
+    font-size: 2.5rem;
     font-weight: bold;
     text-align: center;
     line-height: 2.8rem;
@@ -128,14 +123,14 @@ footer{
     a.button {
     background-color: #4CAF50; /* Green */
     border: none;
-    border-radius: 12px;
+    border-radius: 0.75rem;
     left: 0%;
     color: white;
-    padding: 15px 32px;
+    padding: 0.938rem 2rem;
     text-align: center;
     text-decoration: none;
-    font-size: 16px;
-    margin: 4px 2px;
+    font-size: 1rem;
+    margin: 0.25rem 0.125rem;
     cursor: pointer;
 }
 
@@ -159,7 +154,7 @@ footer{
         height: 100%;
         width: 50%;
         justify-content: center;
-        border-radius: 12px;
+        border-radius: 0.75rem;
       }
 }
 @media screen and (max-width: 320px){
@@ -167,4 +162,4 @@ footer{
         height: 80%;
     }
 }
-*{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}body{background-color:#A8C0C1}.text{font-family:sans-serif;color:#353a3bfb}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border-radius:12px;position:relative;left:30%;color:#fff;padding:15px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;cursor:pointer}
+*{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}body{background-color:#A8C0C1}.text{font-family:sans-serif;color:#353a3bfb}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border: radius 0.75em;;position:relative;left:30%;color:#fff;padding:0.938rem 2rem;text-align:center;text-decoration:none;font-size:1rem;margin: 0.25rem 0.125rem;cursor:pointer}
