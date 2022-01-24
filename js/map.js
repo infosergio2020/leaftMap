@@ -161,7 +161,7 @@ var createMarker = function (latlng,texto){
         if (idioma=="ES") changevtt = 
         '<track kind="captions" label="Subtitulos en Español" src="media/'+link+'.vtt" srclang="es" default />'
         else 
-            '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
+            changevtt = '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
         var mynewplayer = 
         '<div class="px-video-container" id="video">'+
         '<div class="px-video-img-captions-container">'+

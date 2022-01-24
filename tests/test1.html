@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="style1.css">
+  </head>
+  <body>        
+    <h1>Accordion</h1>
+    <div id="accordionGroup" class="accordion">
+      <button id="accordion-open-1" class="accordion__button" aria-expanded="false">
+        Mas información de la zona
+      </button>
+      <div id="accordion-section-1" class="accordion__section" aria-hidden="true">
+        <p>
+          Zona de severidad: Leve
+        </p>  
+        <p>
+          Dificultad para caminar. El agua subió entre 0.61 a 1.05 metros. 
+        </p>
+      </div>
+    </div>
+    
+<script>
+    const accordionButtons = document.querySelectorAll('.accordion__button');
+    accordionButtons.forEach(button => {
+    const expanded = button.getAttribute('aria-expanded');
+    const number = button.getAttribute('id').split('-').pop();
+    const associatedSection = document.getElementById(`accordion-section-${number}`)
+ 
+  button.addEventListener('click', () => {
+    button.classList.toggle('expanded');
+    associatedSection.classList.toggle('open');
+    if (button.classList.contains('expanded')) {
+      button.setAttribute('aria-expanded', true);
+      associatedSection.setAttribute('aria-hidden', false);
+    } else {
+      button.setAttribute('aria-expanded', false);
+      associatedSection.setAttribute('aria-hidden', true);
+    }
+  })
+  
+})
+</script>
+  </body>
+</html>

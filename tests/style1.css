@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+ body {
+	 font-family: 'Roboto', sans-serif;
+	 color: #6505cc;
+}
+ .accordion {
+	 width: 40rem;
+}
+ .accordion h2 {
+	 margin: -1px 0 0;
+	 border: 1px solid #6505cc;
+}
+ .accordion p {
+	 margin: 0;
+}
+ .accordion__button {
+	 position: relative;
+	 display: block;
+	 margin: -1px 0 0;
+	 border: 1px solid #6505cc;
+	 padding: 0.5rem 1rem;
+	 width: 100%;
+	 text-align: left;
+	 color: #6505cc;
+	 font-size: 1rem;
+	 background: #eedbff;
+}
+ .accordion__button:focus, .accordion__button:hover {
+	 background: #310363;
+	 color: #eedbff;
+}
+ .accordion__button:focus::after, .accordion__button:hover::after {
+	 border-top-color: #eedbff;
+}
+ .accordion__button::after {
+	 content: '';
+	 position: absolute;
+	 right: 1rem;
+	 top: 0.65rem;
+	 width: 0;
+	 height: 0;
+	 border-left: 10px solid transparent;
+	 border-right: 10px solid transparent;
+	 border-top: 15px solid #6505cc;
+}
+ .accordion__button.expanded {
+	 background: #6505cc;
+	 color: #eedbff;
+}
+ .accordion__button.expanded::after {
+	 border-left: 10px solid transparent;
+	 border-right: 10px solid transparent;
+	 border-bottom: 15px solid #eedbff;
+	 border-top: none;
+}
+ .accordion__section {
+	 border-left: 1px solid #6505cc;
+	 border-right: 1px solid #6505cc;
+	 padding: 1rem;
+	 background: #eedbff;
+	 max-height: 0vh;
+	 overflow: hidden;
+	 padding: 0;
+}
+ .accordion__section.open {
+	 max-height: 100vh;
+	 overflow: auto;
+	 padding: 1.25em;
+	 visibility: visible;
+}
+ 
