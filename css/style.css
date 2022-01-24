@@ -41,7 +41,7 @@ body {
 #mapid { 
     background-color: #A8C0C1;
     flex: 2;
-    height: 500px;
+    height: 31.25rem;
     min-width: 250px;
     outline: none;
     padding: 30px;
@@ -55,9 +55,10 @@ body {
      margin:0 auto;
      min-width: 250px;
      padding: 20px;
+     height: 31.25rem;
  }
  #info {
-    height:80%;
+    height:85%;
     width: 90%;
     border-style: groove;
     border-color: #55F3A3;
@@ -66,6 +67,11 @@ body {
     margin:0 auto;
     min-width: 250px;
     padding: 20px;
+    overflow-y: auto;
+}
+#separator{
+    border-top: 8px solid #fff;
+    border-radius: 5px;
 }
  #boton_acc{
      text-align: center;
@@ -156,5 +162,9 @@ footer{
         border-radius: 12px;
       }
 }
-
+@media screen and (max-width: 320px){
+    #info{
+        height: 80%;
+    }
+}
 *{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}body{background-color:#A8C0C1}.text{font-family:sans-serif;color:#353a3bfb}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border-radius:12px;position:relative;left:30%;color:#fff;padding:15px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;cursor:pointer}
