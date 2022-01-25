@@ -25,8 +25,8 @@ else if (idioma == "ES"){
     //Cambio de idioma
     document.getElementsByClassName('button')[0].innerHTML='Idioma';
     //Informacion de 1 entretvistado
-    searchID('title-info').innerHTML='Información del entrevistado';
-    searchID('tituloinicial').innerHTML='Haga click en alguna persona dentro del mapa para obtener mas información de la misma.';
+    searchID('title-info').innerHTML='Mas información de la persona entrevistada';
+    searchID('tituloinicial').innerHTML='Seleccione alguna persona dentro del mapa para obtener mas información de la misma.';
     searchID('label1').innerHTML='<h1>Nombre: </h1>';
     searchID('label2').innerHTML='<h1>Zona: </h1>';
     searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
