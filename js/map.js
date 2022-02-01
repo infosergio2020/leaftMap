@@ -46,7 +46,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 }).addTo(mymap);
 
 //Add geojson 
-L.geoJSON(inundaciones).addTo(mymap)
+L.geoJSON(zonas).addTo(mymap)
 
 //Create an icon 
 var LeafletIcon = L.Icon.extend({
