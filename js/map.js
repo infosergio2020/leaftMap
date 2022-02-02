@@ -108,9 +108,13 @@ function decompose(text){
 function noNull (item){
     return (item != null)
 }
+function idiomaEspañol(){
+    return (idioma == "ES")
+}
+
+/*Carga la informacion del entrevistado y la zona donde vive*/ 
 function assignedText(cadena){
     if (noNull(cadena)){
-        //console.log(cadena.length);
         var t;
         for (var i=0; i < cadena.length; i++) {
             //console.log('texto'+i);
@@ -118,6 +122,22 @@ function assignedText(cadena){
             //console.log(cadena[i]);
             if (cadena[i]!==''){
                 t.textContent=cadena[i];                
+            }
+        }
+        //Inserto los cambios de la informacion de la zona
+        var zone = searchID('accordion-section-1');
+        if (idiomaEspañol){
+            //alert(mi);
+            switch (cadena[1]) {
+                case " Los Hornos":  zone.innerHTML = myzones.LosHornos ;break;
+                case " Villa Elvira": zone.innerHTML = myzones.villaElvira; break;
+                case " Barrio Jardin": zone.innerHTML = myzones.barrioJardin; break;
+                case " Tolosa": zone.innerHTML = myzones.Tolosa; break;
+                case " Estadio Maradona": zone.innerHTML = myzones.estadioMaradona; break;
+                case " Parque Castelli":  zone.innerHTML = myzones.parqueCasteli; break;
+                case " Barrio Norte": zone.innerHTML = myzones.barrioNorte; break;
+                case " Ringuelet": zone.innerHTML = myzones.Ringuelet; break;
+                case " Altos de San Lorenzo": zone.innerHTML = myzones.altosDeSanLorenzo; break;
             }
         }
         t=searchID('label1');
@@ -152,13 +172,13 @@ var createMarker = function (latlng,texto){
         var cadena = decompose(texto);  
         assignedText(cadena);
         console.log("Estoy en función click!!");
-        //Insertar aqui los cambios a media-player
+        //Inserto los cambios a media-player
         var link= cadena[0];
         console.log(link);
         var mediaplayer = searchID('video');
         mediaplayer.remove();
         mediaplayer = searchID('mediaplayer');
-        //me fijo el idioma en el que tengo que cargar cc o sub. Si es ingles el archivo se encontrara con nombre2.vtt
+        //me fijo el idioma en el que tengo que cargar cc o sub. Si esta en ingles el archivo se encontrara con nombre2.vtt
         let changevtt;
         if (idioma=="ES") changevtt = 
         '<track kind="captions" label="Subtitulos en Español" src="media/'+link+'.vtt" srclang="es" default />'

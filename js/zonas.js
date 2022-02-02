@@ -1,0 +1,21 @@
+//Informacion de la zona en el momento de la inundación en ESPAÑOL
+let barrioJardin = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Elevada.</p>"+"<p>Esto significa un riesgo alto para las personas en el exterior.</p>"+"<p>El caudal de precipitaciones máximo fué de 2 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué de 1.06 a 1.65 metros.</p>";
+let villaElvira = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s. </p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
+let altosDeSanLorenzo = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s. </p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
+let parqueCasteli = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s. </p>"+"<p>El nivel máximo de profundidad de inundación fué de 1.06 a 1.65 metros.</p>";
+let LosHornos, Tolosa = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
+let estadioMaradona = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Elevada.</p>"+"<p>Esto significa un riesgo alto para las personas en el exterior.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
+let barrioNorte = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué de 1.06 a 1.65 metros.</p>";
+let Ringuelet = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
+
+let mi = 123;
+export {barrioJardin};
+//Informacion en INGLES
+
+/*
+Situación al 2 de abril del 2013. 
+Esta zona registró en algunos sectores un nivel de severidad Leve.
+Esto significa una dificultad para caminar.
+El caudal de precipitaciones maximo registrado es de ...
+El nivel maximo de profundidad de inundación fue de 0.80 a 1.20 metros.
+*/
