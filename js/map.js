@@ -122,7 +122,7 @@ function assignedText(cadena){
             t=searchID('texto'+i);
             //console.log(cadena[i]);
             if (cadena[i]!==''){
-                t.textContent=cadena[i];                
+                t.textContent=cadena[i].replace("-"," ");    //Agregado para reemplazar el guion por un espacio
             }
         }
         //Inserto los cambios de la informacion de la zona
@@ -219,7 +219,7 @@ var createMarker = function (latlng,texto){
 } 
 
 
-//Createm markers 13 
+//Createm markers 14 
 //Nota: los avatars estan ordenados
 createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
 createMarker([-34.917228, -57.985247],'Carzolio-Clara. Estadio Maradona');
