@@ -234,6 +234,8 @@ createMarker([-34.955009, -57.991031],'Mendoza-Azucena. Los Hornos');
 createMarker([-34.960042, -57.875716],'Purdier-Victor. Villa Elvira');
 createMarker([-34.917343, -57.989806],'Rivas-Silvia. Estadio Maradona');
 createMarker([-34.896274, -57.981307],'Suarez-Amina. Tolosa');
+createMarker([-34.956277, -57.947428],'Fariña-Marily. Cementerio');
+
 
 hideZoomControl();
 hideMaker(titulos);
