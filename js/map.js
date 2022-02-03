@@ -1,3 +1,4 @@
+import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet,mi } from "./zonas.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
 var titulos=[]; //Nombre de los entrevistados
@@ -127,17 +128,17 @@ function assignedText(cadena){
         //Inserto los cambios de la informacion de la zona
         var zone = searchID('accordion-section-1');
         if (idiomaEspañol){
-            //alert(mi);
+            alert(mi);
             switch (cadena[1]) {
-                case " Los Hornos":  zone.innerHTML = myzones.LosHornos ;break;
-                case " Villa Elvira": zone.innerHTML = myzones.villaElvira; break;
-                case " Barrio Jardin": zone.innerHTML = myzones.barrioJardin; break;
-                case " Tolosa": zone.innerHTML = myzones.Tolosa; break;
-                case " Estadio Maradona": zone.innerHTML = myzones.estadioMaradona; break;
-                case " Parque Castelli":  zone.innerHTML = myzones.parqueCasteli; break;
-                case " Barrio Norte": zone.innerHTML = myzones.barrioNorte; break;
-                case " Ringuelet": zone.innerHTML = myzones.Ringuelet; break;
-                case " Altos de San Lorenzo": zone.innerHTML = myzones.altosDeSanLorenzo; break;
+                case " Los Hornos":  zone.innerHTML = LosHornos ;break;
+                case " Villa Elvira": zone.innerHTML = villaElvira; break;
+                case " Barrio Jardin": zone.innerHTML = barrioJardin; break;
+                case " Tolosa": zone.innerHTML = Tolosa; break;
+                case " Estadio Maradona": zone.innerHTML = estadioMaradona; break;
+                case " Parque Castelli":  zone.innerHTML = parqueCasteli; break;
+                case " Barrio Norte": zone.innerHTML = barrioNorte; break;
+                case " Ringuelet": zone.innerHTML = Ringuelet; break;
+                case " Altos de San Lorenzo": zone.innerHTML = altosDeSanLorenzo; break;
             }
         }
         t=searchID('label1');

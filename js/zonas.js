@@ -9,7 +9,7 @@ let barrioNorte = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona reg
 let Ringuelet = "<h1>Situación al 2 de abril del 2013</h1>"+"<p>Esta zona registró en algunos sectores un nivel de severidad Extrema.</p>"+"<p>Esto significa que puede llegar a presentarse daños a edificios.</p>"+"<p>El caudal de precipitaciones máximo fué de 3 m/s.</p>"+"<p>El nivel máximo de profundidad de inundación fué mayor a 1.65 metros.</p>";
 
 let mi = 123;
-export {barrioJardin};
+export {barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,LosHornos,Tolosa,estadioMaradona,barrioNorte,Ringuelet,mi};
 //Informacion en INGLES
 
 /*
