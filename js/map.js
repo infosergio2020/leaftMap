@@ -1,4 +1,4 @@
-import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet,mi } from "./zonas.js";
+import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
 var titulos=[]; //Nombre de los entrevistados
@@ -128,7 +128,6 @@ function assignedText(cadena){
         //Inserto los cambios de la informacion de la zona
         var zone = searchID('accordion-section-1');
         if (idiomaEspañol){
-            alert(mi);
             switch (cadena[1]) {
                 case " Los Hornos":  zone.innerHTML = LosHornos ;break;
                 case " Villa Elvira": zone.innerHTML = villaElvira; break;
