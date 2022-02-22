@@ -37,7 +37,6 @@ document.getElementsByClassName('accesible')[0].setAttribute('aria-label',introt
 
 //Create my map 
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
-
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     maxZoom: 18,
     id: 'mapbox/streets-v10',
@@ -45,6 +44,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
 }).addTo(mymap);
+
 
 //Add geojson 
 L.geoJSON(zonas).addTo(mymap)
@@ -159,7 +159,7 @@ var agregoNombre = function(texto){
 var nro=1;
 var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:new LeafletIcon({iconUrl: 'media/makers/avatar'+(nro++)+'.png'})
-        }).bindTooltip(agregoNombre(texto)).openTooltip().addTo(mymap);
+        }).addTo(mymap);
 
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
