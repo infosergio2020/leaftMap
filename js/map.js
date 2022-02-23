@@ -49,6 +49,22 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 //Add geojson 
 L.geoJSON(zonas).addTo(mymap)
 
+let prueba = function(){
+    alert("hice click");
+};
+//Add combobox - opciones
+var legend = L.control({position: 'topright'});
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info-zona');
+    div.setAttribute('role','combobox');
+    div.setAttribute('tabindex','1');
+    div.setAttribute('aria-label','Haga click para filtrar por zona.');
+    div.innerHTML = '<select role="listbox" onclick=prueba><option></option><option>Tolosa</option><option>Cementerio</option></select>';
+    //div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+    return div;
+};
+
+
 //Create an icon 
 var LeafletIcon = L.Icon.extend({
     options: {
@@ -249,3 +265,8 @@ createMarker([-34.956277, -57.947428],'Fariña-Marily. Cementerio');
 hideZoomControl();
 hideMaker(titulos);
 searchID('inicio').focus();
+
+legend.addTo(mymap);
+document.querySelector('select').addEventListener("onclick",function(){
+    alert('changed');
+})
