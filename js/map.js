@@ -79,8 +79,8 @@ const hideMaker = function(titulos){
     console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("alt", titulos[i]);
-        elements[i].setAttribute("tabindex", "0");
+        elements[i].setAttribute("alt", "Haga click en"+titulos[i]+"para acceder a su entrevista");
+        elements[i].setAttribute("tabindex", i);
         } 
 }
 // ori prueba esconder los controles de zoom
@@ -215,6 +215,7 @@ var createMarker = function (latlng,texto){
         let boton = document.getElementById('boton');
         boton.addEventListener('click',markerFocus.bind(e));
         boton.style.visibility='visible';
+        boton.setAttribute('aria-label','Haga click para volver al mapa.')
     })
 } 
 
