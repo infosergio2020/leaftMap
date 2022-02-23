@@ -57,7 +57,10 @@ var LeafletIcon = L.Icon.extend({
         popupAnchor: [3,76]
     }
 })
+//comentario
+//document.querySelector('.leaflet-shadow-pane').remove();
 
+//document.querySelector('.leaflet-tile-container img, .leaflet-shadow-pane img').setAttribute('role','presentation');
 /*var personIcon= new LeafletIcon (nro) ({
     iconUrl: 'media/makers/avatar'+nro+'.png'
 })*/
