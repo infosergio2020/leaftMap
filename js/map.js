@@ -18,7 +18,7 @@ else if (idioma == "ES"){
         titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
     }
     console.log('estoy en español');
-    introtext='A continuación se listan'+titulos+'entrevistas en el mapa de entrevistados';
+    introtext='A continuación se listan'+titulos.length+'entrevistas en el mapa de entrevistados';
     //Cambio de info a español
     //Titulo del mapa
     document.getElementsByClassName('accesible')[0].innerHTML='Mapa de entrevistados';
@@ -79,8 +79,10 @@ const hideMaker = function(titulos){
     console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("alt", "Haga click en"+titulos[i]+"para acceder a su entrevista");
-        elements[i].setAttribute("tabindex", i);
+        elements[i].setAttribute("alt", titulos[i]);
+        elements[i].setAttribute("aria-label", "Haga click en "+titulos[i]+" para acceder a su entrevista");
+        elements[i].setAttribute("role", "image");
+        elements[i].setAttribute("tabindex", i+1); //traslado 1 por titulo de pagina y boton
         } 
 }
 // ori prueba esconder los controles de zoom
@@ -208,13 +210,16 @@ var createMarker = function (latlng,texto){
         //Add button "volver al mapa"
         var markerFocus = function (){
             e.target._icon.focus();
+            console.log(e.target._icon.alt);
+            console.log(titulos[titulos.length-1]);
             searchID('info').setAttribute('aria-hidden','true');
-            //searchID('label1').blur(); //le saco el focus al texto Nombre!
+            if (e.target._icon.alt == titulos[titulos.length-1]) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
             console.log("markerFocus");
         };
         let boton = document.getElementById('boton');
         boton.addEventListener('click',markerFocus.bind(e));
         boton.style.visibility='visible';
+        boton.setAttribute('role','button');
         boton.setAttribute('aria-label','Haga click para volver al mapa.')
     })
 } 
@@ -240,3 +245,4 @@ createMarker([-34.956277, -57.947428],'Fariña-Marily. Cementerio');
 
 hideZoomControl();
 hideMaker(titulos);
+searchID('inicio').focus();
