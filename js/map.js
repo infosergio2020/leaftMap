@@ -159,7 +159,7 @@ var agregoNombre = function(texto){
 var nro=1;
 var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:new LeafletIcon({iconUrl: 'media/makers/avatar'+(nro++)+'.png'})
-        }).addTo(mymap);
+        }).bindTooltip(agregoNombre(texto)).openTooltip().addTo(mymap);
 
     marker.on('click',function(e){ //Aca entra solo si es click de mouse
         searchID('info').setAttribute('aria-hidden','false');
