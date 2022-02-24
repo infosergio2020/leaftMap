@@ -217,6 +217,7 @@ Select.prototype.createOption = function (optionText, index) {
   optionEl.addEventListener('click', (event) => {
     event.stopPropagation();
     this.onOptionClick(index);
+    alert('change click');
   });
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
 
