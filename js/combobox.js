@@ -407,6 +407,7 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 window.addEventListener('load', function () {
   const options = [
     'Elija una zona',
+    'Todas las zonas',
     'Tolosa',
     'Cementerio',
     'Barrio Norte',

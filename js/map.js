@@ -96,7 +96,8 @@ const hideMaker = function(titulos){
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
         elements[i].setAttribute("alt", titulos[i].nombre);
-        elements[i].setAttribute("zona",titulos[i].zona);
+        elements[i].setAttribute("data-nombre",titulos[i].nombre);
+        elements[i].setAttribute("data-zona",titulos[i].zona);
         elements[i].setAttribute("aria-label", "Haga click en "+titulos[i]+" para acceder a su entrevista");
         elements[i].setAttribute("role", "image");
         elements[i].setAttribute("tabindex", i+1); //traslado 1 por titulo de pagina y boton
@@ -177,10 +178,15 @@ var agregoNombre = function(texto){
 export function filterMarker(opcionName){
     console.log('filterMarker with option: '+opcionName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
-    console.log(elements[0]) ; // ver como acceder al atributo 
     for (var i = 0; i < elements.length; ++i) {
-     if (opcionName != elements[i].zona){
+     if (opcionName != elements[i].dataset.zona){ //Los marcadores que no sean de la zona se esconden
         elements[i].setAttribute("tabindex", '-1');
+        elements[i].style.visibility='hidden';
+     }
+     else{ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
+        console.log('mostrar!');
+        elements[i].setAttribute("tabindex", i+1); // probar bien lo de tabindex
+        elements[i].style.visibility='visible';
      }
     }     
 }
@@ -258,20 +264,20 @@ var createMarker = function (latlng,texto){
 legend.addTo(mymap);
 //Createm markers 14 
 //Nota: los avatars estan ordenados
-createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
-createMarker([-34.917228, -57.985247],'Carzolio-Clara. Estadio Maradona');
-createMarker([-34.957986, -57.977000],'Dominguez-Lujan. Los Hornos');
-createMarker([-34.900719, -57.980701],'Fernandez-Alejandro. Tolosa');
-createMarker([-34.942394, -57.948540],'Galicchio-Maria. Parque Castelli');
-createMarker([-34.902690, -57.977697],'Gomez-Carlos. Tolosa'); 
-createMarker([-34.886737, -57.984030],'Gutierrez-Lucas. Ringuelet');
-createMarker([-34.926702, -57.911197],'Maria-Paola. Barrio Jardin');
-createMarker([-34.907296, -57.963152],'McAdden-Betina. Barrio Norte');
-createMarker([-34.955009, -57.991031],'Mendoza-Azucena. Los Hornos');
-createMarker([-34.960042, -57.875716],'Purdier-Victor. Villa Elvira');
-createMarker([-34.917343, -57.989806],'Rivas-Silvia. Estadio Maradona');
-createMarker([-34.896274, -57.981307],'Suarez-Amina. Tolosa');
-createMarker([-34.956277, -57.947428],'Fariña-Marily. Cementerio');
+createMarker([-34.943566, -57.958339], `Benitez-Gabriela.Parque Castelli`);
+createMarker([-34.917228, -57.985247],'Carzolio-Clara.Estadio Maradona');
+createMarker([-34.957986, -57.977000],'Dominguez-Lujan.Los Hornos');
+createMarker([-34.900719, -57.980701],'Fernandez-Alejandro.Tolosa');
+createMarker([-34.942394, -57.948540],'Galicchio-Maria.Parque Castelli');
+createMarker([-34.902690, -57.977697],'Gomez-Carlos.Tolosa'); 
+createMarker([-34.886737, -57.984030],'Gutierrez-Lucas.Ringuelet');
+createMarker([-34.926702, -57.911197],'Maria-Paola.Barrio Jardín');
+createMarker([-34.907296, -57.963152],'McAdden-Betina.Barrio Norte');
+createMarker([-34.955009, -57.991031],'Mendoza-Azucena.Los Hornos');
+createMarker([-34.960042, -57.875716],'Purdier-Victor.Villa Elvira');
+createMarker([-34.917343, -57.989806],'Rivas-Silvia.Estadio Maradona');
+createMarker([-34.896274, -57.981307],'Suarez-Amina.Tolosa');
+createMarker([-34.956277, -57.947428],'Fariña-Marily.Cementerio');
 
 
 hideZoomControl();
