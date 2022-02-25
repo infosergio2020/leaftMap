@@ -2,9 +2,8 @@
  *   This content is licensed according to the W3C Software License at
  *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  */
-
+import{filterMarker} from "./map.js";
 'use strict';
-
 // Save a list of named combobox actions, for future readability
 const SelectActions = {
   Close: 0,
@@ -33,7 +32,7 @@ function filterOptions(options = [], filter, exclude = []) {
   });
 }
 
-// map a key press to an action
+// Asigna una tecla a una acción
 function getActionFromKey(event, menuOpen) {
   const { key, altKey, ctrlKey, metaKey } = event;
   const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
@@ -73,7 +72,8 @@ function getActionFromKey(event, menuOpen) {
       return SelectActions.PageDown;
     } else if (key === 'Escape') {
       return SelectActions.Close;
-    } else if (key === 'Enter' || key === ' ') {
+    } else if (key === 'Enter' || key === ' ') { //cuando pulse enter para seleccionar una opcion termica aca
+      console.log('opcion seleccionada');
       return SelectActions.CloseSelect;
     }
   }
@@ -164,8 +164,8 @@ function maintainScrollVisibility(activeElement, scrollParent) {
 }
 
 /*
- * Select Component
- * Accepts a combobox element and an array of string options
+ * Selecciona componente
+ * Accepts a combobox element and an array of string options / Acepta un elemento del combobox y opciones arreglo de strings 
  */
 const Select = function (el, options = []) {
   // element refs
@@ -185,20 +185,19 @@ const Select = function (el, options = []) {
 
   // init
   if (el && this.comboEl && this.listboxEl) {
-    this.init();
+    this.init(); //asigna a cada opcion de la lista una acción
   }
 };
 
 Select.prototype.init = function () {
-  // select first option by default
+  // selecciona la primera opcion por defecto
   this.comboEl.innerHTML = this.options[0];
-
-  // add event listeners
+  // añade eventos listeners - a la primera opcion por defecto 
   this.comboEl.addEventListener('blur', this.onComboBlur.bind(this));
   this.comboEl.addEventListener('click', this.onComboClick.bind(this));
   this.comboEl.addEventListener('keydown', this.onComboKeyDown.bind(this));
 
-  // create options
+  // crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
   this.options.map((option, index) => {
     const optionEl = this.createOption(option, index);
     this.listboxEl.appendChild(optionEl);
@@ -206,7 +205,7 @@ Select.prototype.init = function () {
 };
 
 Select.prototype.createOption = function (optionText, index) {
-  const optionEl = document.createElement('div');
+  const optionEl = document.createElement('div'); 
   optionEl.setAttribute('role', 'option');
   optionEl.id = `${this.idBase}-${index}`;
   optionEl.className =
@@ -217,8 +216,19 @@ Select.prototype.createOption = function (optionText, index) {
   optionEl.addEventListener('click', (event) => {
     event.stopPropagation();
     this.onOptionClick(index);
-    alert('change click');
+    alert('evento click');
+    console.log(index); //indice de la lista de zonas index=1 Tolosa
+    console.log(optionText); //nombre de la opcion seleccionada
+    filterMarker(optionText);
   });
+  optionEl.addEventListener('onkeypress', (event) => { //NO FUNCIONA VER
+    event.stopPropagation();
+    this.onOptionClick(index);
+    alert('evento enter');  
+    console.log(index); //indice de la lista de zonas index=1 Tolosa
+    console.log(optionText); //nombre de la opcion seleccionada
+  });
+  
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
 
   return optionEl;

@@ -58,7 +58,6 @@ legend.onAdd = function (map) {
     '<div class="combo-menu" role="listbox" id="listbox1" aria-labelledby="combo1-label" tabindex="-1">'+
         '<!-- opciones zonas: cargo por js -->'+
     '</div>';
-    //div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
     return div;
 };    
 
@@ -96,7 +95,8 @@ const hideMaker = function(titulos){
     console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
-        elements[i].setAttribute("alt", titulos[i]);
+        elements[i].setAttribute("alt", titulos[i].nombre);
+        elements[i].setAttribute("zona",titulos[i].zona);
         elements[i].setAttribute("aria-label", "Haga click en "+titulos[i]+" para acceder a su entrevista");
         elements[i].setAttribute("role", "image");
         elements[i].setAttribute("tabindex", i+1); //traslado 1 por titulo de pagina y boton
@@ -164,23 +164,37 @@ function assignedText(cadena){
     }
     return;
 }
+/*Agrega a la variable titulos el nombre de la persona + zona */
 var agregoNombre = function(texto){
     var cadena = decompose(texto);
     if (noNull(cadena)){
-        titulos.push(cadena[0]);
+        let reg = {nombre:cadena[0],zona:cadena[1]};
+        titulos.push(reg);  
         return cadena[0]
     }
 } 
+/*"Elimina o esconde aquellos marcadores que no pertenecen a la zona opcionName" */
+export function filterMarker(opcionName){
+    console.log('filterMarker with option: '+opcionName);
+    let elements = document.querySelectorAll(".leaflet-marker-icon");
+    console.log(elements[0]) ; // ver como acceder al atributo 
+    for (var i = 0; i < elements.length; ++i) {
+     if (opcionName != elements[i].zona){
+        elements[i].setAttribute("tabindex", '-1');
+     }
+    }     
+}
+
 
 /***
- * Crea un marcador con sus respectivas funciones - 
+ * Crea un marcador con sus respectivas funciones - Mientras agrega el marcador agrega a titulos el nombre de la persona (agregoNombre)
  */
 var nro=1;
 var createMarker = function (latlng,texto){
     var marker = L.marker(latlng,{icon:new LeafletIcon({iconUrl: 'media/makers/avatar'+(nro++)+'.png'})
         }).bindTooltip(agregoNombre(texto)).openTooltip().addTo(mymap);
-
-    marker.on('click',function(e){ //Aca entra solo si es click de mouse
+    //Añado función click a medida que se crea cada marcador
+    marker.on('click',function(e){ 
         searchID('info').setAttribute('aria-hidden','false');
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
@@ -240,8 +254,8 @@ var createMarker = function (latlng,texto){
         boton.setAttribute('aria-label','Haga click para volver al mapa.')
     })
 } 
-
-
+//añade el combobox al mapa
+legend.addTo(mymap);
 //Createm markers 14 
 //Nota: los avatars estan ordenados
 createMarker([-34.943566, -57.958339], `Benitez-Gabriela. Parque Castelli`);
@@ -262,5 +276,5 @@ createMarker([-34.956277, -57.947428],'Fariña-Marily. Cementerio');
 
 hideZoomControl();
 hideMaker(titulos);
+//enfoca primero el titulo de la página
 searchID('inicio').focus();
-legend.addTo(mymap);
