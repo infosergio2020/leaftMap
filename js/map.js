@@ -100,7 +100,7 @@ const hideMaker = function(titulos){
         elements[i].setAttribute("data-zona",titulos[i].zona);
         elements[i].setAttribute("aria-label", "Haga click en "+titulos[i]+" para acceder a su entrevista");
         elements[i].setAttribute("role", "image");
-        elements[i].setAttribute("tabindex", i+1); //traslado 1 por titulo de pagina y boton
+        elements[i].setAttribute("tabindex", i+2); //traslado 1 por titulo de pagina y boton
         } 
 }
 // ori prueba esconder los controles de zoom
@@ -139,10 +139,13 @@ function assignedText(cadena){
         var t;
         for (var i=0; i < cadena.length; i++) {
             //console.log('texto'+i);
-            t=searchID('texto'+i);
+            t=searchID('label'+(i+1));
+            t.setAttribute('tabindex','0');
             //console.log(cadena[i]);
             if (cadena[i]!==''){
-                t.innerHTML='&nbsp'+cadena[i].replace("-"," ");    //Agregado para reemplazar el guion por un espacio
+                if(i==0) t.innerText='Entrevista a';
+                else t.innerText='De'
+                t.innerText= t.innerText+' '+cadena[i].replace("-"," ");    //Agregado para reemplazar el guion por un espacio
             }
         }
         //Inserto los cambios de la informacion de la zona
@@ -181,7 +184,7 @@ export function filterMarker(opcionName){
     for (var i = 0; i < elements.length; ++i) {
      if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
         console.log('mostrar!');
-        elements[i].setAttribute("tabindex", i+1); // probar bien lo de tabindex
+        elements[i].setAttribute("tabindex", i+2); // probar bien lo de tabindex
         elements[i].style.visibility='visible';
      }
      else{ //Los marcadores que NO sean de la ZONA se esconden
@@ -204,12 +207,14 @@ var createMarker = function (latlng,texto){
         searchID('info').setAttribute('aria-hidden','false');
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
+        //Hago visible toda la info
+        searchID('info').setAttribute('tabindex','1');
         searchID('label1').style.visibility='visible';
         searchID('label2').style.visibility='visible';
         searchID('accordionGroup').style.visibility='visible';
         searchID('separator').style.visibility='visible';
         var cadena = decompose(texto);  
-        assignedText(cadena);
+        assignedText(cadena); //+da focus al titulo de la info entrevistado
         console.log("Estoy en función click!!");
         //Inserto los cambios a media-player
         var link= cadena[0];
@@ -236,7 +241,7 @@ var createMarker = function (latlng,texto){
         '<div class="px-video-controls"></div>'+
         '</div>';
         mediaplayer.innerHTML= mynewplayer;
-            // Initialize
+        // Initialize
         new InitPxVideo({
             "videoId": "video",
             "captionsOnDefault": true,
@@ -244,15 +249,23 @@ var createMarker = function (latlng,texto){
             "videoTitle": "Entrevista", //Esto tiene que ir cambiando constantemente
             "debug": true
         });
-        //Add button "volver al mapa"
+        //funcion click del boton volver al mapa - Aca deberia colocar los tabindex en -1 para que no enfoque hasta el siguiente click/enter del avatar
         var markerFocus = function (){
             e.target._icon.focus();
-            console.log(e.target._icon.alt);
-            console.log(titulos[titulos.length-1]);
-            searchID('info').setAttribute('aria-hidden','true');
-            if (e.target._icon.alt == titulos[titulos.length-1]) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
-            console.log("markerFocus");
+            //Hide info - crear funcion despues
+            searchID('label1').setAttribute('tabindex','-1'); //esconde 'Entrevista a'
+            searchID('label2').setAttribute('tabindex','-1'); //esconde 'De'
+            searchID('accordionGroup').setAttribute('tabindex','-1'); //esconder acordeon  no esta funcionando
+            searchID('accordion-open-1').setAttribute('tabindex','-1');
+            searchID('separator').setAttribute('tabindex','-1'); //esconde el separador
+            //falta esconder controles del mediaplayer (ver)
+            //searchID('mediaplayer').style.visibility='hidden'; //esconde media player LITERAL
+            searchID('boton').setAttribute('tabindex','-1'); //esconde el boton pero no reaparece, intente poner tabindex afuera pero nada
+            //para el ultimo caso
+            if (e.target._icon.alt == titulos[titulos.length-1].nombre) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
+            console.log("markerFocus - volviendo al mapa..");
         };
+        //Añadir boton "volver al mapa"
         let boton = document.getElementById('boton');
         boton.addEventListener('click',markerFocus.bind(e));
         boton.style.visibility='visible';
