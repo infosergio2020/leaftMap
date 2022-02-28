@@ -259,8 +259,8 @@ var createMarker = function (latlng,texto){
             searchID('accordion-open-1').setAttribute('tabindex','-1');
             searchID('separator').setAttribute('tabindex','-1'); //esconde el separador
             //falta esconder controles del mediaplayer (ver)
-            //searchID('mediaplayer').style.visibility='hidden'; //esconde media player LITERAL
-            searchID('boton').setAttribute('tabindex','-1'); //esconde el boton pero no reaparece, intente poner tabindex afuera pero nada
+            
+            searchID('boton').setAttribute('tabindex','-1'); //esconde el boton
             //para el ultimo caso
             if (e.target._icon.alt == titulos[titulos.length-1].nombre) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
             console.log("markerFocus - volviendo al mapa..");
@@ -269,6 +269,7 @@ var createMarker = function (latlng,texto){
         let boton = document.getElementById('boton');
         boton.addEventListener('click',markerFocus.bind(e));
         boton.style.visibility='visible';
+        boton.setAttribute('tabindex','0'); //reaparece boton
         boton.setAttribute('role','button');
         boton.setAttribute('aria-label','Haga click para volver al mapa.')
     })
