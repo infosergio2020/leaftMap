@@ -193,7 +193,53 @@ export function filterMarker(opcionName){
      }
     }     
 }
-
+/*
+* De acuerdo al boolean que le pase esconde o muestra los botones del media player 
+* opcion T: esconde
+* opcion F: muestra
+*/
+function hideMediaplayer(opcion){
+    if (opcion == true){
+        let media_btn = document.getElementsByClassName('px-video-restart')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-rewind')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-play')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-pause')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-forward')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-mute')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-volume')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-btnCaptions')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+        media_btn = document.getElementsByClassName('px-video-btnFullScreen')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','-1');
+    }
+    else{
+        let media_btn = document.getElementsByClassName('px-video-restart')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-rewind')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-play')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-pause')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-forward')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-mute')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-volume')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-btnCaptions')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+        media_btn = document.getElementsByClassName('px-video-btnFullScreen')[0];
+        if (noNull(media_btn)) media_btn.setAttribute('tabindex','1');
+    }
+}
 
 /***
  * Crea un marcador con sus respectivas funciones - Mientras agrega el marcador agrega a titulos el nombre de la persona (agregoNombre)
@@ -208,11 +254,11 @@ var createMarker = function (latlng,texto){
         var textoinicio = document.getElementById('tituloinicial');
         if (textoinicio != null) textoinicio.remove();    
         //Hago visible toda la info
-        searchID('info').setAttribute('tabindex','1');
         searchID('label1').style.visibility='visible';
         searchID('label2').style.visibility='visible';
         searchID('accordionGroup').style.visibility='visible';
         searchID('separator').style.visibility='visible';
+        hideMediaplayer(false);
         var cadena = decompose(texto);  
         assignedText(cadena); //+da focus al titulo de la info entrevistado
         console.log("Estoy en función click!!");
@@ -259,7 +305,7 @@ var createMarker = function (latlng,texto){
             searchID('accordion-open-1').setAttribute('tabindex','-1');
             searchID('separator').setAttribute('tabindex','-1'); //esconde el separador
             //falta esconder controles del mediaplayer (ver)
-            
+            hideMediaplayer(true);
             searchID('boton').setAttribute('tabindex','-1'); //esconde el boton
             //para el ultimo caso
             if (e.target._icon.alt == titulos[titulos.length-1].nombre) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
