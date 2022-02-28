@@ -7,7 +7,7 @@ let introtext;
 //Cambio de idioma
 if (idioma == "EN"){
     for (var i = 0; i < titulos.length; ++i) {
-        titulos[i]="Press enter to listen to the interview from "+titulos[i];
+        titulos[i]="Press enter to listen to the interview from "+titulos[i].nombre;
     }
     introtext= titulos+' interviews are listed below on the testimonial map';
     console.log('estoy en ingles');
@@ -15,7 +15,7 @@ if (idioma == "EN"){
 }
 else if (idioma == "ES"){
     for (var i = 0; i < titulos.length; ++i) {
-        titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i];
+        titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i].nombre;
     }
     console.log('estoy en español');
     introtext='A continuación se listan'+titulos.length+'entrevistas en el mapa de entrevistados';
@@ -98,7 +98,7 @@ const hideMaker = function(titulos){
         elements[i].setAttribute("alt", titulos[i].nombre);
         elements[i].setAttribute("data-nombre",titulos[i].nombre);
         elements[i].setAttribute("data-zona",titulos[i].zona);
-        elements[i].setAttribute("aria-label", "Haga click en "+titulos[i]+" para acceder a su entrevista");
+        elements[i].setAttribute("aria-label", "Haga click en "+titulos[i].nombre+" para acceder a su entrevista");
         elements[i].setAttribute("role", "image");
         elements[i].setAttribute("tabindex", i+2); //traslado 1 por titulo de pagina y boton
         } 
