@@ -34,13 +34,15 @@ function filterOptions(options = [], filter, exclude = []) {
 
 // Asigna una tecla a una acción
 function getActionFromKey(event, menuOpen) {
+  let currentOption;
   const { key, altKey, ctrlKey, metaKey } = event;
   const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
   // handle opening when closed
   if (!menuOpen && openKeys.includes(key)) {
     return SelectActions.Open;
   }
-
+  currentOption = event.currentTarget;
+  console.log(currentOption);
   // home and end move the selected option when open or closed
   if (key === 'Home') {
     return SelectActions.First;
@@ -73,6 +75,8 @@ function getActionFromKey(event, menuOpen) {
     } else if (key === 'Escape') {
       return SelectActions.Close;
     } else if (key === 'Enter' || key === ' ') { //cuando pulse enter para seleccionar una opcion termica aca
+      //invoco a la función 
+      filterMarker(currentOption); //parametro nombre del item seleccionado
       console.log('opcion seleccionada');
       return SelectActions.CloseSelect;
     }
