@@ -34,15 +34,12 @@ function filterOptions(options = [], filter, exclude = []) {
 
 // Asigna una tecla a una acción
 function getActionFromKey(event, menuOpen) {
-  let currentOption;
   const { key, altKey, ctrlKey, metaKey } = event;
   const openKeys = ['ArrowDown', 'ArrowUp', 'Enter', ' ']; // all keys that will do the default open action
   // handle opening when closed
   if (!menuOpen && openKeys.includes(key)) {
     return SelectActions.Open;
   }
-  currentOption = event.currentTarget;
-  console.log(currentOption);
   // home and end move the selected option when open or closed
   if (key === 'Home') {
     return SelectActions.First;
@@ -75,8 +72,6 @@ function getActionFromKey(event, menuOpen) {
     } else if (key === 'Escape') {
       return SelectActions.Close;
     } else if (key === 'Enter' || key === ' ') { //cuando pulse enter para seleccionar una opcion termica aca
-      //invoco a la función 
-      filterMarker(currentOption); //parametro nombre del item seleccionado
       console.log('opcion seleccionada');
       return SelectActions.CloseSelect;
     }
@@ -277,7 +272,7 @@ Select.prototype.onComboKeyDown = function (event) {
   const max = this.options.length - 1;
 
   const action = getActionFromKey(event, this.open);
-
+  //invoco a la función 
   switch (action) {
     case SelectActions.Last:
     case SelectActions.First:
@@ -297,7 +292,8 @@ Select.prototype.onComboKeyDown = function (event) {
     // intentional fallthrough
     case SelectActions.Close:
       event.preventDefault();
-      return this.updateMenuState(false);
+      filterMarker(event.target.innerText);
+      return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
     case SelectActions.Type:
       return this.onComboType(key);
     case SelectActions.Open:
