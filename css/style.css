@@ -41,6 +41,7 @@ body {
     outline: none;
     padding: 1.875rem;
     position: relative;
+    z-index: 1;
  }
  #desc {
      background-color:#A8C0C1;

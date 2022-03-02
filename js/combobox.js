@@ -142,7 +142,7 @@ function isElementInView(element) {
   );
 }
 
-// check if an element is currently scrollable
+// chequeo si un elemento es scrolleable (teclado)
 function isScrollable(element) {
   return element && element.clientHeight < element.scrollHeight;
 }

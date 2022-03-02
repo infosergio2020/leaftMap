@@ -45,7 +45,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoibWl6enkyMDIiLCJhIjoiY2t0aHVtNWI0MHZuODJ3dWU2OGdjZjBxMiJ9.Z5oB_qULFlnOpBwo10mT-A'
 }).addTo(mymap);
 
-
 //Add geojson 
 L.geoJSON(zonas).addTo(mymap)
 
@@ -53,13 +52,14 @@ L.geoJSON(zonas).addTo(mymap)
 var legend = L.control({position: 'topright'});
 legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'combo js-select');
+    div.setAttribute('id','combo-pppal');
     div.innerHTML = '<div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="1">'+
     '</div>'+
     '<div class="combo-menu" role="listbox" id="listbox1" aria-labelledby="combo1-label" tabindex="-1">'+
         '<!-- opciones zonas: cargo por js -->'+
     '</div>';
     return div;
-};    
+};
 
 
 //Create an icon 
@@ -322,6 +322,10 @@ var createMarker = function (latlng,texto){
 } 
 //añade el combobox al mapa
 legend.addTo(mymap);
+//Con esto evito la propagación de la rueda del mouse y evito que haga zoom el mapa cuando este posicionado en el combobox
+var elem = L.DomUtil.get('combo-pppal'); //busco el id de mi combobox
+L.DomEvent.on(elem, 'mousewheel', L.DomEvent.stopPropagation); 
+
 //Createm markers 14 
 //Nota: los avatars estan ordenados
 createMarker([-34.943566, -57.958339], `Benitez-Gabriela.Parque Castelli`);
