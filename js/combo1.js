@@ -2,7 +2,6 @@
  *   This content is licensed according to the W3C Software License at
  *   https://www.w3.org/Consortium/Legal/2015/copyright-software-and-document
  */
-import{filterMarker} from "./map.js";
 'use strict';
 // Save a list of named combobox actions, for future readability
 const SelectActions = {
@@ -213,11 +212,9 @@ Select.prototype.createOption = function (optionText, index) {
   optionEl.innerText = optionText;
 
   optionEl.addEventListener('click', (event) => {
-    event.stopPropagation();
     this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada
-    filterMarker(optionText);
   });
   
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
@@ -240,12 +237,29 @@ Select.prototype.getSearchString = function (char) {
   this.searchString += char;
   return this.searchString;
 };
-
+let flag;
+let a = document.getElementById('listbox1');
+a.addEventListener("mousedown",function(){
+    flag=true;
+    console.log("active");
+});
+a.addEventListener("mouseup",function(){
+    flag=true;
+    console.log("active");
+});
+a.addEventListener("mouseover",function(){
+    flag=false;
+    console.log("disable");
+});
 Select.prototype.onComboBlur = function () {
   // do not do blur action if ignoreBlur flag has been set
+  if (!flag){
   if (this.ignoreBlur) {
-    this.ignoreBlur = false;
+    this.ignoreBlur = false; 
     return;
+  }
+  else{
+      console.log(this.ignoreBlur);
   }
 
   // select current option and close
@@ -253,10 +267,14 @@ Select.prototype.onComboBlur = function () {
     this.selectOption(this.activeIndex);
     this.updateMenuState(false, false);
   }
+}
 };
 //Click al primer elemento del combobox 
-Select.prototype.onComboClick = function () {
-  this.updateMenuState(!this.open, false);
+Select.prototype.onComboClick = function (event) {
+  //console.log(event);
+  //var a = document.getElementById('listbox1');
+  //a.trigger('click');
+  this.updateMenuState(!this.open, true);
 };
 
 Select.prototype.onComboKeyDown = function (event) {
@@ -284,7 +302,6 @@ Select.prototype.onComboKeyDown = function (event) {
     // intentional fallthrough
     case SelectActions.Close:
       event.preventDefault();
-      filterMarker(event.target.innerText);
       return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
     case SelectActions.Type:
       return this.onComboType(key);
@@ -342,7 +359,7 @@ Select.prototype.onOptionChange = function (index) {
     options[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 };
-
+//click en un elemento del listbox1 - evento
 Select.prototype.onOptionClick = function (index) {
   this.onOptionChange(index);
   this.selectOption(index);
@@ -352,7 +369,7 @@ Select.prototype.onOptionClick = function (index) {
 Select.prototype.onOptionMouseDown = function () {
   // Clicking an option will cause a blur event,
   // but we don't want to perform the default keyboard blur action
-  this.ignoreBlur = true;
+  this.ignoreBlur = true; //Selecciona una opción de la lista - flag ignoreBlur
 };
 
 Select.prototype.selectOption = function (index) {
@@ -378,7 +395,6 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 
   // update state
   this.open = open;
-
   // update aria-expanded and styles
   this.comboEl.setAttribute('aria-expanded', `${open}`);
   open ? this.el.classList.add('open') : this.el.classList.remove('open');
@@ -390,7 +406,6 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
   if (activeID === '' && !isElementInView(this.comboEl)) {
     this.comboEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
-
   // move focus back to the combobox, if needed
   callFocus && this.comboEl.focus();
 };
