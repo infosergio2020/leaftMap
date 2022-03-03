@@ -241,33 +241,31 @@ let flag;
 let a = document.getElementById('listbox1');
 a.addEventListener("mousedown",function(){
     flag=true;
-    console.log("active");
+    //console.log("active");
 });
 a.addEventListener("mouseup",function(){
     flag=true;
-    console.log("active");
+    //console.log("active");
 });
-a.addEventListener("mouseover",function(){
+a.addEventListener("mouseout",function(){
     flag=false;
-    console.log("disable");
+    //console.log("disable");
 });
 Select.prototype.onComboBlur = function () {
   // do not do blur action if ignoreBlur flag has been set
-  if (!flag){
-  if (this.ignoreBlur) {
-    this.ignoreBlur = false; 
-    return;
+  console.log(flag); //Entra una sola vez por el primer click
+  if (!flag){ //evalua si fue evento de raton o no - 
+    if (this.ignoreBlur && !flag) {
+      this.ignoreBlur = false; 
+      console.log("ingrese toggle");
+      return;
+    }
+    // select current option and close
+    if (this.open) {
+      this.selectOption(this.activeIndex);
+      this.updateMenuState(false, false);
+    }
   }
-  else{
-      console.log(this.ignoreBlur);
-  }
-
-  // select current option and close
-  if (this.open) {
-    this.selectOption(this.activeIndex);
-    this.updateMenuState(false, false);
-  }
-}
 };
 //Click al primer elemento del combobox 
 Select.prototype.onComboClick = function (event) {
