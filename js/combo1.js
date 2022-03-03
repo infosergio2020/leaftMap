@@ -367,7 +367,8 @@ Select.prototype.onOptionClick = function (index) {
 Select.prototype.onOptionMouseDown = function () {
   // Clicking an option will cause a blur event,
   // but we don't want to perform the default keyboard blur action
-  this.ignoreBlur = true; //Selecciona una opción de la lista - flag ignoreBlur
+  if (flag)
+    this.ignoreBlur = true; //Selecciona una opción de la lista - flag ignoreBlur
 };
 
 Select.prototype.selectOption = function (index) {
