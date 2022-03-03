@@ -16,13 +16,13 @@
   border-right: 2px solid rgb(0 0 0 / 75%);
   content: "";
   display: block;
-  height: 8px;
+  height: 12px;
   pointer-events: none;
   position: absolute;
-  right: 8px;
+  right: 16px;
   top: 50%;
   transform: translate(0, -65%) rotate(45deg);
-  width: 8px;
+  width: 12px;
 }
 
 .combo-input {
@@ -33,6 +33,7 @@
   font-size: 1em;
   min-height: calc(1.4em + 26px);
   padding: 12px 19px 14px 16px;
+  text-align: left;
   width: 100%;
 }
 
@@ -65,7 +66,7 @@
   position: absolute;
   top: 100%;
   width: 100%;
-  z-index: 999;
+  z-index: 100;
 }
 
 .open .combo-menu {
@@ -96,8 +97,58 @@
   content: "";
   height: 16px;
   position: absolute;
-  right: 11px;
+  right: 15px;
   top: 50%;
   transform: translate(0, -50%) rotate(45deg);
   width: 8px;
+}
+/* multiselect list of selected options VER QUE ES*/
+.selected-options {
+  list-style-type: none;
+  margin: 0;
+  max-width: 400px;
+  padding: 0;
+}
+
+.selected-options li {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.remove-option {
+  background-color: #6200ee;
+  border: 1px solid #6200ee;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 0.75em;
+  font-weight: bold;
+  margin-bottom: 6px;
+  margin-right: 6px;
+  padding: 0.25em 1.75em 0.25em 0.25em;
+  position: relative;
+}
+
+.remove-option:focus {
+  border-color: #baa1dd;
+  box-shadow: 0 0 3px 1px #6200ee;
+  outline: 3px solid transparent;
+}
+
+.remove-option::before,
+.remove-option::after {
+  border-right: 2px solid #fff;
+  content: "";
+  height: 1em;
+  right: 0.75em;
+  position: absolute;
+  top: 50%;
+  width: 0;
+}
+
+.remove-option::before {
+  transform: translate(0, -50%) rotate(45deg);
+}
+
+.remove-option::after {
+  transform: translate(0, -50%) rotate(-45deg);
 }
