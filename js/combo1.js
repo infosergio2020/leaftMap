@@ -394,6 +394,7 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 window.addEventListener('load', function () {
   const options = [
     'Elija una zona',
+    'COMBO 1',
     'Todas las zonas',
     'Tolosa',
     'Cementerio',
@@ -413,4 +414,11 @@ window.addEventListener('load', function () {
   selectEls.forEach((el) => {
     new Select(el, options);
   });
+  console.log("COMBO");
+  var div = L.DomUtil.get('listbox1');
+  div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+  L.DomEvent.disableClickPropagation(div);
+  L.DomEvent.on(div, 'scroll', L.DomEvent.stopPropagation); 
+  div = L.DomUtil.get('listbox1');
+  L.DomEvent.disableClickPropagation(div);
 });

@@ -10,7 +10,7 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
     <link rel="stylesheet" href="css/combobox.css" />
     <style type="text/css">
-        #map { height: 500px; }
+        #map { height: 500px; width: 300;}
         #legend { background: #FFF;}
     </style>
 </head>
@@ -22,7 +22,60 @@
         <!-- opciones zonas: cargo por js -->
         </div>
     </div>
+    <script>	
+    function getCloudMadeUrl(styleId) {
+        return 'http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/' + styleId + '/256/{z}/{x}/{y}.png';
+    }
+    var cloudmadeAttribution = 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
+        cloudmade = new L.TileLayer(getCloudMadeUrl(997), {attribution: cloudmadeAttribution}),
+        cloudmade2 = new L.TileLayer(getCloudMadeUrl(998), {attribution: 'Hello world'});
+    
+        // setup map
+    var lat = 48.185556;
+    var lng =  11.620278;
+    var zoom =  10;
+    
+    
+    var map = new L.Map('map');
+    
+    var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    var osmAttrib='Map data &copy; OpenStreetMap contributors';
+    var osm = new L.TileLayer(osmUrl, {minZoom: 5, maxZoom: 18, attribution: osmAttrib});
+    
+    map.addLayer(osm);
+    map.setView(new L.LatLng(lat, lng), zoom);
+    
+    
+    var legend = L.control({position: 'topright'});
+    legend.onAdd = function (map) {
+        var div3 = document.createElement('div');
+        div3.setAttribute('class','combo-menu');
+        div3.setAttribute('id','listbox1');
+        div3.setAttribute('role','listbox');
+        var div2 = document.createElement('div');
+        div2.setAttribute('class','combo-input');
+        div2.setAttribute('id','combo1');
+        div2.setAttribute('role','combobox');
+        div2.setAttribute('tabindex','0');
+        div2.setAttribute('aria-controls','listbox1');
+        div2.setAttribute('aria-expanded','false');
+        div2.setAttribute('aria-haspopup','listbox');
+        div2.setAttribute('aria-labelledby','combo1-label');
+        L.DomEvent.disableClickPropagation(div3);
+        var div = L.DomUtil.create('div', 'combo js-select');
+        div.setAttribute('id','combo-pppal');
+        div.appendChild(div2);
+        div.appendChild(div3);
+        div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
+        L.DomEvent.disableClickPropagation(div);
+        return div;
+    };
+    legend.addTo(map);
+    //Con esto evito la propagación de la rueda del mouse y evito que haga zoom el mapa cuando este posicionado en el combobox
+    var elem = L.DomUtil.get('combo-pppal'); //busco el id de mi combobox
+    L.DomEvent.on(elem, 'mousewheel', L.DomEvent.stopPropagation); 
+    console.log("SCRIPT");
+    </script>
     <script defer src="./js/combo1.js"></script>
-
 </body>
 </html>

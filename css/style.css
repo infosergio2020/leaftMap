@@ -93,7 +93,10 @@ footer{
     margin-top: 3rem;
 
 }
-
+.search{
+    background-color: #51de57ba;
+    display: grid;
+}
 .miheader {
     overflow: hidden;
     background-color: #00695C;

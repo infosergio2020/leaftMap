@@ -48,21 +48,6 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 //Add geojson 
 L.geoJSON(zonas).addTo(mymap)
 
-//Add combobox - opciones
-var legend = L.control({position: 'topright'});
-legend.onAdd = function (map) {
-    var div = L.DomUtil.create('div', 'combo js-select');
-    div.setAttribute('id','combo-pppal');
-    div.innerHTML = '<div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="0"></div>'+
-    '<div class="combo-menu" role="listbox" id="listbox1">'+
-        '<!-- opciones zonas: cargo por js -->'+
-    '</div>';  
-    div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-    L.DomEvent.disableClickPropagation(div);
-    return div;
-};
-
-
 //Create an icon 
 var LeafletIcon = L.Icon.extend({
     options: {
@@ -182,17 +167,20 @@ var agregoNombre = function(texto){
 export function filterMarker(opcionName){
     console.log('filterMarker with option: '+opcionName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
+    let count_intvw = 0; //contador de entrevistas
     for (var i = 0; i < elements.length; ++i) {
      if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
         console.log('mostrar!');
         elements[i].setAttribute("tabindex", i+2); 
         elements[i].style.visibility='visible';
+        count_intvw++;
      }
      else{ //Los marcadores que NO sean de la ZONA se esconden
         elements[i].setAttribute("tabindex", '-1');
         elements[i].style.visibility='hidden';
      }
     } 
+    return count_intvw;
 }
 /*
 * De acuerdo al boolean que le pase esconde o muestra los botones del media player 
@@ -321,11 +309,6 @@ var createMarker = function (latlng,texto){
         boton.setAttribute('aria-label','Haga click para volver al mapa.')
     })
 } 
-//añade el combobox al mapa
-legend.addTo(mymap);
-//Con esto evito la propagación de la rueda del mouse y evito que haga zoom el mapa cuando este posicionado en el combobox
-var elem = L.DomUtil.get('combo-pppal'); //busco el id de mi combobox
-L.DomEvent.on(elem, 'mousewheel', L.DomEvent.stopPropagation); 
 
 //Createm markers 14 
 //Nota: los avatars estan ordenados
