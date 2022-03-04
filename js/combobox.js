@@ -213,7 +213,6 @@ Select.prototype.createOption = function (optionText, index) {
   optionEl.innerText = optionText;
 
   optionEl.addEventListener('click', (event) => {
-    event.stopPropagation();
     this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada

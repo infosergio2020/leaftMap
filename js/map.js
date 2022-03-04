@@ -53,8 +53,8 @@ var legend = L.control({position: 'topright'});
 legend.onAdd = function (map) {
     var div = L.DomUtil.create('div', 'combo js-select');
     div.setAttribute('id','combo-pppal');
-    div.innerHTML = '<div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="1"></div>'+
-    '<div class="combo-menu" role="listbox" id="listbox1" aria-labelledby="combo1-label" tabindex="-1">'+
+    div.innerHTML = '<div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="0"></div>'+
+    '<div class="combo-menu" role="listbox" id="listbox1">'+
         '<!-- opciones zonas: cargo por js -->'+
     '</div>';  
     div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
@@ -192,7 +192,7 @@ export function filterMarker(opcionName){
         elements[i].setAttribute("tabindex", '-1');
         elements[i].style.visibility='hidden';
      }
-    }     
+    } 
 }
 /*
 * De acuerdo al boolean que le pase esconde o muestra los botones del media player 
@@ -326,8 +326,6 @@ legend.addTo(mymap);
 //Con esto evito la propagación de la rueda del mouse y evito que haga zoom el mapa cuando este posicionado en el combobox
 var elem = L.DomUtil.get('combo-pppal'); //busco el id de mi combobox
 L.DomEvent.on(elem, 'mousewheel', L.DomEvent.stopPropagation); 
-L.DomEvent.disableClickPropagation(elem);
-L.DomEvent.stopPropagation(elem);
 
 //Createm markers 14 
 //Nota: los avatars estan ordenados

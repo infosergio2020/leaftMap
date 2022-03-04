@@ -237,27 +237,10 @@ Select.prototype.getSearchString = function (char) {
   this.searchString += char;
   return this.searchString;
 };
-let flag;
-let a = document.getElementById('listbox1');
-a.addEventListener("mousedown",function(){
-    flag=true;
-    //console.log("active");
-});
-a.addEventListener("mouseup",function(){
-    flag=true;
-    //console.log("active");
-});
-a.addEventListener("mouseout",function(){
-    flag=false;
-    //console.log("disable");
-});
 Select.prototype.onComboBlur = function () {
   // do not do blur action if ignoreBlur flag has been set
-  console.log(flag); //Entra una sola vez por el primer click
-  if (!flag){ //evalua si fue evento de raton o no - 
-    if (this.ignoreBlur && !flag) {
+    if (this.ignoreBlur) {
       this.ignoreBlur = false; 
-      console.log("ingrese toggle");
       return;
     }
     // select current option and close
@@ -265,7 +248,6 @@ Select.prototype.onComboBlur = function () {
       this.selectOption(this.activeIndex);
       this.updateMenuState(false, false);
     }
-  }
 };
 //Click al primer elemento del combobox 
 Select.prototype.onComboClick = function (event) {
@@ -367,7 +349,6 @@ Select.prototype.onOptionClick = function (index) {
 Select.prototype.onOptionMouseDown = function () {
   // Clicking an option will cause a blur event,
   // but we don't want to perform the default keyboard blur action
-  if (flag) //toma a los eventos click como una opcion mas de la lista 
     this.ignoreBlur = true; //Selecciona una opción de la lista - flag ignoreBlur
 };
 
