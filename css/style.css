@@ -93,10 +93,15 @@ footer{
     margin-top: 3rem;
 
 }
-.search{
+.group-search{
     background-color: #208f81bd;
-    display: grid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     padding: 0.6rem;
+}
+.search{
+    width: 50%;
 }
 .search-title {
     padding: 0.3rem;

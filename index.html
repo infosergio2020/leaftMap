@@ -19,7 +19,6 @@
 	<link rel="stylesheet" href="css/px-video.css" />
 	<link rel="stylesheet" href="css/style-accordion.css" />
 	<link rel="stylesheet" href="css/combobox.css" />
-
 </head>
 <body>
         <div class="miheader">
@@ -28,13 +27,26 @@
                 <a tabindex="1" role="button" href="language.html" class="button" aria-label="Haga click para cambiar el idioma de la página">Language</a>
             </div>
         </div>
-        <div class="search">
-            <div tabindex="1" class="search-title" aria-label="" alt=""><h2>Seleccione la zona que desea buscar</h2></div>
-            <div class="combo js-select">
-                <div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="1"></div>
-                <div class="combo-menu" role="listbox" id="listbox1">
-                <!-- opciones zonas: cargo por js -->
+        <div class="group-search">
+            <div class="search">
+                <div tabindex="1" class="search-title" aria-label="" alt=""><h2>Seleccione la zona que desea buscar</h2></div>
+                <div class="combo js-select">
+                    <div aria-controls="listbox1" aria-expanded="false" aria-haspopup="listbox" aria-labelledby="combo1-label" id="combo1" class="combo-input" role="combobox" tabindex="1"></div>
+                    <div class="combo-menu" role="listbox" id="listbox1">
+                    <!-- opciones zonas: cargo por js -->
+                    </div>
                 </div>
+            </div>
+            <div class="wrapper">
+                <form>
+                <div role="search">
+                    <label class="search-label" for="search">Búsqueda de entrevistados
+                    <p id="error" role="alert"></p>
+                </label>
+                    <input id="search" class="search-input" type="text">
+                    <input class="button" type="button" value="Buscar">
+                </div>
+                </form>
             </div>
         </div>
     <main>
@@ -107,6 +119,7 @@
     <script defer src="./js/map.js" type="module"></script>
     <script defer src="./js/accordion.js"></script>
     <script defer src="./js/combobox.js" type="module"></script>
+    <script defer src="./js/search.js"></script>
     <!-- scripts media player-->
     <script defer src="./js/strings.js"></script>
     <script src="./js/px-video.js"></script>

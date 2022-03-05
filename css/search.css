@@ -1,0 +1,64 @@
+.wrapper {
+    width: 50%;
+}
+.wrapper form {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    padding: 50px;
+}
+.button:focus, .button:hover {
+    outline: 0;
+    border-color: #135016;
+    background-color: #14491fbe;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.63);
+}
+.search-label {
+    display: block;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+.search-input {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 2px solid grey;
+    -webkit-appearance: none;
+    padding: 1em 0.5em;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+.search-input:focus {
+    outline: 0;
+    border-color: #015289;
+    box-shadow: 0 0 5px 0 #015289;
+}
+[aria-hidden="true"], .hidden {
+    display: none;
+}
+[aria-hidden="false"] {
+    display: block;
+}
+[aria-invalid] {
+    border: 2px solid #cc3535;
+    outline: 0;
+}
+[aria-invalid]:focus, [aria-invalid]:hover {
+    outline: 0;
+    border-color: #b92f2f;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.63);
+}
+#error span {
+    display: block;
+    background-color: #cc3535;
+    background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/182774/error.svg");
+    background-repeat: no-repeat;
+    color: #fff;
+    padding: 10px;
+    margin-top: 10px;
+    font-size: 80%;
+    border-radius: 5px;
+    padding-left: 30px;
+    background-size: 20px 20px;
+    background-position: left 5px center;
+}
