@@ -96,6 +96,10 @@ footer{
 .search{
     background-color: #208f81bd;
     display: grid;
+    padding: 0.6rem;
+}
+.search-title {
+    padding: 0.3rem;
 }
 .miheader {
     overflow: hidden;
