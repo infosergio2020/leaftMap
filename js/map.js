@@ -1,6 +1,7 @@
 import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
+let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
 var usados=[]; //para el nro aleatorio
 let introtext;
@@ -56,13 +57,6 @@ var LeafletIcon = L.Icon.extend({
         popupAnchor: [3,76]
     }
 })
-//comentario
-//document.querySelector('.leaflet-shadow-pane').remove();
-
-//document.querySelector('.leaflet-tile-container img, .leaflet-shadow-pane img').setAttribute('role','presentation');
-/*var personIcon= new LeafletIcon (nro) ({
-    iconUrl: 'media/makers/avatar'+nro+'.png'
-})*/
 
 //Functions
 function toggleText(id) {
@@ -163,24 +157,37 @@ var agregoNombre = function(texto){
         return cadena[0]
     }
 } 
+/**
+ * agrega a alt el numero de entrevistas.. 1 de 4, 2 de 4.. etc
+ * @param {*} itvwszone  entrevistados de zona seleccionada por filterMarker
+ */
+function renameMarker(...itvwszone){
+    var add;
+    for (let i = 0; i < itvwszone.length; ++i) {
+        add = "Haga click en "+itvwszone[i].alt+" para acceder a su entrevista.";
+        add = add+' '+(i+1)+' de '+itvwszone.length+'.';
+        itvwszone[i].setAttribute('aria-label',add); 
+    }
+}
 /*"Elimina o esconde aquellos marcadores que no pertenecen a la zona opcionName" */
 export function filterMarker(opcionName){
     console.log('filterMarker with option: '+opcionName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
-    let count_intvw = 0; //contador de entrevistas
-    for (var i = 0; i < elements.length; ++i) {
+    itvwszone=[]; //vacio mi array
+    let j=0;
+    for (let i = 0; i < elements.length; ++i) {
      if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
-        console.log('mostrar!');
         elements[i].setAttribute("tabindex", i+2); 
         elements[i].style.visibility='visible';
-        count_intvw++;
+        itvwszone[j]=elements[i];
+        j++;
      }
      else{ //Los marcadores que NO sean de la ZONA se esconden
         elements[i].setAttribute("tabindex", '-1');
         elements[i].style.visibility='hidden';
      }
-    } 
-    return count_intvw;
+    }
+    renameMarker(...itvwszone); 
 }
 /*
 * De acuerdo al boolean que le pase esconde o muestra los botones del media player 

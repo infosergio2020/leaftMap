@@ -216,7 +216,7 @@ Select.prototype.createOption = function (optionText, index) {
     this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada
-    console.log(filterMarker(optionText));
+    filterMarker(optionText);
   });
   
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
@@ -283,7 +283,7 @@ Select.prototype.onComboKeyDown = function (event) {
     // intentional fallthrough
     case SelectActions.Close:
       event.preventDefault();
-      console.log(filterMarker(event.target.innerText));
+      filterMarker(event.target.innerText);
       return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
     case SelectActions.Type:
       return this.onComboType(key);
