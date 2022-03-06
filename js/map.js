@@ -356,7 +356,7 @@ var createMarker = function (latlng,texto){
 
 //Createm markers 14 
 //Nota: los avatars estan ordenados
-createMarker([-34.943566, -57.958339], `Benitez-Clara.Parque Castelli`);
+createMarker([-34.943566, -57.958339], `Benitez-Gabriela.Parque Castelli`);
 createMarker([-34.917228, -57.985247],'Carzolio-Clara.Estadio Maradona');
 createMarker([-34.957986, -57.977000],'Dominguez-Lujan.Los Hornos');
 createMarker([-34.900719, -57.980701],'Fernandez-Alejandro.Tolosa');

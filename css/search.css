@@ -45,11 +45,11 @@
     border-color: #015289;
     box-shadow: 0 0 5px 0 #015289;
 }
-[aria-invalid] {
+[aria-invalid=true] {
     border: 2px solid #cc3535;
     outline: 0;
 }
-[aria-invalid]:focus, [aria-invalid]:hover {
+[aria-invalid=true]:focus, [aria-invalid]:hover {
     outline: 0;
     border-color: #b92f2f;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.63);
