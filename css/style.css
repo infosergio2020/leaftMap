@@ -181,4 +181,13 @@ footer{
         height: 80%;
     }
 }
+@media screen and (max-width:512px) {
+    .group-search{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .search{
+        width: 100%;
+    }
+}
 *{padding:0;margin:0;font-family:Arial,Helvetica,sans-serif}body{background-color:#A8C0C1}.text{font-family:sans-serif;color:#353a3bfb}#boton_acc{text-align:center;background-color:aquamarine}.centrar{display:flex;justify-content:center}.ocultar-visualmente{position:absolute;overflow:hidden;top:-9999px}.footer__texto{text-align:center;margin-top:3rem}.button{background-color:#4CAF50;border:none;border: radius 0.75em;;position:relative;left:30%;color:#fff;padding:0.938rem 2rem;text-align:center;text-decoration:none;font-size:1rem;margin: 0.25rem 0.125rem;cursor:pointer}
