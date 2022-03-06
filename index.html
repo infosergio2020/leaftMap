@@ -42,11 +42,11 @@
             <div class="wrapper">
                 <form>
                 <div role="search">
-                    <label class="search-label" for="search"><h2>Búsqueda de entrevistados</h2>
+                    <div class="search-label" for="search" tabindex="1"><h2>Búsqueda de entrevistados</h2>
                     <p id="error" role="alert"></p>
-                </label>
-                    <input id="search" class="search-input" type="text">
-                    <input class="button-search" type="button" value="Buscar">
+                    </div>
+                    <input id="search" class="search-input" tabindex="1" type="text">
+                    <input class="button-search" role="button" tabindex="1" type="button" value="Buscar">
                 </div>
                 </form>
             </div>
@@ -121,7 +121,7 @@
     <script defer src="./js/map.js" type="module"></script>
     <script defer src="./js/accordion.js"></script>
     <script defer src="./js/combobox.js" type="module"></script>
-    <script defer src="./js/search.js"></script>
+    <script defer src="./js/search.js" type="module"></script>
     <!-- scripts media player-->
     <script defer src="./js/strings.js"></script>
     <script src="./js/px-video.js"></script>

@@ -189,6 +189,31 @@ export function filterMarker(opcionName){
     }
     renameMarker(...itvwszone); 
 }
+
+export function filterMarker2(inputName){
+    console.log('filterMarker2 with option: '+inputName);
+    let elements = document.querySelectorAll(".leaflet-marker-icon");
+    itvwszone=[]; //vacio mi array,voy a ver si puedo reutilizarlo para esta fn
+    let j=0;
+    let ocurrencia; let input = '/'+inputName+'/gi';   
+    console.log(input) ;
+    for (let i = 0; i < elements.length; ++i) {   
+        ocurrencia = elements[i].dataset.nombre.replace("-"," ");
+        console.log(ocurrencia.match(input));
+        console.log(ocurrencia);
+        if (elements[i].dataset.nombre.localeCompare(inputName)==0){ //marcadores que SI COINCIDEN con NOMBRE, APELLIDO o AMBOS se muestran
+            elements[i].setAttribute("tabindex", i+2); 
+            elements[i].style.visibility='visible';
+            itvwszone[j]=elements[i];
+            j++;
+        }
+        else{ //Los marcadores que NO sean de la ZONA se esconden
+            elements[i].setAttribute("tabindex", '-1');
+            elements[i].style.visibility='hidden';
+        }
+    }
+    renameMarker(...itvwszone); 
+}
 /*
 * De acuerdo al boolean que le pase esconde o muestra los botones del media player 
 * opcion T: esconde

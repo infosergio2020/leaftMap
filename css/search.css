@@ -7,10 +7,10 @@
     padding: 0.3rem;
 }
 .button-search {
-    background: #0170bc;
+    background: #4CAF50;
     color: #fff;
     border: 0;
-    border-radius: 5px;
+    border-radius: 0.75rem;
     appearance: none;
     cursor: pointer;
     font-size: 16px;
@@ -18,10 +18,10 @@
     line-height: 1.3;
     border: 2px solid transparent;
 }
-.button-search:focus, .button-search:hover {
+.button-search:focus, .button-search:hover, button:focus, button:hover {
     outline: 0;
-    border-color: #015289;
-    background-color: #0161a3;
+    border-color: #4f9089;
+    background-color: #00695C;
     box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.63);
 }
 .search-label {
