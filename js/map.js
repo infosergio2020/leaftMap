@@ -187,6 +187,7 @@ export function filterMarker(opcionName){
      }
     }
     renameMarker(...itvwszone); 
+    return j; //si retorna 0 es que no hubo coincidencias
 }
 /**
  * Corrobora que la ocurrencia sea válida con un entrevistado. 
@@ -225,6 +226,7 @@ export function filterMarker2(inputName){
         }
     }
     renameMarker(...itvwszone); 
+    return j; //si retorna 0 es que no hubo coincidencias
 }
 /*
 * De acuerdo al boolean que le pase esconde o muestra los botones del media player 

@@ -35,7 +35,7 @@ function checkInput(e) {
       nombre_busqueda = nombre_busqueda.toLowerCase();
       console.log(nombre_busqueda);
       //Busco mediante la lista de nombres
-      filterMarker2(nombre_busqueda);
+      if (filterMarker2(nombre_busqueda)==0) console.log("no hubo coincidencias ):");
   }
 }
 input.setAttribute('aria-label','Escriba el nombre de la persona que desea buscar y luego presione Enter.');
