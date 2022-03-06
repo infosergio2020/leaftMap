@@ -98,13 +98,14 @@ footer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    height: auto;
     padding: 0.6rem;
 }
 .search{
     width: 50%;
 }
 .search-title {
-    padding: 0.3rem;
+    padding: 0.6rem;
 }
 .miheader {
     overflow: hidden;
