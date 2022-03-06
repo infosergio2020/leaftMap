@@ -102,8 +102,7 @@ function searchID(id){
 /***
  * Divide el texto pasado por parametro en un arreglo de cadenas
  */
-function decompose(text){
-    var separador = ".";
+function decompose(text,separador){
     return text.split(separador);
 }
 function noNull (item){
@@ -150,7 +149,7 @@ function assignedText(cadena){
 }
 /*Agrega a la variable titulos el nombre de la persona + zona */
 var agregoNombre = function(texto){
-    var cadena = decompose(texto);
+    var cadena = decompose(texto,".");
     if (noNull(cadena)){
         let reg = {nombre:cadena[0],zona:cadena[1]};
         titulos.push(reg);  
@@ -189,19 +188,32 @@ export function filterMarker(opcionName){
     }
     renameMarker(...itvwszone); 
 }
-
+/**
+ * Corrobora que la ocurrencia sea válida con un entrevistado. 
+ * No quiero llegar a Ej: si matcheo con una vocal 'a' me va a devolver todas las 'a' que encontró en el string.
+ * @param {*} coincidencias array del matcheo con todas las coincidencias
+ * @param marcador nombre del marcador leaflet 
+ * @returns true o false de acuerdo a si el elemento coincidió o no
+ */
+ function validarMatch(marcador,...coincidencias){
+    var cadena = decompose(marcador,"-");
+    var i = 0; var notfound=false;
+    while ((i<cadena.length)&&(!notfound)){ //comparo resultado del match con elemento leaflet
+      notfound= (cadena[i]==coincidencias[0]); i++; //Tomo la primera coincidencia porque el nombre de una persona no se repite 2 veces en 1 persona
+    } 
+    return notfound;
+}
 export function filterMarker2(inputName){
     console.log('filterMarker2 with option: '+inputName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     itvwszone=[]; //vacio mi array,voy a ver si puedo reutilizarlo para esta fn
     let j=0;
-    let ocurrencia; let input = '/'+inputName+'/gi';   
-    console.log(input) ;
+    let elementMarker; 
+    let input = new RegExp(inputName, 'i'); //convierto en un objeto RegExp ya que no permite concatenación ni vaariable para invocar al match()
     for (let i = 0; i < elements.length; ++i) {   
-        ocurrencia = elements[i].dataset.nombre.replace("-"," ");
-        console.log(ocurrencia.match(input));
-        console.log(ocurrencia);
-        if (elements[i].dataset.nombre.localeCompare(inputName)==0){ //marcadores que SI COINCIDEN con NOMBRE, APELLIDO o AMBOS se muestran
+        elementMarker = elements[i].dataset.nombre;
+         //match devuelve un array con las coincidencias
+        if (validarMatch(elementMarker,elementMarker.match(input))){ //marcadores que SI COINCIDEN con NOMBRE, APELLIDO o AMBOS se muestran
             elements[i].setAttribute("tabindex", i+2); 
             elements[i].style.visibility='visible';
             itvwszone[j]=elements[i];
@@ -280,7 +292,7 @@ var createMarker = function (latlng,texto){
         searchID('accordionGroup').style.visibility='visible';
         searchID('separator').style.visibility='visible';
         hideMediaplayer(false);
-        var cadena = decompose(texto);  
+        var cadena = decompose(texto,".");  
         assignedText(cadena); //+da focus al titulo de la info entrevistado
         console.log("Estoy en función click!!");
         //Inserto los cambios a media-player
@@ -344,7 +356,7 @@ var createMarker = function (latlng,texto){
 
 //Createm markers 14 
 //Nota: los avatars estan ordenados
-createMarker([-34.943566, -57.958339], `Benitez-Gabriela.Parque Castelli`);
+createMarker([-34.943566, -57.958339], `Benitez-Clara.Parque Castelli`);
 createMarker([-34.917228, -57.985247],'Carzolio-Clara.Estadio Maradona');
 createMarker([-34.957986, -57.977000],'Dominguez-Lujan.Los Hornos');
 createMarker([-34.900719, -57.980701],'Fernandez-Alejandro.Tolosa');
