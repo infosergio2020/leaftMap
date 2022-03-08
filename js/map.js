@@ -1,4 +1,5 @@
 import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
+import { Select } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
 let itvwszone;[]; //entrevistas por zona
@@ -157,6 +158,16 @@ var agregoNombre = function(texto){
     }
 } 
 /**
+ * Cargo opciones al segundo combobox 
+ * @param {*} itvwszone  entrevistados de zona seleccionada por filterMarker
+ */
+ function cargaElementos(...itvwszone){
+    const selectEls = document.querySelectorAll('.js-select2');
+    selectEls.forEach((el) => {
+        new Select(el,true, itvwszone);
+    });   
+}
+/**
  * agrega a alt el numero de entrevistas.. 1 de 4, 2 de 4.. etc
  * @param {*} itvwszone  entrevistados de zona seleccionada por filterMarker
  */
@@ -168,25 +179,48 @@ function renameMarker(...itvwszone){
         itvwszone[i].setAttribute('aria-label',add); 
     }
 }
-/*"Elimina o esconde aquellos marcadores que no pertenecen a la zona opcionName" */
-export function filterMarker(opcionName){
+/**
+ * Elimina o esconde aquellos marcadores que no pertenecen a la zona opcionName
+ * @param {*} opcionName opcion seleccionada por evento
+ * @param {*} opcList  boolean indica en el listbox que estoy posicionado: false-listbox1 true-listbox2
+ * @returns 
+ */
+export function filterMarker(opcionName,opcList){
     console.log('filterMarker with option: '+opcionName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     itvwszone=[]; //vacio mi array
     let j=0;
-    for (let i = 0; i < elements.length; ++i) {
-     if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
-        elements[i].setAttribute("tabindex", i+2); 
-        elements[i].style.visibility='visible';
-        itvwszone[j]=elements[i];
-        j++;
-     }
-     else{ //Los marcadores que NO sean de la ZONA se esconden
-        elements[i].setAttribute("tabindex", '-1');
-        elements[i].style.visibility='hidden';
-     }
+    if (!opcList){ //listbox 1 POR ZONA
+        for (let i = 0; i < elements.length; ++i) {
+            if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
+                elements[i].setAttribute("tabindex", i+2); 
+                elements[i].style.visibility='visible';
+                itvwszone[j]=elements[i];
+                j++;
+            }
+            else{ //Los marcadores que NO sean de la ZONA se esconden
+                elements[i].setAttribute("tabindex", '-1');
+                elements[i].style.visibility='hidden';
+            }
+        }
+    }
+    else{ //listbox 2 POR NOMBRE
+        for (let i = 0; i < elements.length; ++i) {
+            if ((opcionName == elements[i].dataset.nombre)){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
+                elements[i].setAttribute("tabindex", i+2); 
+                elements[i].style.visibility='visible';
+                itvwszone[j]=elements[i];
+                j++;
+            }
+            else{ //Los marcadores que NO sean de la ZONA se esconden
+                elements[i].setAttribute("tabindex", '-1');
+                elements[i].style.visibility='hidden';
+            }
+        }
     }
     renameMarker(...itvwszone); 
+    if (!opcList) //si es listbox1 cargo elementos al 2
+        cargaElementos(...itvwszone);
     return j; //si retorna 0 es que no hubo coincidencias
 }
 /**
