@@ -161,12 +161,11 @@ function maintainScrollVisibility(activeElement, scrollParent) {
     scrollParent.scrollTo(0, offsetTop - parentOffsetHeight + offsetHeight);
   }
 }
-
 /*
  * Selecciona componente
  * Accepts a combobox element and an array of string options / Acepta un elemento del combobox y opciones arreglo de strings 
  */
-export const Select = function (el,opc, options = []) {
+export const Select = function (el,options = []) {
   // element refs
   this.el = el;
   this.comboEl = el.querySelector('[role=combobox]');
@@ -181,50 +180,35 @@ export const Select = function (el,opc, options = []) {
   this.open = false;
   this.searchString = '';
   this.searchTimeout = null;
+  console.log("select");
 
-  // init de acuerdo a opc
+  // init
   if (el && this.comboEl && this.listboxEl) {
-    this.init(opc); //asigna a cada opcion de la lista una acción
+    this.init(); //asigna a cada opcion de la lista una acción
   }
 };
 
-Select.prototype.init = function (opc) {
+Select.prototype.init = function () {
   // selecciona la primera opcion por defecto
-  if (!opc)
-    this.comboEl.innerHTML = this.options[0];
-  else {
-    this.comboEl.innerHTML = this.options[0].alt;
-  }
+  this.comboEl.innerHTML = this.options[0];
   // añade eventos listeners - a la primera opcion por defecto 
-  this.comboEl.addEventListener('blur', this.onComboBlur.bind(this,opc));
+  this.comboEl.addEventListener('blur', this.onComboBlur.bind(this));
   this.comboEl.addEventListener('click', this.onComboClick.bind(this));
-  this.comboEl.addEventListener('keydown', this.onComboKeyDown.bind(this,opc));
+  this.comboEl.addEventListener('keydown', this.onComboKeyDown.bind(this));
 
-  // crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
-  //CUIDADO! depende si listbox es 1 o 2. Listbox1 false, listbox2 true
-  if (!opc){
-    this.options.map((option, index) => {
-      const optionEl = this.createOption(option, index,false);
-      this.listboxEl.appendChild(optionEl);
-    });
-  }
-  else{
-    this.options.map((option, index) => {
-      var renameOpt = option.alt.replace("-"," ");
-      const optionEl = this.createOption(option.alt, index,true);
-      console.log(option.alt);
-      this.listboxEl.appendChild(optionEl);
-    });    
-  }
+// crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
+  this.options.map((option, index) => {
+    const optionEl = this.createOption(option, index);
+    this.listboxEl.appendChild(optionEl);
+  });    
 };
 /**
  * Asigna a cada elemento del menu listbox un evento
  * @param {*} optionText elemento actual del listbox
  * @param {*} index indice del ele actual
- * @param {*} opcList boolean indica en el listbox que estoy posicionado: false-listbox1 true-listbox2
  * @returns 
  */
-Select.prototype.createOption = function (optionText, index, opcList) {
+Select.prototype.createOption = function (optionText, index) {
   const optionEl = document.createElement('div'); 
   optionEl.setAttribute('role', 'option');
   optionEl.id = `${this.idBase}-${index}`;
@@ -234,10 +218,10 @@ Select.prototype.createOption = function (optionText, index, opcList) {
   optionEl.innerText = optionText;
 
   optionEl.addEventListener('click', (event) => {
-    this.onOptionClick(index,opcList);
+    this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada
-    filterMarker(optionText,opcList);
+    filterMarker(optionText,false); //por ser listbox1
   });
   
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
@@ -261,7 +245,7 @@ Select.prototype.getSearchString = function (char) {
   return this.searchString;
 };
 
-Select.prototype.onComboBlur = function (event,opcList) {
+Select.prototype.onComboBlur = function () {
   // do not do blur action if ignoreBlur flag has been set
   if (this.ignoreBlur) {
     this.ignoreBlur = false;
@@ -270,7 +254,7 @@ Select.prototype.onComboBlur = function (event,opcList) {
 
   // select current option and close
   if (this.open) {
-    this.selectOption(this.activeIndex,opcList);
+    this.selectOption(this.activeIndex);
     this.updateMenuState(false, false);
   }
 };
@@ -279,7 +263,7 @@ Select.prototype.onComboClick = function () {
   this.updateMenuState(!this.open, false);
 };
 
-Select.prototype.onComboKeyDown = function (event,opcList) {
+Select.prototype.onComboKeyDown = function (event) {
   const { key } = event;
   const max = this.options.length - 1;
 
@@ -300,11 +284,11 @@ Select.prototype.onComboKeyDown = function (event,opcList) {
       );
     case SelectActions.CloseSelect:
       event.preventDefault();
-      this.selectOption(this.activeIndex,opcList);
+      this.selectOption(this.activeIndex);
     // intentional fallthrough
     case SelectActions.Close:
       event.preventDefault();
-      filterMarker(event.target.innerText);
+      filterMarker(event.target.innerText,false); //por ser listbox1
       return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
     case SelectActions.Type:
       return this.onComboType(key);
@@ -363,9 +347,9 @@ Select.prototype.onOptionChange = function (index) {
   }
 };
 
-Select.prototype.onOptionClick = function (index,opcList) {
+Select.prototype.onOptionClick = function (index) {
   this.onOptionChange(index);
-  this.selectOption(index,opcList);
+  this.selectOption(index);
   this.updateMenuState(false);
 };
 
@@ -375,17 +359,14 @@ Select.prototype.onOptionMouseDown = function () {
   this.ignoreBlur = true;
 };
 
-Select.prototype.selectOption = function (index,opcList) {
+Select.prototype.selectOption = function (index) {
   // update state
   this.activeIndex = index;
 
   // actualiza el elemento seleccionado al combobox
   //como reutilizo funciones tengo que fijarme si es listbox1 o 2 mediante un flag
   const selected = this.options[index];
-  if (opcList)
-    this.comboEl.innerHTML = selected.alt; //si es listbox2
-  else this.comboEl.innerHTML = selected;
-
+  this.comboEl.innerHTML = selected;
   // update aria-selected
   const options = this.el.querySelectorAll('[role=option]');
   [...options].forEach((optionEl) => {
@@ -439,6 +420,246 @@ window.addEventListener('load', function () {
   const selectEls = document.querySelectorAll('.js-select');
 
   selectEls.forEach((el) => {
-    new Select(el,false, options);
+    new Select(el, options);
   });
 });
+
+//COMBO2 
+/*
+ * Selecciona componente
+ * Accepts a combobox element and an array of string options / Acepta un elemento del combobox y opciones arreglo de strings 
+ */
+export const Select2 = function (el, options = []) {
+  // element refs
+  this.el = el;
+  this.comboEl = el.querySelector('[role=combobox]');
+  this.listboxEl = el.querySelector('[role=listbox]');
+
+  // data
+  this.idBase = this.comboEl.id || 'combo';
+  this.options = options; //con esto se lo asigna al elemento, asi ya no necesito el pasaje de parms
+
+  // state
+  this.activeIndex = 0;
+  this.open = false;
+  this.searchString = '';
+  this.searchTimeout = null;
+  console.log("select");
+
+  // init de acuerdo a opc
+  if (el && this.comboEl && this.listboxEl) {
+    this.init(); //asigna a cada opcion de la lista una acción
+  }
+};
+
+Select2.prototype.init = function () {
+  // selecciona la primera opcion por defecto
+  this.comboEl.innerHTML = this.options[0].alt;
+  // añade eventos listeners - a la primera opcion por defecto 
+  this.comboEl.addEventListener('blur', this.onComboBlur.bind(this));
+  this.comboEl.addEventListener('click', this.onComboClick.bind(this));
+  this.comboEl.addEventListener('keydown', this.onComboKeyDown.bind(this));
+
+  // crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
+  this.options.map((option, index) => {
+    const optionEl = this.createOption(option.alt, index);
+    this.listboxEl.appendChild(optionEl);
+  });
+};
+/**
+ * Asigna a cada elemento del menu listbox un evento
+ * @param {*} optionText elemento actual del listbox
+ * @param {*} index indice del ele actual
+ * @returns 
+ */
+Select2.prototype.createOption = function (optionText, index) {
+  const optionEl = document.createElement('div'); 
+  optionEl.setAttribute('role', 'option');
+  optionEl.id = `${this.idBase}-${index}`;
+  optionEl.className =
+    index === 0 ? 'combo-option option-current' : 'combo-option';
+  optionEl.setAttribute('aria-selected', `${index === 0}`);
+  optionEl.innerText = optionText;
+
+  optionEl.addEventListener('click', (event) => {
+    console.log("evento click");
+    this.onOptionClick(index);
+    console.log(index); //indice de la lista de zonas index=1 Tolosa
+    console.log(optionText); //nombre de la opcion seleccionada
+    filterMarker(optionText,true); //por ser listbox2
+  });
+  
+  optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
+
+  return optionEl;
+};
+
+Select2.prototype.getSearchString = function (char) {
+  // reset typing timeout and start new timeout
+  // this allows us to make multiple-letter matches, like a native select
+  if (typeof this.searchTimeout === 'number') {
+    window.clearTimeout(this.searchTimeout);
+  }
+
+  this.searchTimeout = window.setTimeout(() => {
+    this.searchString = '';
+  }, 500);
+
+  // add most recent letter to saved search string
+  this.searchString += char;
+  return this.searchString;
+};
+
+Select2.prototype.onComboBlur = function () {
+  // do not do blur action if ignoreBlur flag has been set
+  if (this.ignoreBlur) {
+    this.ignoreBlur = false;
+    return;
+  }
+
+  // select current option and close
+  if (this.open) {
+    this.selectOption(this.activeIndex);
+    this.updateMenuState(false, false);
+  }
+};
+//Click al primer elemento del combobox 
+Select2.prototype.onComboClick = function () {
+  this.updateMenuState(!this.open, false);
+};
+
+Select2.prototype.onComboKeyDown = function (event) {
+  const { key } = event;
+  const max = this.options.length - 1;
+
+  const action = getActionFromKey(event, this.open);
+  //invoco a la función 
+  switch (action) {
+    case SelectActions.Last:
+    case SelectActions.First:
+      this.updateMenuState(true);
+    // intentional fallthrough
+    case SelectActions.Next:
+    case SelectActions.Previous:
+    case SelectActions.PageUp:
+    case SelectActions.PageDown:
+      event.preventDefault();
+      return this.onOptionChange(
+        getUpdatedIndex(this.activeIndex, max, action)
+      );
+    case SelectActions.CloseSelect:
+      event.preventDefault();
+      this.selectOption(this.activeIndex);
+    // intentional fallthrough
+    case SelectActions.Close:
+      event.preventDefault();
+      filterMarker(event.target.innerText,true); //por ser listbox2
+      return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
+    case SelectActions.Type:
+      return this.onComboType(key);
+    case SelectActions.Open:
+      event.preventDefault();
+      return this.updateMenuState(true);
+  }
+};
+
+Select2.prototype.onComboType = function (letter) {
+  // open the listbox if it is closed
+  this.updateMenuState(true);
+
+  // find the index of the first matching option
+  const searchString = this.getSearchString(letter);
+  const searchIndex = getIndexByLetter(
+    this.options,
+    searchString,
+    this.activeIndex + 1
+  );
+
+  // if a match was found, go to it
+  if (searchIndex >= 0) {
+    this.onOptionChange(searchIndex);
+  }
+  // if no matches, clear the timeout and search string
+  else {
+    window.clearTimeout(this.searchTimeout);
+    this.searchString = '';
+  }
+};
+
+Select2.prototype.onOptionChange = function (index) {
+  // update state
+  this.activeIndex = index;
+
+  // update aria-activedescendant
+  this.comboEl.setAttribute('aria-activedescendant', `${this.idBase}-${index}`);
+
+  // update active option styles
+  const options = this.el.querySelectorAll('[role=option]');
+  [...options].forEach((optionEl) => {
+    optionEl.classList.remove('option-current');
+  });
+  options[index].classList.add('option-current');
+
+  // ensure the new option is in view
+  if (isScrollable(this.listboxEl)) {
+    maintainScrollVisibility(options[index], this.listboxEl);
+  }
+
+  // ensure the new option is visible on screen
+  // ensure the new option is in view
+  if (!isElementInView(options[index])) {
+    options[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+};
+
+Select2.prototype.onOptionClick = function (index) {
+  this.onOptionChange(index);
+  this.selectOption(index);
+  this.updateMenuState(false);
+};
+
+Select2.prototype.onOptionMouseDown = function () {
+  // Clicking an option will cause a blur event,
+  // but we don't want to perform the default keyboard blur action
+  this.ignoreBlur = true;
+};
+
+Select2.prototype.selectOption = function (index) {
+  // update state
+  this.activeIndex = index;
+
+  // actualiza el elemento seleccionado al combobox
+  //como reutilizo funciones tengo que fijarme si es listbox1 o 2 mediante un flag
+  const selected = this.options[index];
+  this.comboEl.innerHTML = selected.alt; //si es listbox2
+  // update aria-selected
+  const options = this.el.querySelectorAll('[role=option]');
+  [...options].forEach((optionEl) => {
+    optionEl.setAttribute('aria-selected', 'false');
+  });
+  options[index].setAttribute('aria-selected', 'true');
+};
+
+Select2.prototype.updateMenuState = function (open, callFocus = true) {
+  if (this.open === open) {
+    return;
+  }
+
+  // update state
+  this.open = open;
+
+  // update aria-expanded and styles
+  this.comboEl.setAttribute('aria-expanded', `${open}`);
+  open ? this.el.classList.add('open') : this.el.classList.remove('open');
+
+  // update activedescendant
+  const activeID = open ? `${this.idBase}-${this.activeIndex}` : '';
+  this.comboEl.setAttribute('aria-activedescendant', activeID);
+
+  if (activeID === '' && !isElementInView(this.comboEl)) {
+    this.comboEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // move focus back to the combobox, if needed
+  callFocus && this.comboEl.focus();
+};

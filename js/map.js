@@ -1,5 +1,5 @@
 import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
-import { Select } from "./combobox.js";
+import { Select2 } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
 let itvwszone;[]; //entrevistas por zona
@@ -158,13 +158,25 @@ var agregoNombre = function(texto){
     }
 } 
 /**
+ * Limpia los hijos de listbox2 en el caso de que hubiera algo cargado anteriormente
+ * Nota de yani: esta funcion deberia ser invocada del combobx2.js
+ */
+function clearListbox2(){
+    console.log("clearList2");
+    var elemBefore = document.getElementById('listbox2');
+    console.log(elemBefore);  
+    while (elemBefore.hasChildNodes())
+      elemBefore.removeChild(elemBefore.firstChild);
+  }
+/**
  * Cargo opciones al segundo combobox 
  * @param {*} itvwszone  entrevistados de zona seleccionada por filterMarker
  */
  function cargaElementos(...itvwszone){
     const selectEls = document.querySelectorAll('.js-select2');
+    clearListbox2();
     selectEls.forEach((el) => {
-        new Select(el,true, itvwszone);
+        new Select2(el, itvwszone);
     });   
 }
 /**
