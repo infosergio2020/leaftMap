@@ -180,7 +180,6 @@ export const Select = function (el,options = []) {
   this.open = false;
   this.searchString = '';
   this.searchTimeout = null;
-  console.log("select");
 
   // init
   if (el && this.comboEl && this.listboxEl) {
@@ -444,8 +443,7 @@ export const Select2 = function (el, options = []) {
   this.open = false;
   this.searchString = '';
   this.searchTimeout = null;
-  console.log("select");
-
+  
   // init de acuerdo a opc
   if (el && this.comboEl && this.listboxEl) {
     this.init(); //asigna a cada opcion de la lista una acción
@@ -482,7 +480,6 @@ Select2.prototype.createOption = function (optionText, index) {
   optionEl.innerText = optionText;
 
   optionEl.addEventListener('click', (event) => {
-    console.log("evento click");
     this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada
