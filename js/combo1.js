@@ -18,6 +18,21 @@ const SelectActions = {
   Type: 10,
 };
 
+const fruit = [
+  'Naranja',
+  'Manzana',
+  'Frutilla',
+  'Durazno',
+  'Sandia'
+];
+const vegetable = [
+  'Brocoli',
+  'Acelga',
+  'Apio'
+]
+const colors = [
+  'Magenta'
+]
 /*
  * Helper functions
  */
@@ -215,6 +230,7 @@ Select.prototype.createOption = function (optionText, index) {
     this.onOptionClick(index);
     console.log(index); //indice de la lista de zonas index=1 Tolosa
     console.log(optionText); //nombre de la opcion seleccionada
+    cargaCombo2(optionText);
   });
   
   optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
@@ -393,32 +409,278 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 // init select
 window.addEventListener('load', function () {
   const options = [
-    'Elija una zona',
-    'COMBO 1',
-    'Todas las zonas',
-    'Tolosa',
-    'Cementerio',
-    'Barrio Norte',
-    'Barrio Jardín',
-    'Los Hornos',
-    'Parque Castelli',
-    'Villa Elvira',
-    'Altos de San Lorenzo',
-    'Estadio Maradona',
-    'Ringuelet',
-    'Berisso',
-    'Huckleberry',
+    'Frutas',
+    'Verduras',
+    'Colores',
   ];
   const selectEls = document.querySelectorAll('.js-select');
 
   selectEls.forEach((el) => {
     new Select(el, options);
   });
-  console.log("COMBO");
-  var div = L.DomUtil.get('listbox1');
-  div.firstChild.onmousedown = div.firstChild.ondblclick = L.DomEvent.stopPropagation;
-  L.DomEvent.disableClickPropagation(div);
-  L.DomEvent.on(div, 'scroll', L.DomEvent.stopPropagation); 
-  div = L.DomUtil.get('listbox1');
-  L.DomEvent.disableClickPropagation(div);
 });
+
+function clearListbox2(){
+  console.log("clearList2");
+  var elemBefore = document.getElementById('listbox2');
+  while (elemBefore.hasChildNodes())
+    elemBefore.removeChild(elemBefore.firstChild);
+  console.log(elemBefore);
+}
+
+function clearCombo2(){
+  
+}
+function cargaCombo2(opcionS){
+  clearListbox2();
+  const selectEls = document.querySelectorAll('.js-select2');
+  
+  var elemChild = document.getElementById('combo2');
+  elemChild.remove();
+  const crearCombo = document.createElement('div'); 
+  crearCombo.setAttribute('aria-controls','listbox'); 
+  crearCombo.setAttribute('aria-expanded','false');
+  crearCombo.setAttribute('aria-haspopup','listbox');
+  crearCombo.setAttribute('aria-labelledby','combo1-label');
+  crearCombo.setAttribute('id','combo2');
+  crearCombo.setAttribute('class','combo-input');
+  crearCombo.setAttribute('role','combobox');
+  crearCombo.setAttribute('tabindex','1');
+  console.log(crearCombo);
+  selectEls[0].appendChild(crearCombo);
+
+  if (opcionS != null){
+      if (opcionS=='Frutas') selectEls.forEach((el) => { new Select2(el, fruit);});
+      else if (opcionS=='Verduras') selectEls.forEach((el) => { new Select2(el, vegetable);});
+      else if (opcionS=='Colores') selectEls.forEach((el) => { new Select2(el, colors);});
+  }
+}
+
+/*
+ * Selecciona componente
+ * Accepts a combobox element and an array of string options / Acepta un elemento del combobox y opciones arreglo de strings 
+ */
+const Select2 = function (el, options = []) {
+  // element refs
+  this.el = el;
+  this.comboEl = el.querySelector('[role=combobox]');
+  this.listboxEl = el.querySelector('[role=listbox]');
+
+  // data
+  this.idBase = this.comboEl.id || 'combo';
+  this.options = options;
+
+  // state
+  this.activeIndex = 0;
+  this.open = false;
+  this.searchString = '';
+  this.searchTimeout = null;
+
+  // init
+  if (el && this.comboEl && this.listboxEl) {
+    this.init(); //asigna a cada opcion de la lista una acción
+  }
+};
+
+Select2.prototype.init = function () {
+  // selecciona la primera opcion por defecto
+  this.comboEl.innerHTML = "";
+  // añade eventos listeners - a la primera opcion por defecto 
+  this.comboEl.addEventListener('blur', this.onComboBlur.bind(this));
+  this.comboEl.addEventListener('click', this.onComboClick.bind(this));
+  this.comboEl.addEventListener('keydown', this.onComboKeyDown.bind(this));
+
+  // crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
+  this.options.map((option, index) => {
+    const optionEl = this.createOption(option, index);
+    this.listboxEl.appendChild(optionEl);
+  });
+};
+
+Select2.prototype.createOption = function (optionText, index) {
+  const optionEl = document.createElement('div'); 
+  optionEl.setAttribute('role', 'option');
+  optionEl.id = `${this.idBase}-${index}`;
+  optionEl.className =
+    index === 0 ? 'combo-option option-current' : 'combo-option';
+  optionEl.setAttribute('aria-selected', `${index === 0}`);
+  optionEl.innerText = optionText;
+
+  optionEl.addEventListener('click', (event) => {
+    this.onOptionClick(index);
+    console.log(index); //indice de la lista de zonas index=1 Tolosa
+    console.log(optionText); //nombre de la opcion seleccionada
+  });
+  
+  optionEl.addEventListener('mousedown', this.onOptionMouseDown.bind(this));
+
+  return optionEl;
+};
+
+Select2.prototype.getSearchString = function (char) {
+  // reset typing timeout and start new timeout
+  // this allows us to make multiple-letter matches, like a native select
+  if (typeof this.searchTimeout === 'number') {
+    window.clearTimeout(this.searchTimeout);
+  }
+
+  this.searchTimeout = window.setTimeout(() => {
+    this.searchString = '';
+  }, 500);
+
+  // add most recent letter to saved search string
+  this.searchString += char;
+  return this.searchString;
+};
+Select2.prototype.onComboBlur = function () {
+  // do not do blur action if ignoreBlur flag has been set
+    if (this.ignoreBlur) {
+      this.ignoreBlur = false; 
+      return;
+    }
+    // select current option and close
+    if (this.open) {
+      this.selectOption(this.activeIndex);
+      this.updateMenuState(false, false);
+    }
+};
+//Click al primer elemento del combobox 
+Select2.prototype.onComboClick = function (event) {
+  //console.log(event);
+  //var a = document.getElementById('listbox1');
+  //a.trigger('click');
+  this.updateMenuState(!this.open, true);
+};
+
+Select2.prototype.onComboKeyDown = function (event) {
+  const { key } = event;
+  const max = this.options.length - 1;
+
+  const action = getActionFromKey(event, this.open);
+  //invoco a la función 
+  switch (action) {
+    case SelectActions.Last:
+    case SelectActions.First:
+      this.updateMenuState(true);
+    // intentional fallthrough
+    case SelectActions.Next:
+    case SelectActions.Previous:
+    case SelectActions.PageUp:
+    case SelectActions.PageDown:
+      event.preventDefault();
+      return this.onOptionChange(
+        getUpdatedIndex(this.activeIndex, max, action)
+      );
+    case SelectActions.CloseSelect:
+      event.preventDefault();
+      this.selectOption(this.activeIndex);
+    // intentional fallthrough
+    case SelectActions.Close:
+      event.preventDefault();
+      return this.updateMenuState(false); //Solo cuando cierro el combobox, invoco a la función filterMarker
+    case SelectActions.Type:
+      return this.onComboType(key);
+    case SelectActions.Open:
+      event.preventDefault();
+      return this.updateMenuState(true);
+  }
+};
+
+Select2.prototype.onComboType = function (letter) {
+  // open the listbox if it is closed
+  this.updateMenuState(true);
+
+  // find the index of the first matching option
+  const searchString = this.getSearchString(letter);
+  const searchIndex = getIndexByLetter(
+    this.options,
+    searchString,
+    this.activeIndex + 1
+  );
+
+  // if a match was found, go to it
+  if (searchIndex >= 0) {
+    this.onOptionChange(searchIndex);
+  }
+  // if no matches, clear the timeout and search string
+  else {
+    window.clearTimeout(this.searchTimeout);
+    this.searchString = '';
+  }
+};
+
+Select2.prototype.onOptionChange = function (index) {
+  // update state
+  this.activeIndex = index;
+
+  // update aria-activedescendant
+  this.comboEl.setAttribute('aria-activedescendant', `${this.idBase}-${index}`);
+
+  // update active option styles
+  const options = this.el.querySelectorAll('[role=option]');
+  [...options].forEach((optionEl) => {
+    optionEl.classList.remove('option-current');
+  });
+  options[index].classList.add('option-current');
+
+  // ensure the new option is in view
+  if (isScrollable(this.listboxEl)) {
+    maintainScrollVisibility(options[index], this.listboxEl);
+  }
+
+  // ensure the new option is visible on screen
+  // ensure the new option is in view
+  if (!isElementInView(options[index])) {
+    options[index].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+};
+//click en un elemento del listbox1 - evento
+Select2.prototype.onOptionClick = function (index) {
+  this.onOptionChange(index);
+  this.selectOption(index);
+  this.updateMenuState(false);
+};
+
+Select2.prototype.onOptionMouseDown = function () {
+  // Clicking an option will cause a blur event,
+  // but we don't want to perform the default keyboard blur action
+    this.ignoreBlur = true; //Selecciona una opción de la lista - flag ignoreBlur
+};
+
+Select2.prototype.selectOption = function (index) {
+  // update state
+  this.activeIndex = index;
+
+  // update displayed value
+  const selected = this.options[index];
+  this.comboEl.innerHTML = selected;
+
+  // update aria-selected
+  const options = this.el.querySelectorAll('[role=option]');
+  [...options].forEach((optionEl) => {
+    optionEl.setAttribute('aria-selected', 'false');
+  });
+  options[index].setAttribute('aria-selected', 'true');
+};
+
+Select2.prototype.updateMenuState = function (open, callFocus = true) {
+  if (this.open === open) {
+    return;
+  }
+
+  // update state
+  this.open = open;
+  // update aria-expanded and styles
+  this.comboEl.setAttribute('aria-expanded', `${open}`);
+  open ? this.el.classList.add('open') : this.el.classList.remove('open');
+
+  // update activedescendant
+  const activeID = open ? `${this.idBase}-${this.activeIndex}` : '';
+  this.comboEl.setAttribute('aria-activedescendant', activeID);
+
+  if (activeID === '' && !isElementInView(this.comboEl)) {
+    this.comboEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+  // move focus back to the combobox, if needed
+  callFocus && this.comboEl.focus();
+};
