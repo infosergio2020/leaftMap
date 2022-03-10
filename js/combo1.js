@@ -429,12 +429,7 @@ function clearListbox2(){
 }
 
 function clearCombo2(){
-  
-}
-function cargaCombo2(opcionS){
-  clearListbox2();
   const selectEls = document.querySelectorAll('.js-select2');
-  
   var elemChild = document.getElementById('combo2');
   elemChild.remove();
   const crearCombo = document.createElement('div'); 
@@ -446,9 +441,12 @@ function cargaCombo2(opcionS){
   crearCombo.setAttribute('class','combo-input');
   crearCombo.setAttribute('role','combobox');
   crearCombo.setAttribute('tabindex','1');
-  console.log(crearCombo);
   selectEls[0].appendChild(crearCombo);
-
+}
+function cargaCombo2(opcionS){
+  clearListbox2();
+  clearCombo2();
+  const selectEls = document.querySelectorAll('.js-select2');
   if (opcionS != null){
       if (opcionS=='Frutas') selectEls.forEach((el) => { new Select2(el, fruit);});
       else if (opcionS=='Verduras') selectEls.forEach((el) => { new Select2(el, vegetable);});

@@ -168,13 +168,30 @@ function clearListbox2(){
     while (elemBefore.hasChildNodes())
       elemBefore.removeChild(elemBefore.firstChild);
   }
+function clearCombo2(){
+    const selectEls = document.querySelectorAll('.js-select2');
+    var elemChild = document.getElementById('combo2');
+    elemChild.remove();
+    const crearCombo = document.createElement('div'); 
+    crearCombo.setAttribute('aria-controls','listbox'); 
+    crearCombo.setAttribute('aria-expanded','false');
+    crearCombo.setAttribute('aria-haspopup','listbox');
+    crearCombo.setAttribute('aria-labelledby','combo1-label');
+    crearCombo.setAttribute('id','combo2');
+    crearCombo.setAttribute('class','combo-input');
+    crearCombo.setAttribute('role','combobox');
+    crearCombo.setAttribute('tabindex','1');
+    if (selectEls != null)
+        selectEls[0].appendChild(crearCombo);
+}
 /**
  * Cargo opciones al segundo combobox 
  * @param {*} itvwszone  entrevistados de zona seleccionada por filterMarker
  */
  function cargaElementos(...itvwszone){
-    const selectEls = document.querySelectorAll('.js-select2');
     clearListbox2();
+    clearCombo2();
+    const selectEls = document.querySelectorAll('.js-select2');
     selectEls.forEach((el) => {
         new Select2(el, itvwszone);
     });   
@@ -233,45 +250,6 @@ export function filterMarker(opcionName,opcList){
     renameMarker(...itvwszone); 
     if (!opcList) //si es listbox1 cargo elementos al 2
         cargaElementos(...itvwszone);
-    return j; //si retorna 0 es que no hubo coincidencias
-}
-/**
- * Corrobora que la ocurrencia sea válida con un entrevistado. 
- * No quiero llegar a Ej: si matcheo con una vocal 'a' me va a devolver todas las 'a' que encontró en el string.
- * @param {*} coincidencias array del matcheo con todas las coincidencias
- * @param marcador nombre del marcador leaflet 
- * @returns true o false de acuerdo a si el elemento coincidió o no
- */
- function validarMatch(marcador,...coincidencias){
-    var cadena = decompose(marcador,"-");
-    var i = 0; var notfound=false;
-    while ((i<cadena.length)&&(!notfound)){ //comparo resultado del match con elemento leaflet
-      notfound= (cadena[i]==coincidencias[0]); i++; //Tomo la primera coincidencia porque el nombre de una persona no se repite 2 veces en 1 persona
-    } 
-    return notfound;
-}
-export function filterMarker2(inputName){
-    console.log('filterMarker2 with option: '+inputName);
-    let elements = document.querySelectorAll(".leaflet-marker-icon");
-    itvwszone=[]; //vacio mi array,voy a ver si puedo reutilizarlo para esta fn
-    let j=0;
-    let elementMarker; 
-    let input = new RegExp(inputName, 'i'); //convierto en un objeto RegExp ya que no permite concatenación ni vaariable para invocar al match()
-    for (let i = 0; i < elements.length; ++i) {   
-        elementMarker = elements[i].dataset.nombre;
-         //match devuelve un array con las coincidencias
-        if (validarMatch(elementMarker,elementMarker.match(input))){ //marcadores que SI COINCIDEN con NOMBRE, APELLIDO o AMBOS se muestran
-            elements[i].setAttribute("tabindex", i+2); 
-            elements[i].style.visibility='visible';
-            itvwszone[j]=elements[i];
-            j++;
-        }
-        else{ //Los marcadores que NO sean de la ZONA se esconden
-            elements[i].setAttribute("tabindex", '-1');
-            elements[i].style.visibility='hidden';
-        }
-    }
-    renameMarker(...itvwszone); 
     return j; //si retorna 0 es que no hubo coincidencias
 }
 /*
