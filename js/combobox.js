@@ -401,7 +401,6 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 // init select
 window.addEventListener('load', function () {
   const options = [
-    'Elija una zona',
     'Todas las zonas',
     'Tolosa',
     'Cementerio',
@@ -414,16 +413,17 @@ window.addEventListener('load', function () {
     'Estadio Maradona',
     'Ringuelet',
     'Berisso',
-    'Huckleberry',
+    'Villa Arguello',
   ];
   const selectEls = document.querySelectorAll('.js-select');
 
   selectEls.forEach((el) => {
     new Select(el, options);
   });
+  filterMarker("Todas las zonas",false)
 });
 
-//COMBO2 
+//COMPONENTE COMBOBOX2
 /*
  * Selecciona componente
  * Accepts a combobox element and an array of string options / Acepta un elemento del combobox y opciones arreglo de strings 
@@ -452,7 +452,7 @@ export const Select2 = function (el, options = []) {
 
 Select2.prototype.init = function () {
   // selecciona la primera opcion por defecto
-  this.comboEl.innerHTML = this.options[0].alt;
+  this.comboEl.innerHTML = this.options[0]; //No coloco alt porque el primer elem es "Todos los nombres" SIEMPRE
   // añade eventos listeners - a la primera opcion por defecto 
   this.comboEl.addEventListener('blur', this.onComboBlur.bind(this));
   this.comboEl.addEventListener('click', this.onComboClick.bind(this));
@@ -460,7 +460,8 @@ Select2.prototype.init = function () {
 
   // crea opciones: recorre toda la lista de opciones y por cada una asigna createOption
   this.options.map((option, index) => {
-    const optionEl = this.createOption(option.alt, index);
+    var optionEl=0;
+    index == 0 ? optionEl = this.createOption(option,index) : optionEl = this.createOption(option.alt, index);
     this.listboxEl.appendChild(optionEl);
   });
 };
@@ -628,7 +629,7 @@ Select2.prototype.selectOption = function (index) {
   // actualiza el elemento seleccionado al combobox
   //como reutilizo funciones tengo que fijarme si es listbox1 o 2 mediante un flag
   const selected = this.options[index];
-  this.comboEl.innerHTML = selected.alt; //si es listbox2
+  index == 0 ? this.comboEl.innerHTML = selected : this.comboEl.innerHTML = selected.alt  //si es listbox2
   // update aria-selected
   const options = this.el.querySelectorAll('[role=option]');
   [...options].forEach((optionEl) => {

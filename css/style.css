@@ -101,7 +101,7 @@ footer{
     height: auto;
     padding: 0.6rem;
 }
-.search{
+.search,.search2{
     width: 50%;
 }
 .search-title {
@@ -186,7 +186,7 @@ footer{
         flex-direction: column;
         flex-wrap: wrap;
     }
-    .search{
+    .search,.search2{
         width: 100%;
     }
 }

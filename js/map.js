@@ -4,7 +4,6 @@ import { Select2 } from "./combobox.js";
 var idioma = localStorage.getItem("IDIOMA");
 let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
-var usados=[]; //para el nro aleatorio
 let introtext;
 //Cambio de idioma
 if (idioma == "EN"){
@@ -191,6 +190,9 @@ function clearCombo2(){
  function cargaElementos(...itvwszone){
     clearListbox2();
     clearCombo2();
+    //Agrego la opcion "Todos los nombres"
+    itvwszone.unshift('Todos los nombres');
+    console.log(itvwszone);
     const selectEls = document.querySelectorAll('.js-select2');
     selectEls.forEach((el) => {
         new Select2(el, itvwszone);
@@ -214,14 +216,16 @@ function renameMarker(...itvwszone){
  * @param {*} opcList  boolean indica en el listbox que estoy posicionado: false-listbox1 true-listbox2
  * @returns 
  */
+let currentZone = ""; //Zona actual, esto es para mantener los nombres de ese lugar
 export function filterMarker(opcionName,opcList){
     console.log('filterMarker with option: '+opcionName);
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     itvwszone=[]; //vacio mi array
     let j=0;
-    if (!opcList){ //listbox 1 POR ZONA
+    if ((!opcList)||(opcionName=="Todos los nombres")){ //listbox 1 POR ZONA o bien se eligió en combo2 todos los nombres
+        if (!opcList) currentZone = opcionName; //update zone
         for (let i = 0; i < elements.length; ++i) {
-            if ((opcionName == elements[i].dataset.zona)||(opcionName == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
+            if ((currentZone == elements[i].dataset.zona)||(currentZone == 'Todas las zonas')){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
                 elements[i].setAttribute("tabindex", i+2); 
                 elements[i].style.visibility='visible';
                 itvwszone[j]=elements[i];
@@ -235,13 +239,13 @@ export function filterMarker(opcionName,opcList){
     }
     else{ //listbox 2 POR NOMBRE
         for (let i = 0; i < elements.length; ++i) {
-            if ((opcionName == elements[i].dataset.nombre)){ //marcadores que SI PERTENECEN A LA ZONA se vuelven a mostrar
+            if (opcionName == elements[i].dataset.nombre){ //marcador que COINCIDEN CON EL NOMBRE se muestra
                 elements[i].setAttribute("tabindex", i+2); 
                 elements[i].style.visibility='visible';
                 itvwszone[j]=elements[i];
                 j++;
             }
-            else{ //Los marcadores que NO sean de la ZONA se esconden
+            else{ //Los marcadores que NO COINCIDAN CON EL NOMBRE se esconden
                 elements[i].setAttribute("tabindex", '-1');
                 elements[i].style.visibility='hidden';
             }
