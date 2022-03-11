@@ -420,7 +420,7 @@ window.addEventListener('load', function () {
   selectEls.forEach((el) => {
     new Select(el, options);
   });
-  filterMarker("Todas las zonas",false)
+  filterMarker("Todas las zonas",false); //simular el primer filtro para cargar todas las zonas con todos los nombres
 });
 
 //COMPONENTE COMBOBOX2

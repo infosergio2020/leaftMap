@@ -23,9 +23,9 @@
 </head>
 <body>
         <div class="miheader">
-            <a tabindex="1" id="inicio" class="accesible" aria-label=""><h1>Testimonials map</h1></a> <!--Mapa de entrevistados   - A continuación se listas las 6 entrevistas en el mapa de entrevistados-->
+            <a tabindex="1" id="inicio" class="accesible" aria-label=""><h1>Mapa de entrevistados</h1></a> <!--Mapa de entrevistados   - A continuación se listas las 6 entrevistas en el mapa de entrevistados-->
             <div class="header-right">     
-                <a tabindex="1" role="button" href="language.html" class="button" aria-label="Haga click para cambiar el idioma de la página">Language</a>
+                <a tabindex="1" role="button" href="language.html" class="button" aria-label="Haga click para cambiar el idioma de la página">Idioma</a>
             </div>
         </div>
         <div class="group-search">
@@ -52,19 +52,19 @@
         <section class="home">
             <div id="mapid"></div>
             <div id="desc">
-                <h1 id="title-info">Interviewee information</h1> <!-- Información del entrevistado-->
+                <h1 id="title-info">Acceso a la entrevista</h1> <!--  -->
                 
                 <br>
                 <div id="info" aria-hidden="true">
                     <div class="centrar">
-                        <h1 class="text" id="tituloinicial" aria-hidden="true">Click on an avatar on the map to get more information about it.</h1>   <!-- Haga click en alguna persona dentro del mapa para obtener mas información de la misma.-->
+                        <h1 class="text" id="tituloinicial" aria-hidden="true">Haga click en alguna persona dentro del mapa para obtener mas información de la misma.</h1>   <!--Click on an avatar on the map to get more information about it.-->
                     </div>
                     <div class="centrar text">
-                        <h1 tabindex="0" for="name" id="label1" style="visibility:hidden">Interview to </h1>
+                        <h1 tabindex="0" for="name" id="label1" style="visibility:hidden">Entrevista a </h1> <!--Interview to-->
                        <!-- <h1 id="texto0" tabindex="0" class="text"></h1> -->
                     </div>
                     <div class="centrar text">
-                        <h1 tabindex="0" for="name" id="label2" style="visibility:hidden">From </h1>
+                        <h1 tabindex="0" for="name" id="label2" style="visibility:hidden">De </h1> 
                         <!--<h1 id="texto1" class="text" tabindex="0"></h1>-->
                     </div>
                     <div class="centrar">
@@ -73,7 +73,7 @@
                         Mas información de la zona
                         </button>
                         <div id="accordion-section-1" class="accordion__section" aria-hidden="true">
-                        <h1>Situación al 2 de abril del 2013</h1>
+                        <h1>Situación al 2 de abril del 2013</h1> <!--informacion por defecto-->
                         <p>
                             Esta zona registró en algunos sectores un nivel de severidad Leve.
                         </p>  
@@ -90,7 +90,7 @@
                     </div>
                     </div>
                     <hr role=”separator” id="separator" style="visibility: hidden;"> 
-                    <!--Accesible Media Player: por defecto no tiene nada y esta en ingles-->
+                    <!--Accesible Media Player: por defecto no tiene nada y esta en español-->
                     <div id="mediaplayer">
                     <div class="px-video-container" id="video" style="display: none;">
                         <div class="px-video-img-captions-container">  
@@ -98,20 +98,20 @@
                             <video class="px-video" poster="media/foo.jpg" controls preload="none">
                                 <source id="videoactual" src="video/Suarez-Amina.mp4" type="video/mp4" />
                                 <source src="foo.webm" type="video/webm" />
-                                <track kind="captions" label="English captions" src="media/Suarez-Amina.vtt" srclang="en" default />
+                                <track kind="captions" label="Spanish captions" src="media/Suarez-Amina.vtt" srclang="es" default />
                             </video>
                         </div>
                         <div class="px-video-controls"></div>
                     </div>
                     </div>
-                    <button aria-label="Press enter to return to the map." tabindex="0" type="button" id="boton" class='ocultar-visualmente2' style="visibility:hidden" >Go back to map</button> <!-- volver al mapa - presione enter para volver al mapa-->
+                    <button aria-label="Presione enter para volver al mapa" tabindex="0" type="button" id="boton" class='ocultar-visualmente2' style="visibility:hidden" role="button" >Volver al mapa</button> <!-- go back to map - Press enter to return to the map.-->
                 </div>
             </div>    
         </section>
     
     </main>
     <footer aria-hidden="true">
-        <div class="footer__texto">&copy; 2021 | All rights reserved</div>
+        <div class="footer__texto">&copy; 2022 | All rights reserved</div>
     </footer>
     <!-- comienzo de los script -->
     <script defer src="./js/index.js"></script>

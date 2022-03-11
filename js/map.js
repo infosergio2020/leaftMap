@@ -1,4 +1,6 @@
+//información cargada Mas info de la zona
 import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
+//Carga del combobox2 dinamica
 import { Select2 } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
@@ -353,7 +355,7 @@ var createMarker = function (latlng,texto){
         // Initialize
         new InitPxVideo({
             "videoId": "video",
-            "captionsOnDefault": true,
+            "captionsOnDefault": false, //captions desactivado por defecto
             "seekInterval": 20,
             "videoTitle": "Entrevista a "+cadena[0], //Esto tiene que ir cambiando constantemente
             "debug": true
