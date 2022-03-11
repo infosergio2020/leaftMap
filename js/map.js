@@ -7,25 +7,41 @@ var idioma = localStorage.getItem("IDIOMA");
 let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
 let introtext;
+let infoTranslate = ['Interview to','From'];
 //Cambio de idioma
 if (idioma == "EN"){
     for (var i = 0; i < titulos.length; ++i) {
         titulos[i]="Press enter to listen to the interview from "+titulos[i].nombre;
     }
-    introtext= titulos+' interviews are listed below on the testimonial map';
     console.log('estoy en ingles');
-    //Por defecto esta en ingles
+    //Cambio info a ingles
+    //titulo del mapa
+    searchID('inicio').innerHTML='<h1>Interviewees map</h1>';
+    //Cambio de idioma boton
+    document.getElementsByClassName('button')[0].innerHTML='Language';
+    document.getElementsByClassName('button')[0].setAttribute('aria-label','Click to change the language of the page');
+    //Informacion de 1 entretvistado
+    searchID('title-info').innerHTML='Access to the interview';
+    searchID('tituloinicial').innerHTML='Select a person on the map to get more information about it.';
+    searchID('boton').setAttribute('aria-label','Press enter to return to the map.');
+    searchID('boton').innerHTML='Back to the map';    
+    //Buscadores combo
+    searchID('comboSearch1').innerHTML='<h2>Select the area you want to search</h2>';
+    searchID('comboSearch2').innerHTML='<h2>Select the name of a person</h2>';
+    //mas info de la zona
+    searchID('accordion-open-1').innerText='More information about from the zone';
 }
 else if (idioma == "ES"){
     for (var i = 0; i < titulos.length; ++i) {
         titulos[i]="Presiona enter para escuchar la entrevista de "+titulos[i].nombre;
     }
+    searchID('inicio').innerHTML='<h1>Mapa de entrevistados</h1>';
     console.log('estoy en español');
     introtext='A continuación se listan'+titulos.length+'entrevistas en el mapa de entrevistados';
     //Cambio de info a español
     //Titulo del mapa
-    document.getElementsByClassName('accesible')[0].innerHTML='Mapa de entrevistados';
-    document.getElementsByClassName('accesible')[0].setAttribute('aria-label','A continuación se listas las 6 entrevistas en el mapa de entrevistados.');
+    searchID('inicio').innerHTML='Mapa de entrevistados';
+    searchID('inicio').setAttribute('aria-label','A continuación se listan entrevistas en el mapa de entrevistados.');
     //Cambio de idioma
     document.getElementsByClassName('button')[0].innerHTML='Idioma';
     //Informacion de 1 entretvistado
@@ -35,8 +51,8 @@ else if (idioma == "ES"){
     searchID('label2').innerHTML='<h1>De</h1>';
     searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
     searchID('boton').innerHTML='Volver al mapa';
+    searchID('accordion-open-1').innerText='Mas información de la zona';
 }
-document.getElementsByClassName('accesible')[0].setAttribute('aria-label',introtext);
 
 //Create my map 
 var mymap = L.map('mapid').setView([-34.91018,-57.94452], 12);
@@ -119,13 +135,17 @@ function assignedText(cadena){
     if (noNull(cadena)){
         var t;
         for (var i=0; i < cadena.length; i++) {
-            //console.log('texto'+i);
             t=searchID('label'+(i+1));
             t.setAttribute('tabindex','0');
-            //console.log(cadena[i]);
             if (cadena[i]!==''){
-                if(i==0) t.innerText='Entrevista a';
-                else t.innerText='De'
+                if (idioma=="ES"){
+                    if(i==0) t.innerText='Entrevista a';
+                    else t.innerText='De';
+                }
+                else {
+                    if(i==0) t.innerText=infoTranslate[0];
+                    else t.innerText=infoTranslate[1];
+                }
                 t.innerText= t.innerText+' '+cadena[i].replace("-"," ");    //Agregado para reemplazar el guion por un espacio
             }
         }
