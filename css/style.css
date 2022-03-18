@@ -177,6 +177,9 @@ footer{
         justify-content: center;
         border-radius: 0.75rem;
       }
+    .space-ajust {
+        padding: 1.1rem;
+    }
       .swal2-popup {
         font-size: 2rem;
     }
