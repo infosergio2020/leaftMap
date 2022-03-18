@@ -402,21 +402,19 @@ Select.prototype.updateMenuState = function (open, callFocus = true) {
 window.addEventListener('load', function () {
   const options = [
     'Todas las zonas',
-    'Tolosa',
+    'Tolosa',//
     'Cementerio',
-    'Barrio Norte',
-    'Barrio Jardín',
-    'Los Hornos',
-    'Parque Castelli',
-    'Villa Elvira',
+    'Barrio Norte',//
+    'Barrio Jardín', //
+    'Los Hornos',//
+    'Parque Castelli',//
+    'Villa Elvira',//
     'Villa Sicardi',
-    'Altos de San Lorenzo',
-    'Estadio Maradona',
-    'Ringuelet',
-    'Berisso',
-    'Villa Arguello',
-    'Parque San Martin', 
-    'San Carlos', 
+    'Estadio Maradona',//
+    'Ringuelet',//
+    'Villa Argüello',//
+    'Parque San Martin', //
+    'San Carlos',// 
     'Recorrido por la ciudad',
   ];
   const selectEls = document.querySelectorAll('.js-select');

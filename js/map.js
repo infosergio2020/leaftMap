@@ -1,9 +1,12 @@
 //información cargada Mas info de la zona
-import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
+import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet 
+,villaArg,parqueSM, sanCarlos,ciudad,cementerio
+} from "./zonas.js";
 //Carga del combobox2 dinamica
 import { Select2 } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
+if (idioma == undefined)  idioma="ES";
 let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
 let introtext;
@@ -153,15 +156,19 @@ function assignedText(cadena){
         var zone = searchID('accordion-section-1');
         if (idiomaEspañol){
             switch (cadena[1]) {
-                case " Los Hornos":  zone.innerHTML = LosHornos ;break;
-                case " Villa Elvira": zone.innerHTML = villaElvira; break;
-                case " Barrio Jardin": zone.innerHTML = barrioJardin; break;
-                case " Tolosa": zone.innerHTML = Tolosa; break;
-                case " Estadio Maradona": zone.innerHTML = estadioMaradona; break;
-                case " Parque Castelli":  zone.innerHTML = parqueCasteli; break;
-                case " Barrio Norte": zone.innerHTML = barrioNorte; break;
-                case " Ringuelet": zone.innerHTML = Ringuelet; break;
-                case " Altos de San Lorenzo": zone.innerHTML = altosDeSanLorenzo; break;
+                case "Los Hornos":  zone.innerHTML = LosHornos ;break;
+                case "Villa Elvira": zone.innerHTML = villaElvira; break;
+                case "Barrio Jardin": zone.innerHTML = barrioJardin; break;
+                case "Tolosa": zone.innerHTML = Tolosa; break;
+                case "Estadio Maradona": zone.innerHTML = estadioMaradona; break;
+                case "Parque Castelli":  zone.innerHTML = parqueCasteli; break;
+                case "Barrio Norte": zone.innerHTML = barrioNorte; break;
+                case "Ringuelet": zone.innerHTML = Ringuelet; break;
+                case "Villa Argüello": zone.innerHTML = villaArg; break;
+                case "Parque San Martin": zone.innerHTML = parqueSM; break;
+                case "San Carlos": zone.innerHTML = sanCarlos; break;
+                case "Cementerio": zone.innerHTML = cementerio; break;
+                case "Recorrido por la ciudad": zone.innerHTML = ciudad; break;
             }
         }
         t=searchID('label1');
@@ -439,7 +446,7 @@ createMarker([-34.9127042,-57.9967508],'López-Even.Recorrido por la ciudad');
 createMarker([-34.9272331,-57.9026227],'Padin-Marcela.Barrio Jardín'); 
 createMarker([-34.9312245,-57.9079159],'Gutierrez-Macarena.Barrio Jardín'); 
 createMarker([-34.9467235,-57.9638634],'Becerra-Paula.Parque Castelli'); 
-createMarker([-34.9467235,-57.9638634],'Obineta-Gladys.Ringuelet');
+createMarker([-34.8811729,-57.9839683],'Obineta-Gladys.Ringuelet');
 createMarker([-34.9890184,-57.8532666],'Cárcamo-Estefania.Villa Sicardi'); 
 
 hideZoomControl();
