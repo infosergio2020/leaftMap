@@ -91,18 +91,8 @@
                     </div>
                     <hr role=”separator” id="separator" style="visibility: hidden;"> 
                     <!--Accesible Media Player: por defecto no tiene nada y esta en español-->
-                    <div id="mediaplayer">
-                    <div class="px-video-container" id="video" style="display: none;">
-                        <div class="px-video-img-captions-container">  
-                            <div class="px-video-captions hide" aria-hidden="true"></div>
-                            <video class="px-video" poster="media/foo.jpg" controls preload="none">
-                                <source id="videoactual" src="video/Suarez-Amina.mp4" type="video/mp4" />
-                                <source src="foo.webm" type="video/webm" />
-                                <track kind="captions" label="Spanish captions" src="media/Suarez-Amina.vtt" srclang="es" default />
-                            </video>
-                        </div>
-                        <div class="px-video-controls"></div>
-                    </div>
+                    <div class="mediaplayer">
+                        <iframe id="video" class="myplayer" tabindex=0 src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </div>
                     <button aria-label="Presione enter para volver al mapa." alt="Presione enter para volver al mapa." tabindex="0" type="button" id="boton" class='ocultar-visualmente2' style="visibility:hidden" role="button" >Volver al mapa</button> <!-- go back to map - Press enter to return to the map.-->
                 </div>

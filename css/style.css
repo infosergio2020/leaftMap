@@ -147,6 +147,14 @@ footer{
     margin: 0.25rem 0.125rem;
     cursor: pointer;
 }
+.mediaplayer{
+    padding: 0.5rem;
+}
+.myplayer{
+    display: flex;
+    height: 18rem;
+    width: 100%;
+}
   @media screen and (max-width: 500px) {
     .miheader a {
         float: none;
