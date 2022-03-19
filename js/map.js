@@ -10,6 +10,7 @@ if (idioma == undefined)  idioma="ES";
 let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
 let introtext;
+let captions_lang='?cc_lang_pref=es'; //por defecto cc en español
 let infoTranslate = ['Interview to','From'];
 //Cambio de idioma
 if (idioma == "EN"){
@@ -33,6 +34,7 @@ if (idioma == "EN"){
     searchID('comboSearch2').innerHTML='<h2>Select the name of a person</h2>';
     //mas info de la zona
     searchID('accordion-open-1').innerText='More information about from the zone';
+    captions_lang='?cc_lang_pref=en'; 
 }
 else if (idioma == "ES"){
     for (var i = 0; i < titulos.length; ++i) {
@@ -55,6 +57,7 @@ else if (idioma == "ES"){
     searchID('boton').setAttribute('aria-label','Presione enter para volver al mapa');
     searchID('boton').innerHTML='Volver al mapa';
     searchID('accordion-open-1').innerText='Mas información de la zona';
+    captions_lang='?cc_lang_pref=es'; //por defecto cc en español
 }
 
 //Create my map 
@@ -355,7 +358,8 @@ var createMarker = function (latlng,texto,link){
         assignedText(cadena); //+da focus al titulo de la info entrevistado
         console.log("Estoy en función click!!");
         var d = searchID('video'); 
-        d.src = link;
+        console.log(link+captions_lang);
+        d.src = link+captions_lang;
         //funcion click del boton volver al mapa - Aca colocp los tabindex en -1 para que no enfoque hasta el siguiente click/enter del avatar
         var markerFocus = function (){
             e.target._icon.focus();
