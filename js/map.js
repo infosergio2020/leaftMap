@@ -1,6 +1,8 @@
 //información cargada Mas info de la zona
-import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet 
-,villaArg,parqueSM, sanCarlos,ciudad,cementerio
+import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet
+,villaArg,parqueSM, sanCarlos,ciudad,cementerio,
+barrioJardin2,villaElvira2,parqueCasteli2,Tolosa2,LosHornos2,estadioMaradona2,barrioNorte2,Ringuelet2 
+,villaArg2,parqueSM2, sanCarlos2,ciudad2,cementerio2
 } from "./zonas.js";
 //Carga del combobox2 dinamica
 import { Select2 } from "./combobox.js";
@@ -169,6 +171,23 @@ function assignedText(cadena){
                 case "San Carlos": zone.innerHTML = sanCarlos; break;
                 case "Cementerio": zone.innerHTML = cementerio; break;
                 case "Recorrido por la ciudad": zone.innerHTML = ciudad; break;
+            }
+        }
+        else{
+            switch (cadena[1]) {
+                case "Los Hornos":  zone.innerHTML = LosHornos2 ;break;
+                case "Villa Elvira": zone.innerHTML = villaElvira2; break;
+                case "Barrio Jardin": zone.innerHTML = barrioJardin2; break;
+                case "Tolosa": zone.innerHTML = Tolosa2; break;
+                case "Estadio Maradona": zone.innerHTML = estadioMaradona2; break;
+                case "Parque Castelli":  zone.innerHTML = parqueCasteli2; break;
+                case "Barrio Norte": zone.innerHTML = barrioNorte2; break;
+                case "Ringuelet": zone.innerHTML = Ringuelet2; break;
+                case "Villa Argüello": zone.innerHTML = villaArg2; break;
+                case "Parque San Martin": zone.innerHTML = parqueSM2; break;
+                case "San Carlos": zone.innerHTML = sanCarlos2; break;
+                case "Cementerio": zone.innerHTML = cementerio2; break;
+                case "Recorrido por la ciudad": zone.innerHTML = ciudad2; break;
             }
         }
         t=searchID('label1');
