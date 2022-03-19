@@ -177,8 +177,18 @@ footer{
         justify-content: center;
         border-radius: 0.75rem;
       }
+    #mapid{
+        background-color: #A8C0C1;
+        flex: 0;
+        height: 34.25rem;
+        min-width: 20.4rem;
+        outline: none;
+        padding: 0;
+        position: relative;
+        z-index: 1;
+    }
     .space-ajust {
-        padding: 1.1rem;
+        padding: 0.5rem;
     }
       .swal2-popup {
         font-size: 2rem;
