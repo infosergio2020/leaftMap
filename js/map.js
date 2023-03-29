@@ -1,7 +1,7 @@
 //información cargada Mas info de la zona
-import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet 
-,villaArg,parqueSM, sanCarlos,ciudad,cementerio
-} from "./zonas.js";
+import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet,villaArg,parqueSM, sanCarlos,ciudad,cementerio, 
+    barrioJardin2,villaElvira2,parqueCasteli2,Tolosa2,LosHornos2,estadioMaradona2,barrioNorte2,Ringuelet2 ,villaArg2,parqueSM2, sanCarlos2,ciudad2,cementerio2
+}  from "./zonas.js";
 //Carga del combobox2 dinamica
 import { Select2 } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
@@ -93,7 +93,7 @@ function toggleText(id) {
 }
 
 const hideMaker = function(titulos){
-    console.log('hideMaker its running!!!');
+    //console.log('hideMaker its running!!!');
     let elements = document.querySelectorAll(".leaflet-marker-icon");
     for (var i = 0; i < elements.length; ++i) {
         elements[i].setAttribute("alt", titulos[i].nombre);
@@ -106,7 +106,7 @@ const hideMaker = function(titulos){
 }
 // ori prueba esconder los controles de zoom
 const hideZoomControl = function(){
-    console.log('hideZoomControl its running!!!');
+    //console.log('hideZoomControl its running!!!');
     let elementos = document.querySelectorAll(".leaflet-control a");
     elementos.forEach(item => {
         item.setAttribute("aria-hidden", "true")
@@ -130,6 +130,7 @@ function noNull (item){
     return (item != null)
 }
 function idiomaEspañol(){
+    idioma = localStorage.getItem("IDIOMA");
     return (idioma == "ES")
 }
 
@@ -154,7 +155,7 @@ function assignedText(cadena){
         }
         //Inserto los cambios de la informacion de la zona
         var zone = searchID('accordion-section-1');
-        if (idiomaEspañol){
+        if (idiomaEspañol()){
             switch (cadena[1]) {
                 case "Los Hornos":  zone.innerHTML = LosHornos ;break;
                 case "Villa Elvira": zone.innerHTML = villaElvira; break;
@@ -169,6 +170,22 @@ function assignedText(cadena){
                 case "San Carlos": zone.innerHTML = sanCarlos; break;
                 case "Cementerio": zone.innerHTML = cementerio; break;
                 case "Recorrido por la ciudad": zone.innerHTML = ciudad; break;
+            }
+        } else{
+            switch (cadena[1]) {
+                case "Los Hornos":  zone.innerHTML = LosHornos2 ;break;
+                case "Villa Elvira": zone.innerHTML = villaElvira2; break;
+                case "Barrio Jardin": zone.innerHTML = barrioJardin2; break;
+                case "Tolosa": zone.innerHTML = Tolosa2; break;
+                case "Estadio Maradona": zone.innerHTML = estadioMaradona2; break;
+                case "Parque Castelli":  zone.innerHTML = parqueCasteli2; break;
+                case "Barrio Norte": zone.innerHTML = barrioNorte2; break;
+                case "Ringuelet": zone.innerHTML = Ringuelet2; break;
+                case "Villa Argüello": zone.innerHTML = villaArg2; break;
+                case "Parque San Martin": zone.innerHTML = parqueSM2; break;
+                case "San Carlos": zone.innerHTML = sanCarlos2; break;
+                case "Cementerio": zone.innerHTML = cementerio2; break;
+                case "Recorrido por la ciudad": zone.innerHTML = ciudad2; break;
             }
         }
         t=searchID('label1');
@@ -353,16 +370,15 @@ var createMarker = function (latlng,texto){
         hideMediaplayer(false);
         var cadena = decompose(texto,".");  
         assignedText(cadena); //+da focus al titulo de la info entrevistado
-        console.log("Estoy en función click!!");
         //Inserto los cambios a media-player
         var link= cadena[0];
-        console.log(link);
+        //console.log(link);
         var mediaplayer = searchID('video');
         mediaplayer.remove();
         mediaplayer = searchID('mediaplayer');
         //me fijo el idioma en el que tengo que cargar cc o sub. Si esta en ingles el archivo se encontrara con nombre2.vtt
         let changevtt;
-        console.log('idioma'); console.log(idioma);
+        //console.log('idioma'); console.log(idioma);
         if (idioma=="ES") changevtt = 
         '<track kind="captions" label="Subtitulos en Español" src="media/'+link+'.vtt" srclang="es" default />'
         else 
@@ -403,7 +419,7 @@ var createMarker = function (latlng,texto){
             searchID('boton').setAttribute('tabindex','-1'); //esconde el boton
             //para el ultimo caso
             if (e.target._icon.alt == titulos[titulos.length-1].nombre) searchID('inicio').focus(); //para el ultimo marcador se va al inicio de la pagina 
-            console.log("markerFocus - volviendo al mapa..");
+            //console.log("markerFocus - volviendo al mapa..");
         };
         //Añadir boton "volver al mapa"
         let boton = document.getElementById('boton');
