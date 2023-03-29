@@ -1,9 +1,12 @@
 //información cargada Mas info de la zona
-import { barrioJardin,villaElvira,altosDeSanLorenzo,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet } from "./zonas.js";
+import { barrioJardin,villaElvira,parqueCasteli,Tolosa,LosHornos,estadioMaradona,barrioNorte,Ringuelet 
+,villaArg,parqueSM, sanCarlos,ciudad,cementerio
+} from "./zonas.js";
 //Carga del combobox2 dinamica
 import { Select2 } from "./combobox.js";
 //Me fijo que idioma fue selecciono mediante localStorage
 var idioma = localStorage.getItem("IDIOMA");
+if (idioma == undefined)  idioma="ES";
 let itvwszone;[]; //entrevistas por zona
 var titulos=[]; //Nombre de los entrevistados
 let introtext;
@@ -153,15 +156,19 @@ function assignedText(cadena){
         var zone = searchID('accordion-section-1');
         if (idiomaEspañol){
             switch (cadena[1]) {
-                case " Los Hornos":  zone.innerHTML = LosHornos ;break;
-                case " Villa Elvira": zone.innerHTML = villaElvira; break;
-                case " Barrio Jardin": zone.innerHTML = barrioJardin; break;
-                case " Tolosa": zone.innerHTML = Tolosa; break;
-                case " Estadio Maradona": zone.innerHTML = estadioMaradona; break;
-                case " Parque Castelli":  zone.innerHTML = parqueCasteli; break;
-                case " Barrio Norte": zone.innerHTML = barrioNorte; break;
-                case " Ringuelet": zone.innerHTML = Ringuelet; break;
-                case " Altos de San Lorenzo": zone.innerHTML = altosDeSanLorenzo; break;
+                case "Los Hornos":  zone.innerHTML = LosHornos ;break;
+                case "Villa Elvira": zone.innerHTML = villaElvira; break;
+                case "Barrio Jardin": zone.innerHTML = barrioJardin; break;
+                case "Tolosa": zone.innerHTML = Tolosa; break;
+                case "Estadio Maradona": zone.innerHTML = estadioMaradona; break;
+                case "Parque Castelli":  zone.innerHTML = parqueCasteli; break;
+                case "Barrio Norte": zone.innerHTML = barrioNorte; break;
+                case "Ringuelet": zone.innerHTML = Ringuelet; break;
+                case "Villa Argüello": zone.innerHTML = villaArg; break;
+                case "Parque San Martin": zone.innerHTML = parqueSM; break;
+                case "San Carlos": zone.innerHTML = sanCarlos; break;
+                case "Cementerio": zone.innerHTML = cementerio; break;
+                case "Recorrido por la ciudad": zone.innerHTML = ciudad; break;
             }
         }
         t=searchID('label1');
@@ -355,10 +362,12 @@ var createMarker = function (latlng,texto){
         mediaplayer = searchID('mediaplayer');
         //me fijo el idioma en el que tengo que cargar cc o sub. Si esta en ingles el archivo se encontrara con nombre2.vtt
         let changevtt;
+        console.log('idioma'); console.log(idioma);
         if (idioma=="ES") changevtt = 
         '<track kind="captions" label="Subtitulos en Español" src="media/'+link+'.vtt" srclang="es" default />'
         else 
-            changevtt = '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
+            if (idioma=="EN")
+                changevtt = '<track kind="captions" label="English captions" src="media/'+link+'2.vtt" srclang="es" default />';
         var mynewplayer = 
         '<div class="px-video-container" id="video">'+
         '<div class="px-video-img-captions-container">'+
@@ -406,23 +415,39 @@ var createMarker = function (latlng,texto){
     })
 } 
 
-//Createm markers 14 
+//Createm markers 31
 //Nota: los avatars estan ordenados
-createMarker([-34.943566, -57.958339], `Benitez-Gabriela.Parque Castelli`);
-createMarker([-34.917228, -57.985247],'Carzolio-Clara.Estadio Maradona');
+createMarker([-34.943566, -57.958339],`Benitez-Gabriela.Parque Castelli`);
+createMarker([-34.9198281,-57.9932087],'Carzolio-Clara.Estadio Maradona');
 createMarker([-34.957986, -57.977000],'Dominguez-Lujan.Los Hornos');
-createMarker([-34.900719, -57.980701],'Fernandez-Alejandro.Tolosa');
+createMarker([-34.9066386,-57.9902729],'Fernandez-Alejandro.Tolosa');
 createMarker([-34.942394, -57.948540],'Galicchio-Maria.Parque Castelli');
 createMarker([-34.902690, -57.977697],'Gomez-Carlos.Tolosa'); 
 createMarker([-34.886737, -57.984030],'Gutierrez-Lucas.Ringuelet');
 createMarker([-34.926702, -57.911197],'Maria-Paola.Barrio Jardín');
 createMarker([-34.907296, -57.963152],'McAdden-Betina.Barrio Norte');
-createMarker([-34.955009, -57.991031],'Mendoza-Azucena.Los Hornos');
+createMarker([-34.9943373,-58.0244091],'Mendoza-Azucena.Los Hornos');
 createMarker([-34.960042, -57.875716],'Purdier-Victor.Villa Elvira');
-createMarker([-34.917343, -57.989806],'Rivas-Silvia.Estadio Maradona');
+createMarker([-34.9133353,-57.9974407],'Rivas-Silvia.Estadio Maradona');
 createMarker([-34.896274, -57.981307],'Suarez-Amina.Tolosa');
-createMarker([-34.956277, -57.947428],'Fariña-Marily.Cementerio');
-
+createMarker([-34.959605,-57.9613525],'Fariña-Marily.Cementerio'); 
+createMarker([-34.8762545,-57.9770232],'Roman-Leandro.Ringuelet');
+createMarker([-34.9372233,-57.9218632],'Carroza-Romina.Villa Elvira'); 
+createMarker([-34.9498869,-57.9549036],'Barrionuevo-Olga.Parque Castelli'); 
+createMarker([-34.915850, -57.981716],'Otero-Natalia.Estadio Mardona'); 
+createMarker([-34.9357886,-57.9694307],'Eugenia y Francisco.Parque San Martin'); //-
+createMarker([-34.8867716,-57.9622399],'Lasagna-Lautaro.Tolosa');
+createMarker([-34.9815602,-57.9980396],'Nancy.Los Hornos'); 
+createMarker([-34.9387769,-58.0006605],'Eufrasia-Rosa.San Carlos');  
+createMarker([-34.8882634,-57.9967287],'Suarez-Santiago.Ringuelet'); 
+createMarker([-34.9121917,-57.9715592],'Sonetti-Gisela.Plaza Belgrano'); 
+createMarker([-34.906651,-57.9273567],'Muller-Cristina.Villa Argüello'); 
+createMarker([-34.9127042,-57.9967508],'López-Even.Recorrido por la ciudad');  
+createMarker([-34.9272331,-57.9026227],'Padin-Marcela.Barrio Jardín'); 
+createMarker([-34.9312245,-57.9079159],'Gutierrez-Macarena.Barrio Jardín'); 
+createMarker([-34.9467235,-57.9638634],'Becerra-Paula.Parque Castelli'); 
+createMarker([-34.8811729,-57.9839683],'Obineta-Gladys.Ringuelet');
+createMarker([-34.9890184,-57.8532666],'Cárcamo-Estefania.Villa Sicardi'); 
 
 hideZoomControl();
 hideMaker(titulos);

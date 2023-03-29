@@ -409,11 +409,13 @@ window.addEventListener('load', function () {
     'Los Hornos',
     'Parque Castelli',
     'Villa Elvira',
-    'Altos de San Lorenzo',
+    'Villa Sicardi',
     'Estadio Maradona',
     'Ringuelet',
-    'Berisso',
-    'Villa Arguello',
+    'Villa Argüello',
+    'Parque San Martin', 
+    'San Carlos', 
+    'Recorrido por la ciudad',
   ];
   const selectEls = document.querySelectorAll('.js-select');
 
